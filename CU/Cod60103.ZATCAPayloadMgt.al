@@ -418,7 +418,7 @@ codeunit 60103 "ZATCA Payload Mgt."
         XmlAtt := XmlAttribute.CreateNamespaceDeclaration(ExtNamespacePrefix, ExtNamespaceUri);
         InvoiceElement.Add(XmlAtt);
         InvoiceHeaderElement := XmlElement.Create('ProfileID', CbcNamespaceUri);
-        InvoiceHeaderElement.Add(XmlText.Create('reporting:1.0'));
+        InvoiceHeaderElement.Add(XmlText.Create('Ping:1.0'));
         InvoiceElement.Add(InvoiceHeaderElement);
         InvoiceHeaderElement := XmlElement.Create('ID', CbcNamespaceUri);
         InvoiceHeaderElement.Add(XmlText.Create(SalesInvoiceHeader."No."));
