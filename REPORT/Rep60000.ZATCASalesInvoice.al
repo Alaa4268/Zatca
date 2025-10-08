@@ -1,8 +1,9 @@
 report 60000 "ZATCA Sales - Invoice"
 {
     Caption = 'ZATCA Sales - Invoice';
-    DefaultLayout = RDLC;
+    // DefaultLayout = RDLC;
     EnableHyperlinks = true;
+    DefaultRenderingLayout=NovaLayout;
 
     PreviewMode = PrintLayout;
     // RDLCLayout = './60000ZATCASalesInvoice.rdl';
@@ -36,6 +37,9 @@ report 60000 "ZATCA Sales - Invoice"
             {
             }
             column(CompanyAddress8; CompanyAddr[8])
+            {
+            }
+            column(Salesperson_Code;"Salesperson Code")
             {
             }
             // column(CompanyHomePage; CompanyInfo."Home Page")
@@ -129,6 +133,9 @@ report 60000 "ZATCA Sales - Invoice"
             // {
             // }
             column(CompanyLegalStatement; GetLegalStatement)
+            {
+            }
+            column(CompanyInfo;CompanyInfo.Name)
             {
             }
             column(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
@@ -713,7 +720,7 @@ report 60000 "ZATCA Sales - Invoice"
                     //Start YANA Amount in words
                     RepCheck.InitTextVariable;
 
-                    RepCheck.FormatNoText(NoText, NetInvoice, Header."Currency Code");
+                    RepCheck.FormatNoText(NoText, TotalAmountInclVAT, Header."Currency Code");
 
                     AmountInWords := NoText[1];
                     //End YANA Amount in words
@@ -1129,8 +1136,8 @@ report 60000 "ZATCA Sales - Invoice"
                 end;
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
-                // QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
-                "QR Code":=Header."QR Code";
+                QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                // QRCode:=;
                 if not IsReportInPreviewMode then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
 
@@ -1249,9 +1256,27 @@ report 60000 "ZATCA Sales - Invoice"
         end;
     }
 
+    rendering
+    {
+        layout(NovaLayout)
+        {
+            Type = RDLC;
+            LayoutFile = 'REPORT\60000ZATCASalesInvoiceNova.rdl';
+            CaptionML = ENU = 'ZATCA Sales Invoice - Nova', ENZ = 'فاتورة ضريبية';
+        }
+        layout(MardaLayout)
+        {
+            Type=RDLC;
+            LayoutFile='REPORT\60000ZATCASalesInvoiceMarda.rdl';
+            CaptionML=ENU='ZATCA Sales Invoice - Marda', ENZ = 'فاتورة ضريبية';
+        }
+
+    }
+
     labels
     {
     }
+
 
     trigger OnInitReport()
     begin
@@ -1292,173 +1317,8 @@ report 60000 "ZATCA Sales - Invoice"
         CompanyLogoPosition := SalesSetup."Logo Position on Documents";
     end;
 
-    var
-        SalespersonLbl: Label 'Salesperson';
-        CompanyInfoBankAccNoLbl: Label 'Account No.';
-        CompanyInfoBankNameLbl: Label 'Bank';
-        CompanyInfoGiroNoLbl: Label 'Giro No.';
-        CompanyInfoPhoneNoLbl: Label 'Phone No.';
-        CopyLbl: Label 'Copy';
-        EMailLbl: Label 'Email';
-        HomePageLbl: Label 'Home Page';
-        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount';
-        InvDiscountAmtLbl: Label 'Invoice Discount';
-        InvNoLbl: Label 'Invoice No.';
-        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT';
-        LocalCurrencyLbl: Label 'Local Currency';
-        PageLbl: Label 'Page';
-        PaymentTermsDescLbl: Label 'Payment Terms';
-        PaymentMethodDescLbl: Label 'Payment Method';
-        PostedShipmentDateLbl: Label 'Shipment Date';
-        SalesInvLineDiscLbl: Label 'Discount %';
-        SalesInvoiceLbl: Label 'Invoice';
-        YourSalesInvoiceLbl: Label 'Your Invoice';
-        ShipmentLbl: Label 'Shipment';
-        ShiptoAddrLbl: Label 'Ship-to Address';
-        ShptMethodDescLbl: Label 'Shipment Method';
-        SubtotalLbl: Label 'Subtotal';
-        TotalLbl: Label 'Total';
-        VATAmtSpecificationLbl: Label 'VAT Amount Specification';
-        VATAmtLbl: Label 'VAT Amount';
-        VATAmountLCYLbl: Label 'VAT Amount (LCY)';
-        VATBaseLbl: Label 'VAT Base';
-        VATBaseLCYLbl: Label 'VAT Base (LCY)';
-        VATClausesLbl: Label 'VAT Clause';
-        VATIdentifierLbl: Label 'VAT Identifier';
-        VATPercentageLbl: Label 'VAT %';
-        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
-        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
-        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
-        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
-        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
-        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
-        GLSetup: Record "General Ledger Setup";
-        ShipmentMethod: Record "Shipment Method";
-        PaymentTerms: Record "Payment Terms";
-        PaymentMethod: Record "Payment Method";
-        SalespersonPurchaser: Record "Salesperson/Purchaser";
-        CompanyBankAccount: Record "Bank Account";
-        CompanyInfo: Record "Company Information";
-        CompanyCountryRegion: Record "Country/Region";
-        DummyCompanyInfo: Record "Company Information";
-        SalesSetup: Record "Sales & Receivables Setup";
-        Cust: Record Customer;
-        CustomerInfo: Record Customer;
-        CustomerCountryRegion: Record "Country/Region";
-        RespCenter: Record "Responsibility Center";
-        VATClause: Record "VAT Clause";
-        TempLineFeeNoteOnReportHist: Record "Line Fee Note on Report Hist." temporary;
-        SellToContact: Record Contact;
-        BillToContact: Record Contact;
-        G_Language: Codeunit Language;
-        FormatAddr: Codeunit "Format Address";
-        FormatDocument: Codeunit "Format Document";
-        SegManagement: Codeunit SegManagement;
-        AutoFormat: Codeunit "Auto Format";
-        WorkDescriptionInstream: InStream;
-        JobNo: Code[20];
-        JobTaskNo: Code[20];
-        WorkDescriptionLine: Text;
-        CustAddr: array[8] of Text[100];
-        ChecksPayableText: Text;
-        ShipToAddr: array[8] of Text[100];
-        CompanyAddr: array[8] of Text[100];
-        SalesPersonText: Text[30];
-        TotalText: Text[50];
-        TotalExclVATText: Text[50];
-        TotalInclVATText: Text[50];
-        LineDiscountPctText: Text;
-        PmtDiscText: Text;
-        RemainingAmountTxt: Text;
-        JobNoLbl: Text;
-        JobTaskNoLbl: Text;
-        FormattedVATPct: Text;
-        FormattedUnitPrice: Text;
-        FormattedQuantity: Text;
-        FormattedLineAmount: Text;
-        TotalAmountExclInclVATTextValue: Text;
-        MoreLines: Boolean;
-        ShowWorkDescription: Boolean;
-        ShowShippingAddr: Boolean;
-        LogInteraction: Boolean;
-        TotalSubTotal: Decimal;
-        TotalAmount: Decimal;
-        TotalAmountInclVAT: Decimal;
-        TotalAmountVAT: Decimal;
-        TotalInvDiscAmount: Decimal;
-        TotalPaymentDiscOnVAT: Decimal;
-        RemainingAmount: Decimal;
-        TransHeaderAmount: Decimal;
-        [InDataSet]
-        LogInteractionEnable: Boolean;
-        DisplayAssemblyInformation: Boolean;
-        DisplayShipmentInformation: Boolean;
-        CompanyLogoPosition: Integer;
-        FirstLineHasBeenOutput: Boolean;
-        CalculatedExchRate: Decimal;
-        PaymentInstructionsTxt: Text;
-        ExchangeRateText: Text;
-        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = '%1 and %2 are both amounts.';
-        VATBaseLCY: Decimal;
-        VATAmountLCY: Decimal;
-        TotalVATBaseLCY: Decimal;
-        TotalVATAmountLCY: Decimal;
-        PrevLineAmount: Decimal;
-        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.';
-        TotalAmountExclInclVATValue: Decimal;
-        DisplayAdditionalFeeNote: Boolean;
-        GreetingLbl: Label 'Hello';
-        ClosingLbl: Label 'Sincerely';
-        PmtDiscTxt: Label 'If we receive the payment before %1, you are eligible for a %2% payment discount.', Comment = '%1 Discount Due Date %2 = value of Payment Discount % ';
-        BodyLbl: Label 'Thank you for your business. Your invoice is attached to this message.';
-        AlreadyPaidLbl: Label 'The invoice has been paid.';
-        PartiallyPaidLbl: Label 'The invoice has been partially paid. The remaining amount is %1', Comment = '%1=an amount';
-        FromLbl: Label 'From';
-        BilledToLbl: Label 'Billed to';
-        ChecksPayableLbl: Label 'Please make checks payable to %1', Comment = '%1 = company name';
-        QuestionsLbl: Label 'Questions?';
-        ThanksLbl: Label 'Thank You!';
-        JobNoLbl2: Label 'Job No.';
-        JobTaskNoLbl2: Label 'Job Task No.';
-        JobTaskDescription: Text[100];
-        JobTaskDescLbl: Label 'Job Task Description';
-        UnitLbl: Label 'Unit';
-        VATClausesText: Text;
-        QtyLbl: Label 'Qty', Comment = 'Short form of Quantity';
-        PriceLbl: Label 'Price';
-        PricePerLbl: Label 'Price per';
-        QRCode: Text;
-        SellerName: Text;
-        SellerBuildingNo: Text;
-        SellerStreetName: Text;
-        SellerDistrict: Text;
-        SellerCity: Text;
-        SellerCountry: Text;
-        SellerPostalCode: Text;
-        SellerVATNumber: Text;
-        SellerCRNumber: Text;
-        SellerOtherSellerID: Text;
-        SellerPhone: Text;
-        CustomerName: Text;
-        CustomerBuildingNo: Text;
-        CustomerStreetName: Text;
-        CustomerDistrict: Text;
-        CustomerCity: Text;
-        CustomerCountry: Text;
-        CustomerPostalCode: Text;
-        CustomerVATNumber: Text;
-        CustomerCRNumber: Text;
-        CustomerOtherSellerID: Text;
-        CustomerPhone: Text;
-        RetentionPercentage: Label 'Retention @ %1 %';
-        RetentionPercentage_AR: Label 'حجوزات الضمان @  % %1';
-        AdvancePayment_lbl: Label 'Advance Payment Recovering @ %1 %';
-        AdvancePayment_AR_lbl: Label 'خصم الدفعة المقدمة @  % %1';
-        AdvancePaymentAmount: Decimal;
-        AdvancePaymentVATAmount: Decimal;
-        NetInvoice: Decimal;
-        AmountInWords: Text;
-        NoText: array[2] of Text;
+
+
 
 
     // local procedure InitLogInteraction()
@@ -1700,5 +1560,188 @@ report 60000 "ZATCA Sales - Invoice"
 
         exit(true);
     end;
+
+
+
+
+
+    var
+        SalespersonLbl: Label 'Salesperson';
+        CompanyInfoBankAccNoLbl: Label 'Account No.';
+        CompanyInfoBankNameLbl: Label 'Bank';
+        CompanyInfoGiroNoLbl: Label 'Giro No.';
+        CompanyInfoPhoneNoLbl: Label 'Phone No.';
+        CopyLbl: Label 'Copy';
+        EMailLbl: Label 'Email';
+        HomePageLbl: Label 'Home Page';
+        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount';
+        InvDiscountAmtLbl: Label 'Invoice Discount';
+        InvNoLbl: Label 'Invoice No.';
+        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT';
+        LocalCurrencyLbl: Label 'Local Currency';
+        PageLbl: Label 'Page';
+        PaymentTermsDescLbl: Label 'Payment Terms';
+        PaymentMethodDescLbl: Label 'Payment Method';
+        PostedShipmentDateLbl: Label 'Shipment Date';
+        SalesInvLineDiscLbl: Label 'Discount %';
+        SalesInvoiceLbl: Label 'Invoice';
+        YourSalesInvoiceLbl: Label 'Your Invoice';
+        ShipmentLbl: Label 'Shipment';
+        ShiptoAddrLbl: Label 'Ship-to Address';
+        ShptMethodDescLbl: Label 'Shipment Method';
+        SubtotalLbl: Label 'Subtotal';
+        TotalLbl: Label 'Total';
+        VATAmtSpecificationLbl: Label 'VAT Amount Specification';
+        VATAmtLbl: Label 'VAT Amount';
+        VATAmountLCYLbl: Label 'VAT Amount (LCY)';
+        VATBaseLbl: Label 'VAT Base';
+        VATBaseLCYLbl: Label 'VAT Base (LCY)';
+        VATClausesLbl: Label 'VAT Clause';
+        VATIdentifierLbl: Label 'VAT Identifier';
+        VATPercentageLbl: Label 'VAT %';
+        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
+        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
+        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
+        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
+        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
+        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
+        GLSetup: Record "General Ledger Setup";
+        ShipmentMethod: Record "Shipment Method";
+        PaymentTerms: Record "Payment Terms";
+        PaymentMethod: Record "Payment Method";
+        SalespersonPurchaser: Record "Salesperson/Purchaser";
+        CompanyBankAccount: Record "Bank Account";
+        CompanyInfo: Record "Company Information";
+        CompanyCountryRegion: Record "Country/Region";
+        DummyCompanyInfo: Record "Company Information";
+        SalesSetup: Record "Sales & Receivables Setup";
+        Cust: Record Customer;
+        CustomerInfo: Record Customer;
+        CustomerCountryRegion: Record "Country/Region";
+        RespCenter: Record "Responsibility Center";
+        VATClause: Record "VAT Clause";
+        TempLineFeeNoteOnReportHist: Record "Line Fee Note on Report Hist." temporary;
+        SellToContact: Record Contact;
+        BillToContact: Record Contact;
+        G_Language: Codeunit Language;
+        FormatAddr: Codeunit "Format Address";
+        FormatDocument: Codeunit "Format Document";
+        SegManagement: Codeunit SegManagement;
+        AutoFormat: Codeunit "Auto Format";
+        WorkDescriptionInstream: InStream;
+        JobNo: Code[20];
+        JobTaskNo: Code[20];
+        WorkDescriptionLine: Text;
+        CustAddr: array[8] of Text[100];
+        ChecksPayableText: Text;
+        ShipToAddr: array[8] of Text[100];
+        CompanyAddr: array[8] of Text[100];
+        SalesPersonText: Text[30];
+        TotalText: Text[50];
+        TotalExclVATText: Text[50];
+        TotalInclVATText: Text[50];
+        LineDiscountPctText: Text;
+        PmtDiscText: Text;
+        RemainingAmountTxt: Text;
+        JobNoLbl: Text;
+        JobTaskNoLbl: Text;
+        FormattedVATPct: Text;
+        FormattedUnitPrice: Text;
+        FormattedQuantity: Text;
+        FormattedLineAmount: Text;
+        TotalAmountExclInclVATTextValue: Text;
+        MoreLines: Boolean;
+        ShowWorkDescription: Boolean;
+        ShowShippingAddr: Boolean;
+        LogInteraction: Boolean;
+        TotalSubTotal: Decimal;
+        TotalAmount: Decimal;
+        TotalAmountInclVAT: Decimal;
+        TotalAmountVAT: Decimal;
+        TotalInvDiscAmount: Decimal;
+        TotalPaymentDiscOnVAT: Decimal;
+        RemainingAmount: Decimal;
+        TransHeaderAmount: Decimal;
+        [InDataSet]
+        LogInteractionEnable: Boolean;
+        DisplayAssemblyInformation: Boolean;
+        DisplayShipmentInformation: Boolean;
+        CompanyLogoPosition: Integer;
+        FirstLineHasBeenOutput: Boolean;
+        CalculatedExchRate: Decimal;
+        PaymentInstructionsTxt: Text;
+        ExchangeRateText: Text;
+        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = '%1 and %2 are both amounts.';
+        VATBaseLCY: Decimal;
+        VATAmountLCY: Decimal;
+        TotalVATBaseLCY: Decimal;
+        TotalVATAmountLCY: Decimal;
+        PrevLineAmount: Decimal;
+        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.';
+        TotalAmountExclInclVATValue: Decimal;
+        DisplayAdditionalFeeNote: Boolean;
+        GreetingLbl: Label 'Hello';
+        ClosingLbl: Label 'Sincerely';
+        PmtDiscTxt: Label 'If we receive the payment before %1, you are eligible for a %2% payment discount.', Comment = '%1 Discount Due Date %2 = value of Payment Discount % ';
+        BodyLbl: Label 'Thank you for your business. Your invoice is attached to this message.';
+        AlreadyPaidLbl: Label 'The invoice has been paid.';
+        PartiallyPaidLbl: Label 'The invoice has been partially paid. The remaining amount is %1', Comment = '%1=an amount';
+        FromLbl: Label 'From';
+        BilledToLbl: Label 'Billed to';
+        ChecksPayableLbl: Label 'Please make checks payable to %1', Comment = '%1 = company name';
+        QuestionsLbl: Label 'Questions?';
+        ThanksLbl: Label 'Thank You!';
+        JobNoLbl2: Label 'Job No.';
+        JobTaskNoLbl2: Label 'Job Task No.';
+        JobTaskDescription: Text[100];
+        JobTaskDescLbl: Label 'Job Task Description';
+        UnitLbl: Label 'Unit';
+        VATClausesText: Text;
+        QtyLbl: Label 'Qty', Comment = 'Short form of Quantity';
+        PriceLbl: Label 'Price';
+        PricePerLbl: Label 'Price per';
+        QRCode: Text;
+        SellerName: Text;
+        SellerBuildingNo: Text;
+        SellerStreetName: Text;
+        SellerDistrict: Text;
+        SellerCity: Text;
+        SellerCountry: Text;
+        SellerPostalCode: Text;
+        SellerVATNumber: Text;
+        SellerCRNumber: Text;
+        SellerOtherSellerID: Text;
+        SellerPhone: Text;
+        CustomerName: Text;
+        CustomerBuildingNo: Text;
+        CustomerStreetName: Text;
+        CustomerDistrict: Text;
+        CustomerCity: Text;
+        CustomerCountry: Text;
+        CustomerPostalCode: Text;
+        CustomerVATNumber: Text;
+        CustomerCRNumber: Text;
+        CustomerOtherSellerID: Text;
+        CustomerPhone: Text;
+        RetentionPercentage: Label 'Retention @ %1 %';
+        RetentionPercentage_AR: Label 'حجوزات الضمان @  % %1';
+        AdvancePayment_lbl: Label 'Advance Payment Recovering @ %1 %';
+        AdvancePayment_AR_lbl: Label 'خصم الدفعة المقدمة @  % %1';
+        AdvancePaymentAmount: Decimal;
+        AdvancePaymentVATAmount: Decimal;
+        NetInvoice: Decimal;
+        AmountInWords: Text;
+        NoText: array[2] of Text;
+
+
+
+
+
+
 }
+
+
+
+
+
 

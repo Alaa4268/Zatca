@@ -76,7 +76,13 @@ codeunit 60102 "ZATCA Event Mgt"
     end;
 
 
-
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Correct Posted Sales Invoice", OnAfterCreateCopyDocument, '', false, false)]
+    local procedure OnAfterCreateCopyDocumentOnCorrectPostedSalesInvoice(var SalesHeader: Record "Sales Header"; var SalesInvoiceHeader: Record "Sales Invoice Header")
+    var
+    begin
+        SalesHeader.Validate("Shipment Date",SalesInvoiceHeader."Posting Date");
+        SalesHeader.Modify();
+    end;
 
 
     var

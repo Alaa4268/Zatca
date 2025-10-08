@@ -2789,18 +2789,25 @@ codeunit 60000 "QR Code Generator1"
                     RecRef.SetTable(SalesInvoiceHeader);
                     SalesInvoiceHeader.Get(SalesInvoiceHeader."No.");
                     InputString := CreateAndEncodeInputString(ToRecordID);
-                    SalesInvoiceHeader."QR Code" := InputString;
+                    SalesInvoiceHeader."QR Code" :=CopyStr(SalesInvoiceHeader.QRCode,1,StrLen(InputString));
                     SalesInvoiceHeader."QR Code Generated" := true;
                     SalesInvoiceHeader.Modify(false);
-
+                    BarcodeFontProvider2D := BarcodeFontProvider2DEnum::IDAutomation2D;
                     QRCode := SalesInvoiceHeader."QR Code";
+                    Exit(BarcodeFontProvider2D.EncodeFont(QRCode, BarcodeSymbology::"QR-Code"));
+
+                    // QRCode := SalesInvoiceHeader."QR Code";
+                    // SalesInvoiceHeader."QR Code" := InputString;
+                    // SalesInvoiceHeader."QR Code Generated" := true;6
+                    // SalesInvoiceHeader.Modify(false);
+
                 end;
             Database::"Sales Cr.Memo Header":
                 begin
                     RecRef.SetTable(SalesCrMemoHeader);
                     SalesCrMemoHeader.Get(SalesCrMemoHeader."No.");
-                    InputString := CreateAndEncodeInputString(ToRecordID);
-                    SalesCrMemoHeader."QR Code" := InputString;
+                    // InputString := CreateAndEncodeInputString(ToRecordID);
+                    SalesCrMemoHeader."QR Code" := SalesCrMemoHeader.QRCode;
                     SalesCrMemoHeader."QR Code Generated" := true;
                     SalesCrMemoHeader.Modify(false);
                     QRCode := SalesCrMemoHeader."QR Code";
