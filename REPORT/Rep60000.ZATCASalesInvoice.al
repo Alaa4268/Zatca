@@ -1129,7 +1129,8 @@ report 60000 "ZATCA Sales - Invoice"
                 end;
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
-                //QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                // QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                "QR Code":=Header."QR Code";
                 if not IsReportInPreviewMode then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
 

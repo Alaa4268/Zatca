@@ -61,20 +61,18 @@ codeunit 60102 "ZATCA Event Mgt"
         SalesInvHeader: Record "Sales Invoice Header";
         ReportLayoutRec: Record "Report Layout List";
         ReportLayoutSelection: Record "Report Layout Selection";
+        RecRef: RecordRef;
     begin
         // Choose a layout depending on dimension, specified in General Ledger Setup
-        // GenLedSetup.Get();
-        // if RecVarToPrint.IsRecord then
-        // Message('')
-        // else if RecVarToPrint.IsRecordId then
-        // Message('') 
-        // else if RecVarToPrint.IsFieldRef then 
-        // Message('') else 
-        
-        // SalesInvHeader := RecVarToPrint;
-        // if SalesInvHeader.Get(SalesInvHeader."No.") and DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", SalesInvHeader."Shortcut Dimension 1 Code") and (ReportLayoutRec.Get(DimensionValue."Report layout", DimensionValue."Report Name", DimensionValue."Runtime Package ID")) then begin
-        //     ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
-        // end;
+        GenLedSetup.Get();
+
+        RecRef.GetTable(RecVarToPrint);
+        if RecRef.Number = Database::"Sales Invoice Header" then begin
+            SalesInvHeader := RecVarToPrint;
+            if SalesInvHeader.Get(SalesInvHeader."No.") and DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", SalesInvHeader."Shortcut Dimension 1 Code") and (ReportLayoutRec.Get(DimensionValue."Report layout", DimensionValue."Report Name", DimensionValue."Runtime Package ID")) then begin
+                ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
+            end;
+        end;
     end;
 
 
