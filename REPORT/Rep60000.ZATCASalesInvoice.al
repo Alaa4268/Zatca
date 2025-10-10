@@ -3,7 +3,7 @@ report 60000 "ZATCA Sales - Invoice"
     Caption = 'ZATCA Sales - Invoice';
     // DefaultLayout = RDLC;
     EnableHyperlinks = true;
-    DefaultRenderingLayout=NovaLayout;
+    DefaultRenderingLayout = NovaLayout;
 
     PreviewMode = PrintLayout;
     // RDLCLayout = './60000ZATCASalesInvoice.rdl';
@@ -39,7 +39,7 @@ report 60000 "ZATCA Sales - Invoice"
             column(CompanyAddress8; CompanyAddr[8])
             {
             }
-            column(Salesperson_Code;"Salesperson Code")
+            column(Salesperson_Code; "Salesperson Code")
             {
             }
             // column(CompanyHomePage; CompanyInfo."Home Page")
@@ -135,7 +135,7 @@ report 60000 "ZATCA Sales - Invoice"
             column(CompanyLegalStatement; GetLegalStatement)
             {
             }
-            column(CompanyInfo;CompanyInfo.Name)
+            column(CompanyInfo; CompanyInfo.Name)
             {
             }
             column(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
@@ -1266,9 +1266,15 @@ report 60000 "ZATCA Sales - Invoice"
         }
         layout(MardaLayout)
         {
-            Type=RDLC;
-            LayoutFile='REPORT\60000ZATCASalesInvoiceMarda.rdl';
-            CaptionML=ENU='ZATCA Sales Invoice - Marda', ENZ = 'فاتورة ضريبية';
+            Type = RDLC;
+            LayoutFile = 'REPORT\60000ZATCASalesInvoiceMarda.rdl';
+            CaptionML = ENU = 'ZATCA Sales Invoice - Marda', ENZ = 'فاتورة ضريبية';
+        }
+        layout(ShaqraLayout)
+        {
+            Type = RDLC;
+            LayoutFile = 'REPORT\60000ZATCASalesInvoiceShaqra.rdl';
+            CaptionML = ENU = 'ZATCA Sales Invoice - Shaqra', ENZ = 'فاتورة ضريبية';
         }
 
     }
@@ -1316,9 +1322,6 @@ report 60000 "ZATCA Sales - Invoice"
 
         CompanyLogoPosition := SalesSetup."Logo Position on Documents";
     end;
-
-
-
 
 
     // local procedure InitLogInteraction()

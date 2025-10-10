@@ -64,24 +64,50 @@ codeunit 60102 "ZATCA Event Mgt"
         RecRef: RecordRef;
     begin
         // Choose a layout depending on dimension, specified in General Ledger Setup
-        GenLedSetup.Get();
+        // GenLedSetup.Get();
 
-        RecRef.GetTable(RecVarToPrint);
-        if RecRef.Number = Database::"Sales Invoice Header" then begin
-            SalesInvHeader := RecVarToPrint;
-            if SalesInvHeader.Get(SalesInvHeader."No.") and DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", SalesInvHeader."Shortcut Dimension 1 Code") and (ReportLayoutRec.Get(DimensionValue."Report layout", DimensionValue."Report Name", DimensionValue."Runtime Package ID")) then begin
-                ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
-            end;
+        // RecRef.GetTable(RecVarToPrint);
+        // if RecRef.Number = Database::"Sales Invoice Header" then begin
+        //     SalesInvHeader := RecVarToPrint;
+        //     if SalesInvHeader.Get(SalesInvHeader."No.") and DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", SalesInvHeader."Shortcut Dimension 1 Code") then begin
+        //         clear(ReportLayoutRec);
+        //         ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
+        //         ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
+        //         if ReportLayoutRec.FindFirst() then
+        //             ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
+        //     end;
+        // end;
+    end;
+
+    // Fill Shipment date in sales credit memo upon insert
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterInsertEvent, '', false, false)]
+    local procedure OnAfterInsertSalesCrMemoHeaderEvent(var Rec: Record "Sales Header")
+    begin
+        if Rec."Document Type" = Rec."Document Type"::"Credit Memo" then begin
+            Rec.Validate("Shipment Date", Today);
+            Rec.Modify();
+        end;
+    end;
+    // Fill Shipment date in sales credit memo upon Modifying posting date  
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterValidateEvent, "Posting Date", false, false)]
+    local procedure OnAfterValidatePostingDateEventInSalesCrMemoHeader(var Rec: Record "Sales Header")
+    begin
+        if Rec."Document Type" = Rec."Document Type"::"Credit Memo" then begin
+            Rec.Validate("Shipment Date", Rec."Posting Date");
         end;
     end;
 
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Correct Posted Sales Invoice", OnAfterCreateCopyDocument, '', false, false)]
-    local procedure OnAfterCreateCopyDocumentOnCorrectPostedSalesInvoice(var SalesHeader: Record "Sales Header"; var SalesInvoiceHeader: Record "Sales Invoice Header")
+    // Fill Shipment date in sales credit memo upon filling applied to doc. no. field
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterAppliesToDocNoOnLookup, '', false, false)]
+    local procedure OnAfterValidateAppliedToDocNoEventInSalesHeader(var SalesHeader: Record "Sales Header")
     var
+        SalesInv: Record "Sales Header";
     begin
-        SalesHeader.Validate("Shipment Date",SalesInvoiceHeader."Posting Date");
-        SalesHeader.Modify();
+        if (SalesHeader."Document Type" = SalesHeader."Document Type"::"Credit Memo") and (SalesHeader."Applies-to Doc. Type" = SalesHeader."Applies-to Doc. Type"::Invoice) then
+            if SalesInv.Get(SalesInv."Document Type"::Invoice, SalesHeader."Applies-to Doc. No.") then begin
+                SalesHeader.Validate("Shipment Date", SalesInv."Posting Date");
+                SalesHeader.Modify();
+            end;
     end;
 
 

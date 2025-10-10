@@ -362,6 +362,7 @@ codeunit 60103 "ZATCA Payload Mgt."
         AdditonalDocReferenceValue, InvoiceElement, InvoiceHeaderElement : XmlElement;
         AllowanceCharge, HeaderTaxTotal, InvoiceLine, Item, Price : XmlElement;
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
+        SalesInvHeader: Record "Sales Header";
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesInvoiceHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -591,7 +592,14 @@ codeunit 60103 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue := XmlElement.Create('PriceAmount', CbcNamespaceUri);
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                     AdditonalDocReferenceValue.Add(XmlAtt);
-                    AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")).Replace(',', '')));
+                    // Modify calculations to exclude vat from amount
+                    // SalesInvHeader.Get(SalesInvHeader."Document Type"::Invoice,SalesInvoiceLine."Document No.")
+
+                    if SalesInvoiceHeader."Prices Including VAT" then
+                        AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
+                    else
+                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")).Replace(',', '')));
+
                     Price.Add(AdditonalDocReferenceValue);
                     // Allowance Charge
                     if SalesInvoiceLine."Line Discount Amount" > 0 then begin
@@ -605,12 +613,21 @@ codeunit 60103 "ZATCA Payload Mgt."
                         AdditonalDocReferenceValue := XmlElement.Create('Amount', CbcNamespaceUri);
                         XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                         AdditonalDocReferenceValue.Add(XmlAtt);
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price").Replace(',', '')));
+                        // Modify calculations to exclude vat from amount
+                        if SalesInvoiceHeader."Prices Including VAT" then
+                            AdditonalDocReferenceValue.Add(XmlText.Create(Format(((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
+                        else
+                            AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")).Replace(',', '')));
+
                         AllowanceCharge.Add(AdditonalDocReferenceValue);
                         AdditonalDocReferenceValue := XmlElement.Create('BaseAmount', CbcNamespaceUri);
                         XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                         AdditonalDocReferenceValue.Add(XmlAtt);
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price").Replace(',', '')));
+                        // Modify calculations to exclude vat from amount
+                        if SalesInvoiceHeader."Prices Including VAT" then
+                            AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
+                        else
+                            AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)).Replace(',', '')));
                         AllowanceCharge.Add(AdditonalDocReferenceValue);
                         Price.Add(AllowanceCharge);
                     end;
@@ -635,6 +652,7 @@ codeunit 60103 "ZATCA Payload Mgt."
         AdditonalDocReferenceValue, InvoiceElement, InvoiceHeaderElement : XmlElement;
         AllowanceCharge, HeaderTaxTotal, InvoiceDocumentReference, InvoiceLine, Item, Price : xmlElement;
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
+        TestDate: Text;
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesCrMemoHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -701,6 +719,7 @@ codeunit 60103 "ZATCA Payload Mgt."
         InvoiceHeaderElement.Add(XmlText.Create(InvoiceId));
         InvoiceElement.Add(InvoiceHeaderElement);
         InvoiceHeaderElement := XmlElement.Create('IssueDate', CbcNamespaceUri);
+        TestDate := Format(SalesCrMemoHeader."Posting Date", 0, 9);
         InvoiceHeaderElement.Add(XmlText.Create(Format(SalesCrMemoHeader."Posting Date", 0, 9)));
         InvoiceElement.Add(InvoiceHeaderElement);
         InvoiceHeaderElement := XmlElement.Create('IssueTime', CbcNamespaceUri);
@@ -1002,19 +1021,20 @@ codeunit 60103 "ZATCA Payload Mgt."
         Hours := TimeArray.Get(1).Replace(' ', '');
         Minutes := TimeArray.Get(2).Replace(' ', '');
         evaluate(EMinutes, Minutes);
-        if EMinutes < 10 then begin
-            Minutes := '0' + Minutes;
-            Evaluate(EMinutes, Minutes);
-        end;
+
         if (EMinutes >= 0) or (EMinutes <= 5) then begin
             evaluate(ehours, Hours);
             Ehours := Ehours - 1;
             Hours := Format(EHours);
         end;
+        EMinutes:=55;
         EMinutes := 60 - EMinutes;
         Minutes := Format(eminutes);
+        // if EMinutes < 10 then
+        //     Minutes := '0' + Minutes;
         Seconds := TimeArray.Get(3).Replace(' ', '');
         if StrLen(Hours) = 1 then Hours := '0' + Hours;
+        if StrLen(Minutes) = 1 then Minutes := '0' + Minutes;
         FormattedTime := Hours + ':' + Minutes + ':' + Seconds + 'Z';
         exit(FormattedTime);
     end;
