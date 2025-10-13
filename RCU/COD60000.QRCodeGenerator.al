@@ -2792,9 +2792,7 @@ codeunit 60000 "QR Code Generator1"
                     SalesInvoiceHeader."QR Code" :=CopyStr(SalesInvoiceHeader.QRCode,1,StrLen(InputString));
                     SalesInvoiceHeader."QR Code Generated" := true;
                     SalesInvoiceHeader.Modify(false);
-                    BarcodeFontProvider2D := BarcodeFontProvider2DEnum::IDAutomation2D;
                     QRCode := SalesInvoiceHeader."QR Code";
-                    Exit(BarcodeFontProvider2D.EncodeFont(QRCode, BarcodeSymbology::"QR-Code"));
 
                     // QRCode := SalesInvoiceHeader."QR Code";
                     // SalesInvoiceHeader."QR Code" := InputString;

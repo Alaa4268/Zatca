@@ -3741,6 +3741,15 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         <Field Name="NetInvoice">
           <DataField>NetInvoice</DataField>
         </Field>
+        <Field Name="ArTitle">
+          <DataField>ArTitle</DataField>
+        </Field>
+        <Field Name="EngTitle">
+          <DataField>EngTitle</DataField>
+        </Field>
+        <Field Name="Isb2B">
+          <DataField>Isb2B</DataField>
+        </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>
         </Field>

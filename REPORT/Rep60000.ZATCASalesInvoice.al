@@ -478,6 +478,10 @@ report 60000 "ZATCA Sales - Invoice"
             {
 
             }
+            column(ArTitle; ArTitle) { }
+            column(EngTitle; EngTitle) { }
+            column(Isb2B;Isb2B){}
+
             dataitem(Line; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -748,6 +752,9 @@ report 60000 "ZATCA Sales - Invoice"
                 end;
 
                 trigger OnPreDataItem()
+                var
+                    CustomerRec: Record Customer;
+                    SalInvHeader: Record "Sales Invoice Header";
                 begin
                     VATAmountLine.DeleteAll();
                     VATClauseLine.DeleteAll();
@@ -765,6 +772,18 @@ report 60000 "ZATCA Sales - Invoice"
                     DummyCompanyInfo.Picture := CompanyInfo.Picture;
 
                     OnAfterLineOnPreDataItem(Header, Line);
+
+                    
+                    SalInvHeader.Get(Header."No.");
+                    CustomerRec.Get(SalInvHeader."Sell-to Customer No.");
+                    if CustomerRec."Is B2C" then begin
+                        ArTitle := 'فاتورة ضريبية مبسطة';
+                        EngTitle := 'Simple Taxable Invoice';
+                    end else begin
+                        ArTitle := 'فاتورة ضريبية';
+                        EngTitle := 'Taxable Invoice';
+                        Isb2B:=true;
+                    end;
                 end;
             }
             dataitem(WorkDescriptionLines; "Integer")
@@ -1313,9 +1332,14 @@ report 60000 "ZATCA Sales - Invoice"
     end;
 
     trigger OnPreReport()
+    var
+        CustomerRec: Record Customer;
+        SalInvHeader: Record "Sales Invoice Header";
     begin
         if Header.GetFilters = '' then
             Error(NoFilterSetErr);
+
+
 
         // if not CurrReport.UseRequestPage then
         //     InitLogInteraction;
@@ -1736,6 +1760,10 @@ report 60000 "ZATCA Sales - Invoice"
         AmountInWords: Text;
         NoText: array[2] of Text;
 
+        ArTitle: Text;
+        EngTitle: Text;
+
+        Isb2B:Boolean;
 
 
 

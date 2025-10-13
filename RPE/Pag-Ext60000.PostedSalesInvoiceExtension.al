@@ -60,7 +60,7 @@ pageextension 60000 PostedSalesInvoiceExtension extends "Posted Sales Invoice"
     begin
         // Choose a layout depending on dimension, specified in General Ledger Setup
         GenLedSetup.Get();
-        if DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", Rec."Shortcut Dimension 1 Code") then begin
+        if DimensionValue.Get(GenLedSetup."Global Dimension 2 Code", Rec."Shortcut Dimension 2 Code") then begin
             clear(ReportLayoutRec);
             ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
             ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
