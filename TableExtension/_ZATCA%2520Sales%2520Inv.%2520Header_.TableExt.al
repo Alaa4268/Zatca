@@ -38,5 +38,9 @@ tableextension 60105 "ZATCA Sales Inv. Header" extends "Sales Invoice Header"
             Caption = 'Message';
             DataClassification = CustomerContent;
         }
+        field(60107; "Zat Cr No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

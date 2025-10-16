@@ -17,7 +17,6 @@ pageextension 60102 "ZATCA Posted Cr. Memos" extends "Posted Sales Credit Memos"
                 ToolTip = 'Specifies the status of ZATCA E-Invoicing';
             }
         }
-    }
     actions
     {
         addfirst(Promoted)
@@ -40,9 +39,11 @@ pageextension 60102 "ZATCA Posted Cr. Memos" extends "Posted Sales Credit Memos"
                 var
                     ZATCAAPIProcessing: Codeunit "ZATCA API Processing";
                 begin
-                    if(Rec.Status in[Rec.Status::Cleared, Rec.Status::Reported])then Message('This document has already been approved by ZATCA.')
+                    if (Rec.Status in [Rec.Status::Cleared, Rec.Status::Reported]) then
+                        Message('This document has already been approved by ZATCA.')
                     else
-                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)end;
+                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)
+                end;
             }
         }
         addafter("&Credit Memo")
@@ -70,13 +71,20 @@ pageextension 60102 "ZATCA Posted Cr. Memos" extends "Posted Sales Credit Memos"
         ZATCADeviceOnboarding: Record "ZATCA Device Onboarding";
         ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
     begin
-        ShowField:=ZATCAActivationMgt.IsZATCAIntegrationModuleActive();
-        if ZATCADeviceOnboarding.Get()then ShowAction:=ZATCADeviceOnboarding."On Posted Documents";
-        if ZATCAActivationMgt.IsZATCAIntegrationModuleActive()then case Rec.Status of Rec.Status::" ": StyleText:='None';
-            Rec.Status::Error: StyleText:='Unfavorable';
-            Rec.Status::Cleared, Rec.Status::Reported: StyleText:='Favorable';
+        ShowField := ZATCAActivationMgt.IsZATCAIntegrationModuleActive();
+        if ZATCADeviceOnboarding.Get() then ShowAction := ZATCADeviceOnboarding."On Posted Documents";
+        if ZATCAActivationMgt.IsZATCAIntegrationModuleActive() then
+            case Rec.Status of
+                Rec.Status::" ":
+                    StyleText := 'None';
+                Rec.Status::Error:
+                    StyleText := 'Unfavorable';
+                Rec.Status::Cleared, Rec.Status::Reported:
+                    StyleText := 'Favorable';
             end;
     end;
-    var ShowAction, ShowField: Boolean;
-    StyleText: Text;
+
+    var
+        ShowAction, ShowField : Boolean;
+        StyleText: Text;
 }

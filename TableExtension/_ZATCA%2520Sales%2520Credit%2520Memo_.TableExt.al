@@ -38,5 +38,9 @@ tableextension 60103 "ZATCA Sales Credit Memo" extends "Sales Cr.Memo Header"
             Caption = 'Message';
             DataClassification = CustomerContent;
         }
+        field(60107; "Zat Cr No."; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

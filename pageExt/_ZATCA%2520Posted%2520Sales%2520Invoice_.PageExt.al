@@ -52,6 +52,10 @@ pageextension 60104 "ZATCA Posted Sales Invoice" extends "Posted Sales Invoice"
                     }
                 }
             }
+            field("Zat Cr No."; Rec."Zat Cr No.")
+            {
+                ApplicationArea = All;
+            }   
         }
     }
     actions
@@ -79,9 +83,11 @@ pageextension 60104 "ZATCA Posted Sales Invoice" extends "Posted Sales Invoice"
                 var
                     ZATCAAPIProcessing: Codeunit "ZATCA API Processing";
                 begin
-                    if(Rec.Status in[Rec.Status::Cleared, Rec.Status::Reported])then Message('This document has already been approved by ZATCA.')
+                    if (Rec.Status in [Rec.Status::Cleared, Rec.Status::Reported]) then
+                        Message('This document has already been approved by ZATCA.')
                     else
-                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)end;
+                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)
+                end;
             }
         }
         addafter("&Invoice")
@@ -108,9 +114,11 @@ pageextension 60104 "ZATCA Posted Sales Invoice" extends "Posted Sales Invoice"
     var
         ZATCADeviceOnboarding: Record "ZATCA Device Onboarding";
     begin
-        ShowField:=ZATCAActivationMgt.IsZATCAIntegrationModuleActive();
-        if ZATCADeviceOnboarding.Get()then ShowAction:=ZATCADeviceOnboarding."On Posted Documents";
+        ShowField := ZATCAActivationMgt.IsZATCAIntegrationModuleActive();
+        if ZATCADeviceOnboarding.Get() then ShowAction := ZATCADeviceOnboarding."On Posted Documents";
     end;
-    var ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
-    ShowAction, ShowField: Boolean;
+
+    var
+        ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
+        ShowAction, ShowField : Boolean;
 }
