@@ -1,7 +1,7 @@
 report 60001 "ZATCA Sales - Credit Memo"
 {
     Caption = 'ZATCA Sales - Credit Memo';
-    DefaultLayout = RDLC;
+    DefaultRenderingLayout = MardaLayout;
     EnableHyperlinks = true;
     PreviewMode = PrintLayout;
     // RDLCLayout = './60001ZATCASalesCreditMemo.rdl';
@@ -414,6 +414,16 @@ report 60001 "ZATCA Sales - Credit Memo"
             {
 
             }
+            column("ZatCrNo"; "Zat Cr No.") { }
+            column("BLMAWB"; "B/L-MAWB#") { }
+            column("ZATBayanNo"; "ZAT Bayan No.") { }
+            column("ZatcaConsignee"; "Zatca Consignee") { }
+            column("ZatcaETD"; "Zatca ETD") { }
+            column("ZatcaCNTE"; "Zatca CNTE.#") { }
+            column("PortL"; "Port L.") { }
+            column("PortD"; "Port D.") { }
+            column("ZatcaShippper"; "Zatca Shippper") { }
+            column(Commodity; Commodity) { }
             dataitem(Line; "Sales Cr.Memo Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -1011,9 +1021,40 @@ report 60001 "ZATCA Sales - Credit Memo"
         end;
     }
 
+    rendering
+    {
+        // layout(NovaLayout)
+        // {
+        //     Type = RDLC;
+        //     LayoutFile = 'REPORT\60000ZATCASalesInvoiceNova.rdl';
+        //     CaptionML = ENU = 'ZATCA Sales Invoice - Nova', ENZ = 'فاتورة ضريبية';
+        // }
+        layout(MardaLayout)
+        {
+            Type = RDLC;
+            LayoutFile = 'REPORT\60001ZATCASalesCreditMemoMarda.rdl';
+            CaptionML = ENU = 'ZATCA Credit Memo - Marda', ENZ = 'اشعار دائن';
+        }
+         layout(MardaLayout2)
+        {
+            Type = RDLC;
+            LayoutFile = 'REPORT\60001ZATCASalesCreditMemoMarda2.rdl';
+            CaptionML = ENU = 'ZATCA Credit Memo - Marda', ENZ = 'اشعار دائن';
+        }
+        // layout(ShaqraLayout)
+        // {
+        //     Type = RDLC;
+        //     LayoutFile = 'REPORT\60000ZATCASalesInvoiceShaqra.rdl';
+        //     CaptionML = ENU = 'ZATCA Sales Invoice - Shaqra', ENZ = 'فاتورة ضريبية';
+        // }
+
+    }
     labels
     {
     }
+
+
+
 
     trigger OnInitReport()
     begin

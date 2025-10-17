@@ -481,6 +481,17 @@ report 60000 "ZATCA Sales - Invoice"
             column(ArTitle; ArTitle) { }
             column(EngTitle; EngTitle) { }
             column(Isb2B;Isb2B){}
+            
+            column("ZatCrNo"; "Zat Cr No.") {  }
+            column("BLMAWB"; "B/L-MAWB#") {  }
+            column("ZATBayanNo"; "ZAT Bayan No.") {  }
+            column("ZatcaConsignee"; "Zatca Consignee") {  }
+            column("ZatcaETD"; "Zatca ETD") {  }
+            column("ZatcaCNTE"; "Zatca CNTE.#") {  }
+            column("PortL"; "Port L.") {  }
+            column("PortD"; "Port D.") {  }
+            column("ZatcaShippper"; "Zatca Shippper") {  }
+            column(Commodity; Commodity) {  }
 
             dataitem(Line; "Sales Invoice Line")
             {

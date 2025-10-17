@@ -693,7 +693,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -810,7 +810,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>35.60828mm</Height>
+        <Height>33.63272mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1563,7 +1563,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ZatcaCNTE.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1574,7 +1574,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>10.32981cm</Top>
-              <Left>2.11214cm</Left>
+              <Left>2.12625cm</Left>
               <Height>0.6cm</Height>
               <Width>5.2605cm</Width>
               <ZIndex>21</ZIndex>
@@ -1659,7 +1659,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!BLMAWB.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1755,7 +1755,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ZATBayanNo.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1851,7 +1851,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!CustomerAddress1.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ZatcaConsignee.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1947,7 +1947,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!ShipmentDate.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ZatcaETD.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2043,7 +2043,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!PortL.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2054,7 +2054,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>10.96156cm</Top>
-              <Left>2.13907cm</Left>
+              <Left>2.15318cm</Left>
               <Height>0.6cm</Height>
               <Width>5.217cm</Width>
               <ZIndex>36</ZIndex>
@@ -2139,7 +2139,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!PortD.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2150,7 +2150,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>11.60036cm</Top>
-              <Left>2.13907cm</Left>
+              <Left>2.15318cm</Left>
               <Height>0.6cm</Height>
               <Width>5.217cm</Width>
               <ZIndex>39</ZIndex>
@@ -2235,7 +2235,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ZatcaShippper.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2246,7 +2246,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>12.23917cm</Top>
-              <Left>2.32978cm</Left>
+              <Left>2.34389cm</Left>
               <Height>0.6cm</Height>
               <Width>5.09cm</Width>
               <ZIndex>42</ZIndex>
@@ -2331,7 +2331,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=First(Fields!Commodity.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2342,7 +2342,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>12.86386cm</Top>
-              <Left>2.88128cm</Left>
+              <Left>2.89539cm</Left>
               <Height>0.6cm</Height>
               <Width>4.52908cm</Width>
               <ZIndex>45</ZIndex>
@@ -3749,6 +3749,36 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         </Field>
         <Field Name="Isb2B">
           <DataField>Isb2B</DataField>
+        </Field>
+        <Field Name="ZatCrNo">
+          <DataField>ZatCrNo</DataField>
+        </Field>
+        <Field Name="BLMAWB">
+          <DataField>BLMAWB</DataField>
+        </Field>
+        <Field Name="ZATBayanNo">
+          <DataField>ZATBayanNo</DataField>
+        </Field>
+        <Field Name="ZatcaConsignee">
+          <DataField>ZatcaConsignee</DataField>
+        </Field>
+        <Field Name="ZatcaETD">
+          <DataField>ZatcaETD</DataField>
+        </Field>
+        <Field Name="ZatcaCNTE">
+          <DataField>ZatcaCNTE</DataField>
+        </Field>
+        <Field Name="PortL">
+          <DataField>PortL</DataField>
+        </Field>
+        <Field Name="PortD">
+          <DataField>PortD</DataField>
+        </Field>
+        <Field Name="ZatcaShippper">
+          <DataField>ZatcaShippper</DataField>
+        </Field>
+        <Field Name="Commodity">
+          <DataField>Commodity</DataField>
         </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>

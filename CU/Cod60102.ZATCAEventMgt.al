@@ -111,14 +111,14 @@ codeunit 60102 "ZATCA Event Mgt"
     end;
 
 
-    // [EventSubscriber(ObjectType::Page, Page::"Sales Invoice Subform", OnInsertRecordEvent, '', false, false)]
-    // local procedure OnInsertRecordEventInSalesInvoiceSubform(var Rec: Record "Sales Line")
-    // var
-    //     SalesHeader: Record "Sales Header";
-    // begin
-    //     SalesHeader.Get(Rec."Document Type"::Invoice,Rec."Document No.");
-    //     SalesHeader.TestField("Shortcut Dimension 2 Code");
-    // end;
+    [EventSubscriber(ObjectType::Page, Page::"Sales Invoice Subform", OnInsertRecordEvent, '', false, false)]
+    local procedure OnInsertRecordEventInSalesInvoiceSubform(var Rec: Record "Sales Line")
+    var
+        SalesHeader: Record "Sales Header";
+    begin
+        SalesHeader.Get(Rec."Document Type"::Invoice,Rec."Document No.");
+        SalesHeader.TestField("Shortcut Dimension 2 Code");
+    end;
 
     var
         ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";

@@ -4344,6 +4344,36 @@ End Function
         <Field Name="Isb2B">
           <DataField>Isb2B</DataField>
         </Field>
+        <Field Name="ZatCrNo">
+          <DataField>ZatCrNo</DataField>
+        </Field>
+        <Field Name="BLMAWB">
+          <DataField>BLMAWB</DataField>
+        </Field>
+        <Field Name="ZATBayanNo">
+          <DataField>ZATBayanNo</DataField>
+        </Field>
+        <Field Name="ZatcaConsignee">
+          <DataField>ZatcaConsignee</DataField>
+        </Field>
+        <Field Name="ZatcaETD">
+          <DataField>ZatcaETD</DataField>
+        </Field>
+        <Field Name="ZatcaCNTE">
+          <DataField>ZatcaCNTE</DataField>
+        </Field>
+        <Field Name="PortL">
+          <DataField>PortL</DataField>
+        </Field>
+        <Field Name="PortD">
+          <DataField>PortD</DataField>
+        </Field>
+        <Field Name="ZatcaShippper">
+          <DataField>ZatcaShippper</DataField>
+        </Field>
+        <Field Name="Commodity">
+          <DataField>Commodity</DataField>
+        </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>
         </Field>
