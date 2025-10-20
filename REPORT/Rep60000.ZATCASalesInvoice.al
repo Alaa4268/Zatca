@@ -480,18 +480,19 @@ report 60000 "ZATCA Sales - Invoice"
             }
             column(ArTitle; ArTitle) { }
             column(EngTitle; EngTitle) { }
-            column(Isb2B;Isb2B){}
-            
-            column("ZatCrNo"; "Zat Cr No.") {  }
-            column("BLMAWB"; "B/L-MAWB#") {  }
-            column("ZATBayanNo"; "ZAT Bayan No.") {  }
-            column("ZatcaConsignee"; "Zatca Consignee") {  }
-            column("ZatcaETD"; "Zatca ETD") {  }
-            column("ZatcaCNTE"; "Zatca CNTE.#") {  }
-            column("PortL"; "Port L.") {  }
-            column("PortD"; "Port D.") {  }
-            column("ZatcaShippper"; "Zatca Shippper") {  }
-            column(Commodity; Commodity) {  }
+            column(Isb2B; Isb2B) { }
+
+            column("ZatCrNo"; "Zat Cr No.") { }
+            column("BLMAWB"; "B/L-MAWB#") { }
+            column("ZATBayanNo"; "ZAT Bayan No.") { }
+            column("ZatcaConsignee"; "Zatca Consignee") { }
+            column("ZatcaETD"; "Zatca ETD") { }
+            column("ZatcaCNTE"; "Zatca CNTE.#") { }
+            column("PortL"; "Port L.") { }
+            column("PortD"; "Port D.") { }
+            column("ZatcaShippper"; "Zatca Shippper") { }
+            column(Commodity; Commodity) { }
+            column(Sell_to_Address;"Sell-to Address"){}
 
             dataitem(Line; "Sales Invoice Line")
             {
@@ -784,7 +785,7 @@ report 60000 "ZATCA Sales - Invoice"
 
                     OnAfterLineOnPreDataItem(Header, Line);
 
-                    
+
                     SalInvHeader.Get(Header."No.");
                     CustomerRec.Get(SalInvHeader."Sell-to Customer No.");
                     if CustomerRec."Is B2C" then begin
@@ -793,7 +794,7 @@ report 60000 "ZATCA Sales - Invoice"
                     end else begin
                         ArTitle := 'فاتورة ضريبية';
                         EngTitle := 'Taxable Invoice';
-                        Isb2B:=true;
+                        Isb2B := true;
                     end;
                 end;
             }
@@ -1167,7 +1168,7 @@ report 60000 "ZATCA Sales - Invoice"
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
                 QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
-                // QRCode:=;
+                
                 if not IsReportInPreviewMode then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
 
@@ -1774,10 +1775,8 @@ report 60000 "ZATCA Sales - Invoice"
         ArTitle: Text;
         EngTitle: Text;
 
-        Isb2B:Boolean;
-
-
-
+        Isb2B: Boolean;
+        ZatcaEventMgmt: Codeunit "ZATCA Event Mgt";
 
 
 }

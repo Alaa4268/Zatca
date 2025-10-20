@@ -2805,9 +2805,9 @@ codeunit 60000 "QR Code Generator1"
                 begin
                     RecRef.SetTable(SalesCrMemoHeader);
                     SalesCrMemoHeader.Get(SalesCrMemoHeader."No.");
-                    InputString := CreateAndEncodeInputString(ToRecordID);
+                    // InputString := CreateAndEncodeInputString(ToRecordID);
                     // SalesCrMemoHeader."QR Code" := SalesCrMemoHeader.QRCode;
-                    SalesCrMemoHeader."QR Code" := InputString;
+                    SalesCrMemoHeader."QR Code" := SalesCrMemoHeader.QRCode;
                     SalesCrMemoHeader."QR Code Generated" := true;
                     SalesCrMemoHeader.Modify(false);
                     QRCode := SalesCrMemoHeader."QR Code";

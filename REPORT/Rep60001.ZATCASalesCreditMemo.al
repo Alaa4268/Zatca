@@ -310,6 +310,7 @@ report 60001 "ZATCA Sales - Credit Memo"
             column(SalesPersonName; SalespersonPurchaser.Name)
             {
             }
+            column(Salesperson_Code; "Salesperson Code") { }
             column(SelltoCustomerNo; "Sell-to Customer No.")
             {
             }
@@ -424,6 +425,11 @@ report 60001 "ZATCA Sales - Credit Memo"
             column("PortD"; "Port D.") { }
             column("ZatcaShippper"; "Zatca Shippper") { }
             column(Commodity; Commodity) { }
+            column(Sell_to_Address; "Sell-to Address") { }
+            column(ArTitle; ArTitle) { }
+            column(EngTitle; EngTitle) { }
+            column(Isb2B; Isb2B) { }
+
             dataitem(Line; "Sales Cr.Memo Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -597,7 +603,9 @@ report 60001 "ZATCA Sales - Credit Memo"
                 begin
                     InitializeSalesShipmentLine;
                     ToRecordId := Header.RecordId;
-                    QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                    // ?? why qrcode as a field is not accessible but it is in zatcasales invoice????
+                    Header.QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                    // ZatcaEventMgt.SetQrCode(ToRecordId);
                     if Type = Type::"G/L Account" then
                         "No." := '';
 
@@ -641,7 +649,7 @@ report 60001 "ZATCA Sales - Credit Memo"
                     //Start YANA Amount in words
                     RepCheck.InitTextVariable;
 
-                    RepCheck.FormatNoText(NoText, NetInvoice, Header."Currency Code");
+                    RepCheck.FormatNoText(NoText, TotalAmountInclVAT, Header."Currency Code");
 
                     AmountInWords := NoText[1];
                     //End YANA Amount in words
@@ -654,6 +662,9 @@ report 60001 "ZATCA Sales - Credit Memo"
                 end;
 
                 trigger OnPreDataItem()
+                var
+                    CustomerRec: Record Customer;
+                    CreditMemoHeader: Record "Sales Cr.Memo Header";
                 begin
                     VATAmountLine.DeleteAll();
                     VATClauseLine.DeleteAll();
@@ -669,6 +680,18 @@ report 60001 "ZATCA Sales - Credit Memo"
                     PrevLineAmount := 0;
                     FirstLineHasBeenOutput := false;
                     DummyCompanyInfo.Picture := CompanyInfo.Picture;
+
+                    FirstLineHasBeenOutput := false;
+                    CreditMemoHeader.Get(Header."No.");
+                    CustomerRec.Get(CreditMemoHeader."Sell-to Customer No.");
+                    if CustomerRec."Is B2C" then begin
+                        ArTitle := 'اشعار دائن مبسط';
+                        EngTitle := 'Simple Credit Memo';
+                    end else begin
+                        ArTitle := 'اشعار دائن';
+                        EngTitle := 'Credit Memo';
+                        Isb2B := true;
+                    end;
                 end;
             }
             dataitem(WorkDescriptionLines; "Integer")
@@ -965,8 +988,29 @@ report 60001 "ZATCA Sales - Credit Memo"
             end;
 
             trigger OnPreDataItem()
+            var
+                CustomerRec: Record Customer;
+                CreditMemoHeader: Record "Sales Cr.Memo Header";
             begin
                 FirstLineHasBeenOutput := false;
+            end;
+
+            trigger OnPostDataItem()
+            var
+                CustomerRec: Record Customer;
+                CreditMemoHeader: Record "Sales Cr.Memo Header";
+            begin
+                FirstLineHasBeenOutput := false;
+                CreditMemoHeader.Get(Header."No.");
+                CustomerRec.Get(CreditMemoHeader."Sell-to Customer No.");
+                if CustomerRec."Is B2C" then begin
+                    ArTitle := 'اشعار دائن مبسط';
+                    EngTitle := 'Simple Credit Memo';
+                end else begin
+                    ArTitle := 'اشعار دائن';
+                    EngTitle := 'Credit Memo';
+                    Isb2B := true;
+                end;
             end;
         }
     }
@@ -1035,18 +1079,18 @@ report 60001 "ZATCA Sales - Credit Memo"
             LayoutFile = 'REPORT\60001ZATCASalesCreditMemoMarda.rdl';
             CaptionML = ENU = 'ZATCA Credit Memo - Marda', ENZ = 'اشعار دائن';
         }
-         layout(MardaLayout2)
+        layout(NovaLayou)
         {
             Type = RDLC;
-            LayoutFile = 'REPORT\60001ZATCASalesCreditMemoMarda2.rdl';
-            CaptionML = ENU = 'ZATCA Credit Memo - Marda', ENZ = 'اشعار دائن';
+            LayoutFile = 'REPORT\60001ZATCASalesCreditMemoNova.rdl';
+            CaptionML = ENU = 'ZATCA Credit Memo - Nova', ENZ = 'اشعار دائن';
         }
-        // layout(ShaqraLayout)
-        // {
-        //     Type = RDLC;
-        //     LayoutFile = 'REPORT\60000ZATCASalesInvoiceShaqra.rdl';
-        //     CaptionML = ENU = 'ZATCA Sales Invoice - Shaqra', ENZ = 'فاتورة ضريبية';
-        // }
+        layout(ShaqraLayout)
+        {
+            Type = RDLC;
+            LayoutFile = 'REPORT\60001ZATCACreditMemoShaqra.rdl';
+            CaptionML = ENU = 'ZATCA Credit Memo - Shaqra', ENZ = 'اشعار دائن';
+        }
 
     }
     labels
@@ -1095,126 +1139,6 @@ report 60001 "ZATCA Sales - Credit Memo"
         CompanyLogoPosition := SalesSetup."Logo Position on Documents";
     end;
 
-    var
-        SalesCreditMemoNoLbl: Label 'Sales - Credit Memo %1';
-        SalespersonLbl: Label 'Sales person';
-        CompanyInfoBankAccNoLbl: Label 'Account No.';
-        CompanyInfoBankNameLbl: Label 'Bank';
-        CompanyInfoGiroNoLbl: Label 'Giro No.';
-        CompanyInfoPhoneNoLbl: Label 'Phone No.';
-        CopyLbl: Label 'Copy';
-        EMailLbl: Label 'Email';
-        HomePageLbl: Label 'Home Page';
-        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount';
-        InvDiscountAmtLbl: Label 'Invoice Discount';
-        InvNoLbl: Label 'Credit Memo No.';
-        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT';
-        LocalCurrencyLbl: Label 'Local Currency';
-        PageLbl: Label 'Page';
-        PaymentTermsDescLbl: Label 'Payment Terms';
-        PaymentMethodDescLbl: Label 'Payment Method';
-        PostedShipmentDateLbl: Label 'Shipment Date';
-        SalesInvLineDiscLbl: Label 'Discount %';
-        SalesCreditMemoLbl: Label 'Credit Memo';
-        ShipmentLbl: Label 'Shipment';
-        ShiptoAddrLbl: Label 'Ship-to Address';
-        ShptMethodDescLbl: Label 'Shipment Method';
-        SubtotalLbl: Label 'Subtotal';
-        TotalLbl: Label 'Total';
-        VATAmtSpecificationLbl: Label 'VAT Amount Specification';
-        VATAmtLbl: Label 'VAT Amount';
-        VATAmountLCYLbl: Label 'VAT Amount (LCY)';
-        VATBaseLbl: Label 'VAT Base';
-        VATBaseLCYLbl: Label 'VAT Base (LCY)';
-        VATClausesLbl: Label 'VAT Clause';
-        VATIdentifierLbl: Label 'VAT Identifier';
-        VATPercentageLbl: Label 'VAT %';
-        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
-        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
-        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
-        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
-        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
-        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
-        GLSetup: Record "General Ledger Setup";
-        ShipmentMethod: Record "Shipment Method";
-        PaymentTerms: Record "Payment Terms";
-        PaymentMethod: Record "Payment Method";
-        SalespersonPurchaser: Record "Salesperson/Purchaser";
-        CompanyBankAccount: Record "Bank Account";
-        DummyCompanyInfo: Record "Company Information";
-        CompanyInfo: Record "Company Information";
-        CompanyCountryRegion: Record "Country/Region";
-        SalesSetup: Record "Sales & Receivables Setup";
-        Cust: Record Customer;
-        CustomerInfo: Record Customer;
-        CustomerCountryRegion: Record "Country/Region";
-        RespCenter: Record "Responsibility Center";
-        VATClause: Record "VAT Clause";
-        SellToContact: Record Contact;
-        BillToContact: Record Contact;
-        G_Language: Codeunit Language;
-        FormatAddr: Codeunit "Format Address";
-        FormatDocument: Codeunit "Format Document";
-        SegManagement: Codeunit SegManagement;
-        AutoFormat: Codeunit "Auto Format";
-        WorkDescriptionInstream: InStream;
-        WorkDescriptionLine: Text;
-        CustAddr: array[8] of Text[100];
-        ShipToAddr: array[8] of Text[100];
-        CompanyAddr: array[8] of Text[100];
-        SalesPersonText: Text[30];
-        TotalText: Text[50];
-        TotalExclVATText: Text[50];
-        TotalInclVATText: Text[50];
-        LineDiscountPctText: Text;
-        FormattedVATPct: Text;
-        FormattedUnitPrice: Text;
-        FormattedQuantity: Text;
-        FormattedLineAmount: Text;
-        MoreLines: Boolean;
-        CopyText: Text[30];
-        ShowWorkDescription: Boolean;
-        ShowShippingAddr: Boolean;
-        LogInteraction: Boolean;
-        SalesPrepCreditMemoNoLbl: Label 'Sales - Prepmt. Credit Memo %1';
-        TotalSubTotal: Decimal;
-        TotalAmount: Decimal;
-        TotalAmountInclVAT: Decimal;
-        TotalAmountVAT: Decimal;
-        TotalInvDiscAmount: Decimal;
-        TotalPaymentDiscOnVAT: Decimal;
-        TransHeaderAmount: Decimal;
-        [InDataSet]
-        LogInteractionEnable: Boolean;
-        DisplayAssemblyInformation: Boolean;
-        DisplayShipmentInformation: Boolean;
-        CompanyLogoPosition: Integer;
-        FirstLineHasBeenOutput: Boolean;
-        CalculatedExchRate: Decimal;
-        ExchangeRateText: Text;
-        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = '%1 and %2 are both amounts.';
-        VATBaseLCY: Decimal;
-        VATAmountLCY: Decimal;
-        TotalVATBaseLCY: Decimal;
-        TotalVATAmountLCY: Decimal;
-        PrevLineAmount: Decimal;
-        AppliesToText: Text;
-        QRCode: Text;
-        AppliesToTextLbl: Label 'Applies to Document';
-        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.';
-        GreetingLbl: Label 'Hello';
-        ClosingLbl: Label 'Sincerely';
-        BodyLbl: Label 'Thank you for your business. Your credit memo is attached to this message.';
-        RetentionPercentage: Label 'Retention @ %1 %';
-        RetentionPercentage_AR: Label 'حجوزات الضمان @  % %1';
-        AdvancePayment_lbl: Label 'Advance Payment Recovering @ %1 %';
-        AdvancePayment_AR_lbl: Label 'خصم الدفعة المقدمة @  % %1';
-        AdvancePaymentAmount: Decimal;
-        AdvancePaymentVATAmount: Decimal;
-
-        NetInvoice: Decimal;
-        AmountInWords: Text;
-        NoText: array[2] of Text;
 
 
     // local procedure InitLogInteraction()
@@ -1329,5 +1253,132 @@ report 60001 "ZATCA Sales - Credit Memo"
     local procedure OnBeforeDocumentCaption(SalesCrMemoHeader: Record "Sales Cr.Memo Header"; var DocCaption: Text[250])
     begin
     end;
+
+
+
+    var
+        SalesCreditMemoNoLbl: Label 'Sales - Credit Memo %1';
+        SalespersonLbl: Label 'Sales person';
+        CompanyInfoBankAccNoLbl: Label 'Account No.';
+        CompanyInfoBankNameLbl: Label 'Bank';
+        CompanyInfoGiroNoLbl: Label 'Giro No.';
+        CompanyInfoPhoneNoLbl: Label 'Phone No.';
+        CopyLbl: Label 'Copy';
+        EMailLbl: Label 'Email';
+        HomePageLbl: Label 'Home Page';
+        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount';
+        InvDiscountAmtLbl: Label 'Invoice Discount';
+        InvNoLbl: Label 'Credit Memo No.';
+        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT';
+        LocalCurrencyLbl: Label 'Local Currency';
+        PageLbl: Label 'Page';
+        PaymentTermsDescLbl: Label 'Payment Terms';
+        PaymentMethodDescLbl: Label 'Payment Method';
+        PostedShipmentDateLbl: Label 'Shipment Date';
+        SalesInvLineDiscLbl: Label 'Discount %';
+        SalesCreditMemoLbl: Label 'Credit Memo';
+        ShipmentLbl: Label 'Shipment';
+        ShiptoAddrLbl: Label 'Ship-to Address';
+        ShptMethodDescLbl: Label 'Shipment Method';
+        SubtotalLbl: Label 'Subtotal';
+        TotalLbl: Label 'Total';
+        VATAmtSpecificationLbl: Label 'VAT Amount Specification';
+        VATAmtLbl: Label 'VAT Amount';
+        VATAmountLCYLbl: Label 'VAT Amount (LCY)';
+        VATBaseLbl: Label 'VAT Base';
+        VATBaseLCYLbl: Label 'VAT Base (LCY)';
+        VATClausesLbl: Label 'VAT Clause';
+        VATIdentifierLbl: Label 'VAT Identifier';
+        VATPercentageLbl: Label 'VAT %';
+        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
+        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
+        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
+        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
+        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
+        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
+        GLSetup: Record "General Ledger Setup";
+        ShipmentMethod: Record "Shipment Method";
+        PaymentTerms: Record "Payment Terms";
+        PaymentMethod: Record "Payment Method";
+        SalespersonPurchaser: Record "Salesperson/Purchaser";
+        CompanyBankAccount: Record "Bank Account";
+        DummyCompanyInfo: Record "Company Information";
+        CompanyInfo: Record "Company Information";
+        CompanyCountryRegion: Record "Country/Region";
+        SalesSetup: Record "Sales & Receivables Setup";
+        Cust: Record Customer;
+        CustomerInfo: Record Customer;
+        CustomerCountryRegion: Record "Country/Region";
+        RespCenter: Record "Responsibility Center";
+        VATClause: Record "VAT Clause";
+        SellToContact: Record Contact;
+        BillToContact: Record Contact;
+        G_Language: Codeunit Language;
+        FormatAddr: Codeunit "Format Address";
+        FormatDocument: Codeunit "Format Document";
+        SegManagement: Codeunit SegManagement;
+        AutoFormat: Codeunit "Auto Format";
+        WorkDescriptionInstream: InStream;
+        WorkDescriptionLine: Text;
+        CustAddr: array[8] of Text[100];
+        ShipToAddr: array[8] of Text[100];
+        CompanyAddr: array[8] of Text[100];
+        SalesPersonText: Text[30];
+        TotalText: Text[50];
+        TotalExclVATText: Text[50];
+        TotalInclVATText: Text[50];
+        LineDiscountPctText: Text;
+        FormattedVATPct: Text;
+        FormattedUnitPrice: Text;
+        FormattedQuantity: Text;
+        FormattedLineAmount: Text;
+        MoreLines: Boolean;
+        CopyText: Text[30];
+        ShowWorkDescription: Boolean;
+        ShowShippingAddr: Boolean;
+        LogInteraction: Boolean;
+        SalesPrepCreditMemoNoLbl: Label 'Sales - Prepmt. Credit Memo %1';
+        TotalSubTotal: Decimal;
+        TotalAmount: Decimal;
+        TotalAmountInclVAT: Decimal;
+        TotalAmountVAT: Decimal;
+        TotalInvDiscAmount: Decimal;
+        TotalPaymentDiscOnVAT: Decimal;
+        TransHeaderAmount: Decimal;
+        [InDataSet]
+        LogInteractionEnable: Boolean;
+        DisplayAssemblyInformation: Boolean;
+        DisplayShipmentInformation: Boolean;
+        CompanyLogoPosition: Integer;
+        FirstLineHasBeenOutput: Boolean;
+        CalculatedExchRate: Decimal;
+        ExchangeRateText: Text;
+        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = '%1 and %2 are both amounts.';
+        VATBaseLCY: Decimal;
+        VATAmountLCY: Decimal;
+        TotalVATBaseLCY: Decimal;
+        TotalVATAmountLCY: Decimal;
+        PrevLineAmount: Decimal;
+        AppliesToText: Text;
+        // QRCode: Text;
+        AppliesToTextLbl: Label 'Applies to Document';
+        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.';
+        GreetingLbl: Label 'Hello';
+        ClosingLbl: Label 'Sincerely';
+        BodyLbl: Label 'Thank you for your business. Your credit memo is attached to this message.';
+        RetentionPercentage: Label 'Retention @ %1 %';
+        RetentionPercentage_AR: Label 'حجوزات الضمان @  % %1';
+        AdvancePayment_lbl: Label 'Advance Payment Recovering @ %1 %';
+        AdvancePayment_AR_lbl: Label 'خصم الدفعة المقدمة @  % %1';
+        AdvancePaymentAmount: Decimal;
+        AdvancePaymentVATAmount: Decimal;
+        NetInvoice: Decimal;
+        AmountInWords: Text;
+        NoText: array[2] of Text;
+        ZatcaEventMgt: Codeunit "ZATCA Event Mgt";
+        EngTitle: Text;
+        ArTitle: Text;
+        Isb2B: Boolean;
+
 }
 

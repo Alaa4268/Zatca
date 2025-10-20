@@ -1,5 +1,13 @@
 pageextension 60002 "Pag-Ext60002.SalesOrderExt.al" extends "Sales Order"
 {
+
+    layout
+    {
+        modify("Shortcut Dimension 2 Code")
+        {
+            ShowMandatory=true;
+        }
+    }
     actions
     {
         addfirst(processing)

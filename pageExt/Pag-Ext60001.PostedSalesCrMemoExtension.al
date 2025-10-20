@@ -9,7 +9,7 @@ pageextension 60001 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
                 ApplicationArea = All;
                 Visible = false;
             }
-            
+
             field("B/L-MAWB#"; Rec."B/L-MAWB#") { ApplicationArea = All; }
             field("ZAT Bayan No."; Rec."ZAT Bayan No.") { ApplicationArea = All; }
             field("Zatca Consignee"; Rec."Zatca Consignee") { ApplicationArea = All; }
@@ -57,6 +57,7 @@ pageextension 60001 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
                     L_SalesCrMemoHeader := Rec;
                     CurrPage.SetSelectionFilter(L_SalesCrMemoHeader);
                     L_SalesCrMemoHeader.SetRecFilter();
+                    ZatcaEventMgt.SetLayoutByDim(Rec."Shortcut Dimension 2 Code");
                     Report.Run(60001, true, true, L_SalesCrMemoHeader);
                 end;
             }
@@ -66,4 +67,6 @@ pageextension 60001 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
 
     var
         QRCode: Text;
+        ZatcaEventMgt: Codeunit "ZATCA Event Mgt";
+
 }

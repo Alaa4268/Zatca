@@ -1,5 +1,10 @@
 codeunit 60102 "ZATCA Event Mgt"
 {
+
+    Permissions = tabledata "Sales Cr.Memo Header" = RIMD,
+    tabledata "Sales Invoice Header" = RIMD;
+
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterFinalizePostingOnBeforeCommit', '', true, true)]
     local procedure OnAfterFinalizePostingOnBeforeCommit(var SalesHeader: Record "Sales Header"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header"; var SalesInvoiceHeader: Record "Sales Invoice Header"; var PreviewMode: Boolean; var ReturnReceiptHeader: Record "Return Receipt Header"; var SalesShipmentHeader: Record "Sales Shipment Header")
     var
@@ -54,30 +59,6 @@ codeunit 60102 "ZATCA Event Mgt"
 
     // CIS
 
-    [EventSubscriber(ObjectType::Table, Database::"Report Selections", OnBeforePrintDocument, '', false, false)]
-    local procedure OnBeforePrintDocument(TempReportSelections: Record "Report Selections" temporary; var RecVarToPrint: Variant)
-    var
-        DimensionValue: Record "Dimension Value";
-        SalesInvHeader: Record "Sales Invoice Header";
-        ReportLayoutRec: Record "Report Layout List";
-        ReportLayoutSelection: Record "Report Layout Selection";
-        RecRef: RecordRef;
-    begin
-        // Choose a layout depending on dimension, specified in General Ledger Setup
-        // GenLedSetup.Get();
-
-        // RecRef.GetTable(RecVarToPrint);
-        // if RecRef.Number = Database::"Sales Invoice Header" then begin
-        //     SalesInvHeader := RecVarToPrint;
-        //     if SalesInvHeader.Get(SalesInvHeader."No.") and DimensionValue.Get(GenLedSetup."Global Dimension 1 Code", SalesInvHeader."Shortcut Dimension 1 Code") then begin
-        //         clear(ReportLayoutRec);
-        //         ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
-        //         ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
-        //         if ReportLayoutRec.FindFirst() then
-        //             ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
-        //     end;
-        // end;
-    end;
 
     // Fill Shipment date in sales credit memo upon insert
     [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterInsertEvent, '', false, false)]
@@ -116,11 +97,63 @@ codeunit 60102 "ZATCA Event Mgt"
     var
         SalesHeader: Record "Sales Header";
     begin
-        SalesHeader.Get(Rec."Document Type"::Invoice,Rec."Document No.");
+        SalesHeader.Get(Rec."Document Type"::Invoice, Rec."Document No.");
         SalesHeader.TestField("Shortcut Dimension 2 Code");
+    end;
+
+
+    [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2B", false, false)]
+    local procedure OnBeforeValidateIsB2BEventInSalesInvoice(var Rec: Record Customer)
+    var
+        SalInv: Record "Sales Header";
+        PostedSalInv: Record "Sales Invoice Header";
+    begin
+        clear(SalInv);
+        SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        clear(PostedSalInv);
+        PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        if SalInv.FindFirst() or PostedSalInv.FindFirst() then
+            Error('This field cannot be changed because a transaction has been made for this Customer!');
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2C", false, false)]
+    local procedure OnBeforeValidateIsB2CEventInSalesInvoice(var Rec: Record Customer)
+    var
+        SalInv: Record "Sales Header";
+        PostedSalInv: Record "Sales Invoice Header";
+    begin
+        clear(SalInv);
+        SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        clear(PostedSalInv);
+        PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        if SalInv.FindFirst() or PostedSalInv.FindFirst() then
+            Error('This field cannot be changed because a transaction has been made for this Customer!');
+    end;
+
+
+
+    // =======================================================================================================================================//
+    // ============================================================  PROCEDURES  =============================================================//
+
+    procedure SetLayoutByDim(DimensionCode: Code[20])
+    var
+        DimensionValue: Record "Dimension Value";
+        ReportLayoutRec: Record "Report Layout List";
+        ReportLayoutSelection: Record "Report Layout Selection";
+    begin
+        // Choose a layout depending on dimension, specified in General Ledger Setup
+        GenLedSetup.Get();
+        if DimensionValue.Get(GenLedSetup."Global Dimension 2 Code", DimensionCode) then begin
+            clear(ReportLayoutRec);
+            ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
+            ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
+            if ReportLayoutRec.FindFirst() then
+                ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
+        end;
     end;
 
     var
         ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
         GenLedSetup: Record "General Ledger Setup";
+
 }

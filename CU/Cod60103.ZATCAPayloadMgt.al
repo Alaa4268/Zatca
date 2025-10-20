@@ -363,6 +363,7 @@ codeunit 60103 "ZATCA Payload Mgt."
         AllowanceCharge, HeaderTaxTotal, InvoiceLine, Item, Price : XmlElement;
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
         SalesInvHeader: Record "Sales Header";
+        MonitorValue: Decimal;
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesInvoiceHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -594,6 +595,8 @@ codeunit 60103 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue.Add(XmlAtt);
                     // Modify calculations to exclude vat from amount
                     // SalesInvHeader.Get(SalesInvHeader."Document Type"::Invoice,SalesInvoiceLine."Document No.")
+                    MonitorValue := SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price");
+                    MonitorValue := (SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)));
 
                     if SalesInvoiceHeader."Prices Including VAT" then
                         AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
@@ -1027,7 +1030,7 @@ codeunit 60103 "ZATCA Payload Mgt."
             Ehours := Ehours - 1;
             Hours := Format(EHours);
         end;
-        EMinutes:=55;
+        EMinutes := 55;
         EMinutes := 60 - EMinutes;
         Minutes := Format(eminutes);
         // if EMinutes < 10 then

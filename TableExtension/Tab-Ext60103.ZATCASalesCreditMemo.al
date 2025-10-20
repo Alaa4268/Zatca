@@ -14,8 +14,7 @@ tableextension 60103 "ZATCA Sales Credit Memo" extends "Sales Cr.Memo Header"
         }
         field(60102; QRCode; Text[2048])
         {
-            Caption
-            = 'QR Code';
+            Caption = 'QR Code';
             DataClassification = CustomerContent;
         }
         field(60103; Status; Enum "ZATCA Status")

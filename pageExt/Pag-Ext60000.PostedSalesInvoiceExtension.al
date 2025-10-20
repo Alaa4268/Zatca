@@ -52,33 +52,32 @@ pageextension 60000 PostedSalesInvoiceExtension extends "Posted Sales Invoice"
                     SalesInvHeader := Rec;
                     CurrPage.SetSelectionFilter(SalesInvHeader);
                     SalesInvHeader.SetRecFilter();
-                    SetLayoutByDim();
+                    ZatcaEventMgt.SetLayoutByDim(Rec."Shortcut Dimension 2 Code");
                     Report.Run(60000, true, true, SalesInvHeader);
                 end;
             }
 
         }
     }
-    local procedure SetLayoutByDim()
-    var
-        DimensionValue: Record "Dimension Value";
-        SalesInvHeader: Record "Sales Invoice Header";
-        ReportLayoutRec: Record "Report Layout List";
-        ReportLayoutSelection: Record "Report Layout Selection";
-        RecRef: RecordRef;
-    begin
-        // Choose a layout depending on dimension, specified in General Ledger Setup
-        GenLedSetup.Get();
-        if DimensionValue.Get(GenLedSetup."Global Dimension 2 Code", Rec."Shortcut Dimension 2 Code") then begin
-            clear(ReportLayoutRec);
-            ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
-            ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
-            if ReportLayoutRec.FindFirst() then
-                ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
-        end;
-    end;
+    // local procedure SetLayoutByDim()
+    // var
+    //     DimensionValue: Record "Dimension Value";
+    //     ReportLayoutRec: Record "Report Layout List";
+    //     ReportLayoutSelection: Record "Report Layout Selection";
+    // begin
+    //     // Choose a layout depending on dimension, specified in General Ledger Setup
+    //     GenLedSetup.Get();
+    //     if DimensionValue.Get(GenLedSetup."Global Dimension 2 Code", Rec."Shortcut Dimension 2 Code") then begin
+    //         clear(ReportLayoutRec);
+    //         ReportLayoutRec.SetFilter("Report ID", '=%1', DimensionValue."Report layout");
+    //         ReportLayoutRec.SetFilter(Name, DimensionValue."Report Name");
+    //         if ReportLayoutRec.FindFirst() then
+    //             ReportLayoutSelection.SetTempLayoutSelectedName(ReportLayoutRec.Name);
+    //     end;
+    // end;
 
     var
         QRCode: Text;
         GenLedSetup: Record "General Ledger Setup";
+        ZatcaEventMgt: Codeunit "ZATCA Event Mgt";
 }
