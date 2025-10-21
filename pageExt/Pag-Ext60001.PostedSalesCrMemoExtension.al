@@ -9,16 +9,19 @@ pageextension 60001 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
                 ApplicationArea = All;
                 Visible = false;
             }
-
-            field("B/L-MAWB#"; Rec."B/L-MAWB#") { ApplicationArea = All; }
-            field("ZAT Bayan No."; Rec."ZAT Bayan No.") { ApplicationArea = All; }
-            field("Zatca Consignee"; Rec."Zatca Consignee") { ApplicationArea = All; }
-            field("Zatca ETD"; Rec."Zatca ETD") { ApplicationArea = All; }
-            field("Zatca CNTE.#"; Rec."Zatca CNTE.#") { ApplicationArea = All; }
-            field("Port L."; Rec."Port L.") { ApplicationArea = All; }
-            field("Port D."; Rec."Port D.") { ApplicationArea = All; }
-            field("Zatca Shippper"; Rec."Zatca Shippper") { ApplicationArea = All; }
-            field(Commodity; Rec.Commodity) { ApplicationArea = All; }
+            group(Zatca)
+            {
+                Visible = DimIsMarda;
+                field("B/L-MAWB#"; Rec."B/L-MAWB#") { ApplicationArea = All; }
+                field("ZAT Bayan No."; Rec."ZAT Bayan No.") { ApplicationArea = All; }
+                field("Zatca Consignee"; Rec."Zatca Consignee") { ApplicationArea = All; }
+                field("Zatca ETD"; Rec."Zatca ETD") { ApplicationArea = All; }
+                field("Zatca CNTE.#"; Rec."Zatca CNTE.#") { ApplicationArea = All; }
+                field("Port L."; Rec."Port L.") { ApplicationArea = All; }
+                field("Port D."; Rec."Port D.") { ApplicationArea = All; }
+                field("Zatca Shippper"; Rec."Zatca Shippper") { ApplicationArea = All; }
+                field(Commodity; Rec.Commodity) { ApplicationArea = All; }
+            }
         }
     }
     actions
@@ -65,8 +68,15 @@ pageextension 60001 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
         }
     }
 
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        DimIsMarda:=ZatcaEventMgt.DimIsMarda(Rec.RecordId);
+    end;
+
     var
         QRCode: Text;
         ZatcaEventMgt: Codeunit "ZATCA Event Mgt";
+        DimIsMarda: Boolean;
 
 }

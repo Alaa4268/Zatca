@@ -152,6 +152,40 @@ codeunit 60102 "ZATCA Event Mgt"
         end;
     end;
 
+
+    procedure DimIsMarda(RecID: RecordId): Boolean
+    var
+        RecRef: RecordRef;
+        SalInvHeader: Record "Sales Invoice Header";
+        SalHeader: Record "Sales Header";
+        SalCrMemo: Record "Sales Cr.Memo Header";
+    begin
+        GenLedSetup.Get();
+
+        RecRef := RecID.GetRecord();
+
+        case RecRef.Number of
+            Database::"Sales Header":
+                begin
+                    RecRef.SetTable(SalHeader);
+                    SalHeader.Get(SalHeader."Document Type",SalHeader."No.");
+                    exit(SalHeader."Shortcut Dimension 2 Code" = GenLedSetup."Marada Dim. Value");
+                end;
+            Database::"Sales Invoice Header":
+                begin
+                    RecRef.SetTable(SalInvHeader);
+                    SalInvHeader.Get(SalInvHeader."No.");
+                    exit(SalInvHeader."Shortcut Dimension 2 Code" = GenLedSetup."Marada Dim. Value");
+                end;
+            Database::"Sales Cr.Memo Header":
+                begin
+                    RecRef.SetTable(SalCrMemo);
+                    SalCrMemo.Get(SalCrMemo."No.");
+                    exit(SalCrMemo."Shortcut Dimension 2 Code" = GenLedSetup."Marada Dim. Value");
+                end;
+        end;
+    end;
+
     var
         ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
         GenLedSetup: Record "General Ledger Setup";

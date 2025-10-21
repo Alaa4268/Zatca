@@ -8,5 +8,10 @@ tableextension 50002 "General Ledger Setup" extends "General Ledger Setup"
             DataClassification = ToBeClassified;
             TableRelation=Dimension;
         }
+        field(50001; "Marada Dim. Value"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation="Dimension Value".Code where("Dimension Code"=field("Brand Dimension Code"));
+        }
     }
 }
