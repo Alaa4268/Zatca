@@ -131,6 +131,15 @@ codeunit 60102 "ZATCA Event Mgt"
     end;
 
 
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterValidateEvent, "Sell-to Customer No.", false, false)]
+    local procedure OnAfterValidateSellToCustomerNoEventInSalesHeader(var Rec: Record "Sales Header")
+    var
+        CustomerRec: Record Customer;
+    begin
+        if (Rec."Document Type" = Rec."Document Type"::Invoice) and (CustomerRec.Get(Rec."Sell-to Customer No.")) and (CustomerRec."Global Dimension 2 Code" <> '') then
+            Rec.Validate("Shortcut Dimension 2 Code", CustomerRec."Global Dimension 2 Code");
+    end;
+
 
     // =======================================================================================================================================//
     // ============================================================  PROCEDURES  =============================================================//
@@ -168,7 +177,7 @@ codeunit 60102 "ZATCA Event Mgt"
             Database::"Sales Header":
                 begin
                     RecRef.SetTable(SalHeader);
-                    SalHeader.Get(SalHeader."Document Type",SalHeader."No.");
+                    SalHeader.Get(SalHeader."Document Type", SalHeader."No.");
                     exit(SalHeader."Shortcut Dimension 2 Code" = GenLedSetup."Marada Dim. Value");
                 end;
             Database::"Sales Invoice Header":
