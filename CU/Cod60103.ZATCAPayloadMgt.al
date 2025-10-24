@@ -604,36 +604,38 @@ codeunit 60103 "ZATCA Payload Mgt."
                         AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")).Replace(',', '')));
 
                     Price.Add(AdditonalDocReferenceValue);
-                    // Allowance Charge
-                    if SalesInvoiceLine."Line Discount Amount" > 0 then begin
-                        AllowanceCharge := XmlElement.Create('AllowanceCharge', CacNamespaceUri);
-                        AdditonalDocReferenceValue := XmlElement.Create('ChargeIndicator', CbcNamespaceUri);
-                        AdditonalDocReferenceValue.Add(XmlText.Create('true'));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('AllowanceChargeReason', CbcNamespaceUri);
-                        AdditonalDocReferenceValue.Add(XmlText.Create('discount'));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('Amount', CbcNamespaceUri);
-                        XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
-                        AdditonalDocReferenceValue.Add(XmlAtt);
-                        // Modify calculations to exclude vat from amount
-                        if SalesInvoiceHeader."Prices Including VAT" then
-                            AdditonalDocReferenceValue.Add(XmlText.Create(Format(((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
-                        else
-                            AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")).Replace(',', '')));
 
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('BaseAmount', CbcNamespaceUri);
-                        XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
-                        AdditonalDocReferenceValue.Add(XmlAtt);
-                        // Modify calculations to exclude vat from amount
-                        if SalesInvoiceHeader."Prices Including VAT" then
-                            AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
-                        else
-                            AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)).Replace(',', '')));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        Price.Add(AllowanceCharge);
-                    end;
+                    // Allowance Charge
+                    // if SalesInvoiceLine."Line Discount Amount" > 0 then begin
+                    //     AllowanceCharge := XmlElement.Create('AllowanceCharge', CacNamespaceUri);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('ChargeIndicator', CbcNamespaceUri);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create('false'));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('AllowanceChargeReason', CbcNamespaceUri);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create('discount'));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('Amount', CbcNamespaceUri);
+                    //     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
+                    //     AdditonalDocReferenceValue.Add(XmlAtt);
+                    //     // Modify calculations to exclude vat from amount
+                    //     if SalesInvoiceHeader."Prices Including VAT" then
+                    //         AdditonalDocReferenceValue.Add(XmlText.Create(Format(((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
+                    //     else
+                    //         AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Line Discount %" / 100) * (SalesInvoiceLine."Unit Price")).Replace(',', '')));
+
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('BaseAmount', CbcNamespaceUri);
+                    //     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
+                    //     AdditonalDocReferenceValue.Add(XmlAtt);
+                    //     // Modify calculations to exclude vat from amount
+                    //     if SalesInvoiceHeader."Prices Including VAT" then
+                    //         AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)) / ((1 + (SalesInvoiceLine."VAT %" / 100)))).Replace(',', '')))
+                    //     else
+                    //         AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesInvoiceLine."Unit Price" / ((1 + SalesInvoiceLine."VAT %") / 100)).Replace(',', '')));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     Price.Add(AllowanceCharge);
+                    // end;
+
                     InvoiceLine.Add(Price);
                     InvoiceElement.Add(InvoiceLine);
                 end;
