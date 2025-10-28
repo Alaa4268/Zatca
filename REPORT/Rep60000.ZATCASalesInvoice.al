@@ -492,8 +492,7 @@ report 60000 "ZATCA Sales - Invoice"
             column("PortD"; "Port D.") { }
             column("ZatcaShippper"; "Zatca Shippper") { }
             column(Commodity; Commodity) { }
-            column(Sell_to_Address;"Sell-to Address"){}
-
+            column(Sell_to_Address; "Sell-to Address") { }
             dataitem(Line; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -628,6 +627,10 @@ report 60000 "ZATCA Sales - Invoice"
                 column(PricePer_Lbl; PricePerLbl)
                 {
                 }
+                column(ForeignUnitPrice; ForeignUnitPrice)
+                {
+                }
+
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -759,6 +762,9 @@ report 60000 "ZATCA Sales - Invoice"
                         JobNoLbl := JobNoLbl2
                     else
                         JobNoLbl := '';
+
+                    clear(L_Currency);
+                    // if L_Currency.Get(Header.for)
 
                     FormatDocument.SetSalesInvoiceLine(Line, FormattedQuantity, FormattedUnitPrice, FormattedVATPct, FormattedLineAmount);
                 end;
@@ -1168,7 +1174,7 @@ report 60000 "ZATCA Sales - Invoice"
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
                 QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
-                
+
                 if not IsReportInPreviewMode then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
 
@@ -1777,7 +1783,7 @@ report 60000 "ZATCA Sales - Invoice"
 
         Isb2B: Boolean;
         ZatcaEventMgmt: Codeunit "ZATCA Event Mgt";
-
+        ForeignUnitPrice: Decimal;
 
 }
 

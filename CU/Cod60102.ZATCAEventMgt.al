@@ -108,12 +108,12 @@ codeunit 60102 "ZATCA Event Mgt"
         SalInv: Record "Sales Header";
         PostedSalInv: Record "Sales Invoice Header";
     begin
-        clear(SalInv);
-        SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        clear(PostedSalInv);
-        PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        if SalInv.FindFirst() or PostedSalInv.FindFirst() then
-            Error('This field cannot be changed because a transaction has been made for this Customer!');
+        // clear(SalInv);
+        // SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        // clear(PostedSalInv);
+        // PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        // if SalInv.FindFirst() or PostedSalInv.FindFirst() then
+        //     Error('This field cannot be changed because a transaction has been made for this Customer!');
     end;
 
     [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2C", false, false)]

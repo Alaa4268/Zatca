@@ -19,6 +19,7 @@ pageextension 60111 "Sales Invoice Ext" extends "Sales Invoice"
                 field("Port D."; Rec."Port D.") { ApplicationArea = All; }
                 field("Zatca Shippper"; Rec."Zatca Shippper") { ApplicationArea = All; }
                 field(Commodity; Rec.Commodity) { ApplicationArea = All; }
+                field("Foreign Currency Code"; Rec."Foreign Currency Code") { ApplicationArea = All; }
             }
         }
     }
@@ -26,7 +27,7 @@ pageextension 60111 "Sales Invoice Ext" extends "Sales Invoice"
 
     trigger OnAfterGetCurrRecord()
     begin
-        DimIsMarda:=ZatcaEventMgt.DimIsMarda(Rec.RecordId);
+        DimIsMarda := ZatcaEventMgt.DimIsMarda(Rec.RecordId);
     end;
 
 

@@ -19,12 +19,12 @@ tableextension 60104 "ZATCA Sales Header" extends "Sales Header"
         }
         field(60108; "B/L-MAWB#"; Code[25])
         {
-            ToolTip = 'this field refersto either the Bill of Lading number (if by sea) or Master Air Waybill number (if by air).';
+            ToolTip = 'this field refers to either the Bill of Lading number (if by sea) or Master Air Waybill number (if by air).';
             DataClassification = ToBeClassified;
         }
         field(60109; "ZAT Bayan No."; Code[20])
         {
-            Caption='Bayan No.';
+            Caption = 'Bayan No.';
             DataClassification = ToBeClassified;
         }
         field(60110; "Zatca Consignee"; Text[100])
@@ -56,12 +56,17 @@ tableextension 60104 "ZATCA Sales Header" extends "Sales Header"
         }
         field(60115; "Zatca Shippper"; Text[100])
         {
-            Caption='Shipper';
+            Caption = 'Shipper';
             DataClassification = ToBeClassified;
         }
         field(60116; Commodity; Text[100])
         {
             DataClassification = ToBeClassified;
+        }
+        field(60117; "Foreign Currency Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Currency;
         }
     }
 }
