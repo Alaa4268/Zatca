@@ -487,7 +487,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CurrencyCode.Value</Value>
+                                  <Value>=Fields!ForeignUnitPrice.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -508,6 +508,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -4005,6 +4006,12 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         </Field>
         <Field Name="PricePer_Lbl">
           <DataField>PricePer_Lbl</DataField>
+        </Field>
+        <Field Name="ForeignUnitPrice">
+          <DataField>ForeignUnitPrice</DataField>
+        </Field>
+        <Field Name="ForeignUnitPriceFormat">
+          <DataField>ForeignUnitPriceFormat</DataField>
         </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>

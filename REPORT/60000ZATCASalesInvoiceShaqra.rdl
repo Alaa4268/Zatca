@@ -5046,6 +5046,12 @@ yiqXufHMDW/Jipkd/11uWROwB8bKiXRcQbRS8zhUuDagothwEkaNQpsPLE91NKZOkVJIaUjPcJHpEFob
         <Field Name="PricePer_Lbl">
           <DataField>PricePer_Lbl</DataField>
         </Field>
+        <Field Name="ForeignUnitPrice">
+          <DataField>ForeignUnitPrice</DataField>
+        </Field>
+        <Field Name="ForeignUnitPriceFormat">
+          <DataField>ForeignUnitPriceFormat</DataField>
+        </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>
         </Field>

@@ -58,7 +58,7 @@ pageextension 60104 "ZATCA Posted Sales Invoice" extends "Posted Sales Invoice"
             {
                 ApplicationArea = All;
             }
-
+            field("Foreign Currency Code"; Rec."Foreign Currency Code") { ApplicationArea = All; }
         }
     }
     actions

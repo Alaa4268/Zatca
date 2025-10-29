@@ -49,7 +49,7 @@ tableextension 60105 "ZATCA Sales Inv. Header" extends "Sales Invoice Header"
         }
         field(60109; "ZAT Bayan No."; Code[20])
         {
-            Caption='Bayan No.';
+            Caption = 'Bayan No.';
             DataClassification = ToBeClassified;
         }
         field(60110; "Zatca Consignee"; Text[100])
@@ -87,6 +87,11 @@ tableextension 60105 "ZATCA Sales Inv. Header" extends "Sales Invoice Header"
         field(60116; Commodity; Text[100])
         {
             DataClassification = ToBeClassified;
+        }
+        field(60117; "Foreign Currency Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Currency;
         }
     }
 }

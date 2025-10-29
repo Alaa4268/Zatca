@@ -695,6 +695,7 @@ report 60000 "ZATCA Sales - Invoice"
                     L_Currency: Record Currency;
                     RoundingPrecision: Decimal;
                     RepCheck: Report Check;
+                    CurrencyExchangeRate: Record "Currency Exchange Rate";
                 begin
                     InitializeShipmentLine;
                     if Type = Type::"G/L Account" then
@@ -764,7 +765,9 @@ report 60000 "ZATCA Sales - Invoice"
                         JobNoLbl := '';
 
                     clear(L_Currency);
-                    // if L_Currency.Get(Header.for)
+
+                    if L_Currency.Get(Header."Foreign Currency Code") then
+                        ForeignUnitPrice := CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", L_Currency."Currency Factor");
 
                     FormatDocument.SetSalesInvoiceLine(Line, FormattedQuantity, FormattedUnitPrice, FormattedVATPct, FormattedLineAmount);
                 end;
