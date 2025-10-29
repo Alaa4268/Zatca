@@ -767,7 +767,7 @@ report 60000 "ZATCA Sales - Invoice"
                     clear(L_Currency);
 
                     if L_Currency.Get(Header."Foreign Currency Code") then
-                        ForeignUnitPrice := CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", L_Currency."Currency Factor");
+                        ForeignUnitPrice := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
 
                     FormatDocument.SetSalesInvoiceLine(Line, FormattedQuantity, FormattedUnitPrice, FormattedVATPct, FormattedLineAmount);
                 end;
@@ -1786,7 +1786,7 @@ report 60000 "ZATCA Sales - Invoice"
 
         Isb2B: Boolean;
         ZatcaEventMgmt: Codeunit "ZATCA Event Mgt";
-        ForeignUnitPrice: Decimal;
+        ForeignUnitPrice: Text;
 
 }
 

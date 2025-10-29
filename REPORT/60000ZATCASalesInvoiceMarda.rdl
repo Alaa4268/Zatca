@@ -25,10 +25,10 @@
                   <Width>1.61761cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.64864cm</Width>
+                  <Width>2.3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.94198cm</Width>
+                  <Width>2.3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.36893cm</Width>
@@ -488,7 +488,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!ForeignUnitPrice.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -508,7 +510,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -803,7 +804,7 @@
             <Top>0.09525cm</Top>
             <Left>0.11553cm</Left>
             <Height>2.95711cm</Height>
-            <Width>18.73549cm</Width>
+            <Width>18.74487cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -827,7 +828,7 @@
           </RightBorder>
         </Style>
       </Body>
-      <Width>196.05849mm</Width>
+      <Width>188.604mm</Width>
       <Page>
         <PageHeader>
           <Height>14.35084cm</Height>
@@ -2515,7 +2516,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>7.71878cm</Height>
+          <Height>7.02001cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -4009,9 +4010,6 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         </Field>
         <Field Name="ForeignUnitPrice">
           <DataField>ForeignUnitPrice</DataField>
-        </Field>
-        <Field Name="ForeignUnitPriceFormat">
-          <DataField>ForeignUnitPriceFormat</DataField>
         </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>
