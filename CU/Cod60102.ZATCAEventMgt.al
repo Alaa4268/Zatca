@@ -61,14 +61,24 @@ codeunit 60102 "ZATCA Event Mgt"
 
 
     // Fill Shipment date in sales credit memo upon insert
-    [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterInsertEvent, '', false, false)]
-    local procedure OnAfterInsertSalesCrMemoHeaderEvent(var Rec: Record "Sales Header")
+    // [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterInsertEvent, '', false, false)]
+    // local procedure OnAfterInsertSalesCrMemoHeaderEvent(var Rec: Record "Sales Header")
+    // begin
+    //     if Rec."Document Type" = Rec."Document Type"::"Credit Memo" then begin
+    //         Rec.Validate("Shipment Date", Today);
+    //         Rec.Modify();
+    //     end;
+    // end;
+
+
+    // Fill Shipment date in sales credit memo upon copying document
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Correct Posted Sales Invoice", OnAfterCreateCopyDocument, '', false, false)]
+    local procedure OnAfterCreateCopyDocumentSalesInvToSalesCreditMemo(var SalesHeader: Record "Sales Header"; var SalesInvoiceHeader: Record "Sales Invoice Header")
     begin
-        if Rec."Document Type" = Rec."Document Type"::"Credit Memo" then begin
-            Rec.Validate("Shipment Date", Today);
-            Rec.Modify();
-        end;
+        SalesHeader.Validate("Shipment Date", Today);
+        SalesHeader.Modify();
     end;
+
     // Fill Shipment date in sales credit memo upon Modifying posting date  
     [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnAfterValidateEvent, "Posting Date", false, false)]
     local procedure OnAfterValidatePostingDateEventInSalesCrMemoHeader(var Rec: Record "Sales Header")
@@ -102,18 +112,28 @@ codeunit 60102 "ZATCA Event Mgt"
     end;
 
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Correct Posted Sales Invoice", OnAfterCreateCorrectiveSalesCrMemo, '', false, false)]
+    local procedure OnAfterCreateCorrectiveSalesCrMemo(var SalesHeader: Record "Sales Header"; SalesInvoiceHeader: Record "Sales Invoice Header")
+    begin
+        if SalesHeader."Shipment Date" = 0D then begin
+            SalesHeader.Validate("Shipment Date", SalesInvoiceHeader."Posting Date");
+            SalesHeader.Modify();
+        end;
+    end;
+
+
     [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2B", false, false)]
     local procedure OnBeforeValidateIsB2BEventInSalesInvoice(var Rec: Record Customer)
     var
         SalInv: Record "Sales Header";
         PostedSalInv: Record "Sales Invoice Header";
     begin
-        // clear(SalInv);
-        // SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        // clear(PostedSalInv);
-        // PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        // if SalInv.FindFirst() or PostedSalInv.FindFirst() then
-        //     Error('This field cannot be changed because a transaction has been made for this Customer!');
+        clear(SalInv);
+        SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        clear(PostedSalInv);
+        PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+        if SalInv.FindFirst() or PostedSalInv.FindFirst() then
+            Error('This field cannot be changed because a transaction has been made for this Customer!');
     end;
 
     [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2C", false, false)]

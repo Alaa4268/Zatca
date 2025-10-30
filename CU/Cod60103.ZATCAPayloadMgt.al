@@ -376,6 +376,7 @@ codeunit 60103 "ZATCA Payload Mgt."
             repeat
                 if SalesInvoiceLine.Type <> SalesInvoiceLine.Type::" " then begin
                     LineCount += 1;
+                    // if SalesInvoiceLine."VAT %" <> 0 then   // this line is added by CIS-Alaa
                     VATPercentage := SalesInvoiceLine."VAT %";
                     TaxAmount := SalesInvoiceLine.GetLineAmountInclVAT() - SalesInvoiceLine.GetLineAmountExclVAT();
                     TotalTaxAmount += TaxAmount;

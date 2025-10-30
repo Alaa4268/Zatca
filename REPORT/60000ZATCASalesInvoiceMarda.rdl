@@ -853,7 +853,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox123</rd:DefaultName>
               <Top>10.1887cm</Top>
-              <Left>0.1232cm</Left>
+              <Left>0.13258cm</Left>
               <Height>4.03364cm</Height>
               <Width>18.72782cm</Width>
               <Style>
@@ -2412,7 +2412,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>National Add.:</Value>
+                      <Value>Address :</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2420,8 +2420,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>13.50267cm</Top>
-              <Left>9.87458cm</Left>
+              <Top>13.46386cm</Top>
+              <Left>0.55581cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>48</ZIndex>
@@ -2442,7 +2442,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value> : عنوان البيع الى</Value>
+                      <Value>:العنوان</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2474,7 +2474,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Sell_to_Address.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2485,9 +2485,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>13.50267cm</Top>
-              <Left>12.40986cm</Left>
+              <Left>3.16164cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.57831cm</Width>
+              <Width>12.89708cm</Width>
               <ZIndex>50</ZIndex>
               <Style>
                 <Border>
@@ -3504,6 +3504,9 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         <Field Name="CompanyInfo">
           <DataField>CompanyInfo</DataField>
         </Field>
+        <Field Name="ConcatenatedCompanyInfoLine">
+          <DataField>ConcatenatedCompanyInfoLine</DataField>
+        </Field>
         <Field Name="DisplayAdditionalFeeNote">
           <DataField>DisplayAdditionalFeeNote</DataField>
         </Field>
@@ -3879,6 +3882,36 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         <Field Name="Sell_to_Address">
           <DataField>Sell_to_Address</DataField>
         </Field>
+        <Field Name="TotalAmountVAT">
+          <DataField>TotalAmountVAT</DataField>
+        </Field>
+        <Field Name="TotalAmountVATFormat">
+          <DataField>TotalAmountVATFormat</DataField>
+        </Field>
+        <Field Name="TotalInvDiscAmount">
+          <DataField>TotalInvDiscAmount</DataField>
+        </Field>
+        <Field Name="TotalInvDiscAmountFormat">
+          <DataField>TotalInvDiscAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalRawAmount">
+          <DataField>TotalRawAmount</DataField>
+        </Field>
+        <Field Name="TotalRawAmountFormat">
+          <DataField>TotalRawAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalAmountInclVAT">
+          <DataField>TotalAmountInclVAT</DataField>
+        </Field>
+        <Field Name="TotalAmountInclVATFormat">
+          <DataField>TotalAmountInclVATFormat</DataField>
+        </Field>
+        <Field Name="TotalRawLineDiscAmount">
+          <DataField>TotalRawLineDiscAmount</DataField>
+        </Field>
+        <Field Name="TotalRawLineDiscAmountFormat">
+          <DataField>TotalRawLineDiscAmountFormat</DataField>
+        </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>
         </Field>
@@ -4010,6 +4043,18 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         </Field>
         <Field Name="ForeignUnitPrice">
           <DataField>ForeignUnitPrice</DataField>
+        </Field>
+        <Field Name="RawLineAmount">
+          <DataField>RawLineAmount</DataField>
+        </Field>
+        <Field Name="RawLineAmountFormat">
+          <DataField>RawLineAmountFormat</DataField>
+        </Field>
+        <Field Name="RawUnitPrice">
+          <DataField>RawUnitPrice</DataField>
+        </Field>
+        <Field Name="RawUnitPriceFormat">
+          <DataField>RawUnitPriceFormat</DataField>
         </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>

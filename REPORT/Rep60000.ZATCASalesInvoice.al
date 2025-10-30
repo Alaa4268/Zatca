@@ -138,6 +138,9 @@ report 60000 "ZATCA Sales - Invoice"
             column(CompanyInfo; CompanyInfo.Name)
             {
             }
+            column(ConcatenatedCompanyInfoLine; ConcatenatedCompanyInfoLine)
+            {
+            }
             column(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
             {
             }
@@ -493,6 +496,11 @@ report 60000 "ZATCA Sales - Invoice"
             column("ZatcaShippper"; "Zatca Shippper") { }
             column(Commodity; Commodity) { }
             column(Sell_to_Address; "Sell-to Address") { }
+            column(TotalAmountVAT; TotalAmountVAT) { }
+            column(TotalInvDiscAmount; TotalInvDiscAmount) { }
+            column(TotalRawAmount; TotalRawAmount) { }
+            column(TotalAmountInclVAT; TotalAmountInclVAT) { }
+            column(TotalRawLineDiscAmount; TotalRawLineDiscAmount) { }
             dataitem(Line; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -689,6 +697,9 @@ report 60000 "ZATCA Sales - Invoice"
                           AssemblyLine, ValueEntry."Document Type"::"Sales Invoice", Line."Document No.", Line."Line No.");
                     end;
                 }
+                column(RawLineAmount; RawLineAmount) { }
+                column(RawUnitPrice; RawUnitPrice) { }
+
 
                 trigger OnAfterGetRecord()
                 var
@@ -770,6 +781,17 @@ report 60000 "ZATCA Sales - Invoice"
                         ForeignUnitPrice := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
 
                     FormatDocument.SetSalesInvoiceLine(Line, FormattedQuantity, FormattedUnitPrice, FormattedVATPct, FormattedLineAmount);
+
+                    if Header."Prices Including VAT" then begin
+                        RawLineAmount := (line."Line Amount" + Line."Line Discount Amount") / (1 + (Line."VAT %" / 100));
+                        TotalRawLineDiscAmount += Line."Line Discount Amount" / (1 + (Line."VAT %" / 100))
+                    end else begin
+                        RawLineAmount := line."Line Amount" + Line."Line Discount Amount";
+                        TotalRawLineDiscAmount += Line."Line Discount Amount";
+                    end;
+
+                    RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
+                    TotalRawAmount += RawLineAmount;
                 end;
 
                 trigger OnPreDataItem()
@@ -1231,6 +1253,9 @@ report 60000 "ZATCA Sales - Invoice"
                 TotalPaymentDiscOnVAT := 0;
                 if ("Order No." = '') and "Prepayment Invoice" then
                     "Order No." := "Prepayment Order No.";
+
+                // Filling company addresses and info in one line
+                ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
             end;
 
             trigger OnPreDataItem()
@@ -1787,7 +1812,11 @@ report 60000 "ZATCA Sales - Invoice"
         Isb2B: Boolean;
         ZatcaEventMgmt: Codeunit "ZATCA Event Mgt";
         ForeignUnitPrice: Text;
-
+        ConcatenatedCompanyInfoLine: Text;
+        RawLineAmount: Decimal;
+        RawUnitPrice: Decimal;
+        TotalRawAmount: Decimal;
+        TotalRawLineDiscAmount: Decimal;
 }
 
 
