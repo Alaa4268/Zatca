@@ -475,8 +475,28 @@
             <Width>18.00352cm</Width>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
             </Style>
           </Tablix>
           <Tablix Name="Tablix5">
@@ -1735,13 +1755,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Buyer</Value>
+                                  <Value>العميل</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -1756,45 +1778,11 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>2</ColSpan>
+                        <ColSpan>4</ColSpan>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox14">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>العميل</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
+                    <TablixCell />
                     <TablixCell />
                   </TablixCells>
                 </TablixRow>
@@ -2076,7 +2064,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value> : رقم الاتصال</Value>
+                                  <Value> :رقم العميل </Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2214,7 +2202,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Email : </Value>
+                                  <Value>CR No. : </Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2244,7 +2232,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!SellToContactEmail.Value</Value>
+                                  <Value>=Fields!ZatCrNo.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2278,8 +2266,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value> : بريد الكتروني</Value>
-                                  <Style />
+                                  <Value>:رقم السجل التجاري</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2356,81 +2346,6 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.59294cm</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox5">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Seller</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox1</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox16">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>التاجر</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
                   <Height>0.6cm</Height>
                   <TablixCells>
                     <TablixCell>
@@ -2442,7 +2357,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Name : </Value>
+                                  <Value>Invoice No. :</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2472,7 +2387,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CompanyAddress1.Value</Value>
+                                  <Value>=Fields!DocumentNo.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2506,7 +2421,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value> : الاسم</Value>
+                                  <Value>:رقم الفاتورة</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2516,6 +2431,107 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox53">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date :</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox28</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox54">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DocumentDate.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value> :تاريخ الفاتورة</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox33</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2637,107 +2653,6 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox44">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Contact #:</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox28</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox45">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!CompanyPhoneNo.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox31</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox48">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value> : رقم الاتصال</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox33</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.6cm</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Textbox50">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2775,7 +2690,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CompanyVATRegistrationNo.Value</Value>
+                                  <Value>=Fields!Salesperson_Code.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2809,7 +2724,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>: الرقم الضريبي</Value>
+                                  <Value> :رقم المندوب</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2819,107 +2734,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox37</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.6cm</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox53">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Email : </Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox46</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox54">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!CompanyEMail.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox47</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox55">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value> : بريد الكتروني</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox49</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2951,14 +2765,12 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.3175cm</Top>
-            <Left>0.3175cm</Left>
-            <Height>3.59294cm</Height>
+            <Left>0.28575cm</Left>
+            <Height>2.4cm</Height>
             <Width>9.271cm</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
@@ -3176,7 +2988,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>88.80093mm</Height>
+        <Height>89.22424mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3195,7 +3007,7 @@
       <Width>194.8453mm</Width>
       <Page>
         <PageHeader>
-          <Height>8.05524cm</Height>
+          <Height>6.82757cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3223,7 +3035,7 @@
                       <Value>=Fields!QRCode.Value</Value>
                       <Style>
                         <FontFamily>IDAutomation2D</FontFamily>
-                        <FontSize>7pt</FontSize>
+                        <FontSize>5pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -3233,8 +3045,8 @@
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>2.63737cm</Top>
               <Left>13.76669cm</Left>
-              <Height>5.22737cm</Height>
-              <Width>5.55909cm</Width>
+              <Height>4cm</Height>
+              <Width>4cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -3386,7 +3198,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!CompanyRegistrationNumber.Value, "DataSet_Result")</Value>
+                      <Value>=Fields!CompanyVATRegistrationNo.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -3458,7 +3270,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>4.24745cm</Height>
+          <Height>4.27561cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3618,7 +3430,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox133</rd:DefaultName>
-              <Top>1.78472cm</Top>
+              <Top>3.05472cm</Top>
               <Left>0.28575cm</Left>
               <Height>1.22089cm</Height>
               <Width>19.19878cm</Width>
@@ -3632,187 +3444,12 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox135">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Head Office:</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> Riyadh, Gulf Commercial Complex – </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>Showroom -</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> Riyadh : Imam Saud Road </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>C.R. :</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> 1010664112 – </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>Membership :</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> 125053 – </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>Tel :</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> 4630585 - 2176331 – </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>Fax:</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> 2174435 – </Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>P.O. Box:</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value> 64464, Riyadh 12211</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Segoe UI</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox135</rd:DefaultName>
-              <Top>3.07617cm</Top>
-              <Left>0.28575cm</Left>
-              <Height>1.17128cm</Height>
-              <Width>19.19878cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Line Name="Line3">
-              <Top>0.127cm</Top>
+              <Top>1.55575cm</Top>
               <Left>0.83726cm</Left>
               <Height>0cm</Height>
               <Width>18.05343cm</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Color>Green</Color>
@@ -3838,11 +3475,11 @@
               </Style>
             </Line>
             <Line Name="Line4">
-              <Top>0.22049cm</Top>
+              <Top>1.64924cm</Top>
               <Left>0.83726cm</Left>
               <Height>0cm</Height>
               <Width>18.05343cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Color>Indigo</Color>
@@ -3884,11 +3521,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox191</rd:DefaultName>
-              <Top>0.1742in</Top>
+              <Top>0.7367in</Top>
               <Left>0.32963in</Left>
               <Height>0.31072in</Height>
               <Width>1.77344in</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3917,11 +3554,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox193</rd:DefaultName>
-              <Top>0.1742in</Top>
+              <Top>0.7367in</Top>
               <Left>2.11696in</Left>
               <Height>0.31072in</Height>
               <Width>1.77344in</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3950,11 +3587,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox195</rd:DefaultName>
-              <Top>0.1742in</Top>
+              <Top>0.7367in</Top>
               <Left>3.8904in</Left>
               <Height>0.31072in</Height>
               <Width>1.77344in</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3983,16 +3620,80 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox197</rd:DefaultName>
-              <Top>0.1742in</Top>
+              <Top>0.7367in</Top>
               <Left>5.66384in</Left>
               <Height>0.31072in</Height>
               <Width>1.77344in</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
                 <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox5">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>للالوان البيضاء فقط مع العلم البضاعة الملونة لا ترد و يجب تقديم الفاتورة عند الطلب</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox5</rd:DefaultName>
+              <Top>0.07056cm</Top>
+              <Left>4.66775cm</Left>
+              <Height>0.6cm</Height>
+              <Width>10.553cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox12">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>اقر بأني استلمت البضاعة اعلاه في حالة ممتازة و تم مطابقتها مع الفاتورة - البضاعة ترد خلال سبعة ايام من تاريخ الفاتورة </Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0.81168cm</Top>
+              <Left>2.43586cm</Left>
+              <Height>0.6cm</Height>
+              <Width>14.61281cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>

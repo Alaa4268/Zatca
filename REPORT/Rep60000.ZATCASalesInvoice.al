@@ -1256,6 +1256,9 @@ report 60000 "ZATCA Sales - Invoice"
 
                 // Filling company addresses and info in one line
                 ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
+
+
+                // if Header."Payment Method Code"
             end;
 
             trigger OnPreDataItem()
@@ -1817,6 +1820,7 @@ report 60000 "ZATCA Sales - Invoice"
         RawUnitPrice: Decimal;
         TotalRawAmount: Decimal;
         TotalRawLineDiscAmount: Decimal;
+        PaymentMethodEngAr:Text;
 }
 
 
