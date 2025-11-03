@@ -430,6 +430,14 @@ report 60001 "ZATCA Sales - Credit Memo"
             column(EngTitle; EngTitle) { }
             column(Isb2B; Isb2B) { }
 
+            column(TotalAmountVAT; TotalAmountVAT) { }
+            column(TotalInvDiscAmount; TotalInvDiscAmount) { }
+            column(TotalRawAmount; TotalRawAmount) { }
+            column(TotalAmountInclVAT; TotalAmountInclVAT) { }
+            column(TotalRawLineDiscAmount; TotalRawLineDiscAmount) { }
+            column(PaymentMethodEngAr; PaymentMethodEngAr) { }
+            column(ForeignUnitPrice; ForeignUnitPrice) { }
+            column(ConcatenatedCompanyInfoLine; ConcatenatedCompanyInfoLine) { }
             dataitem(Line; "Sales Cr.Memo Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -534,6 +542,8 @@ report 60001 "ZATCA Sales - Credit Memo"
                     AutoFormatExpression = Header."Currency Code";
                     AutoFormatType = 1;
                 }
+                column(RawLineAmount; RawLineAmount) { }
+                column(RawUnitPrice; RawUnitPrice) { }
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -600,6 +610,7 @@ report 60001 "ZATCA Sales - Credit Memo"
                     RepCheck: Report Check;
                     CUQrCodeGeneratore: Codeunit "QR Code Generator1";
                     ToRecordId: RecordId;
+                    CurrencyExchangeRate: Record "Currency Exchange Rate";
                 begin
                     InitializeSalesShipmentLine;
                     ToRecordId := Header.RecordId;
@@ -659,6 +670,23 @@ report 60001 "ZATCA Sales - Credit Memo"
                     if FirstLineHasBeenOutput then
                         Clear(DummyCompanyInfo.Picture);
                     FirstLineHasBeenOutput := true;
+
+                    clear(L_Currency);
+
+                    if L_Currency.Get(Header."Foreign Currency Code") then
+                        ForeignUnitPrice := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
+
+                    if Header."Prices Including VAT" then begin
+                        RawLineAmount := (line."Line Amount" + Line."Line Discount Amount") / (1 + (Line."VAT %" / 100));
+                        TotalRawLineDiscAmount += Line."Line Discount Amount" / (1 + (Line."VAT %" / 100))
+                    end else begin
+                        RawLineAmount := line."Line Amount" + Line."Line Discount Amount";
+                        TotalRawLineDiscAmount += Line."Line Discount Amount";
+                    end;
+                    
+                    if Quantity <> 0 then
+                        RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
+                    TotalRawAmount += RawLineAmount;
                 end;
 
                 trigger OnPreDataItem()
@@ -985,6 +1013,12 @@ report 60001 "ZATCA Sales - Credit Memo"
                 TotalAmountVAT := 0;
                 TotalAmountInclVAT := 0;
                 TotalPaymentDiscOnVAT := 0;
+
+                // Filling company addresses and info in one line
+                ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
+
+
+                PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
             end;
 
             trigger OnPreDataItem()
@@ -1379,6 +1413,12 @@ report 60001 "ZATCA Sales - Credit Memo"
         EngTitle: Text;
         ArTitle: Text;
         Isb2B: Boolean;
-
+        ForeignUnitPrice: Text;
+        ConcatenatedCompanyInfoLine: Text;
+        RawLineAmount: Decimal;
+        RawUnitPrice: Decimal;
+        TotalRawAmount: Decimal;
+        TotalRawLineDiscAmount: Decimal;
+        PaymentMethodEngAr: Text;
 }
 

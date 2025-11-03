@@ -28,7 +28,7 @@
                   <Width>2.18892cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>6.93378cm</Width>
+                  <Width>8.23789cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.65545cm</Width>
@@ -526,10 +526,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>4.9292cm</Top>
-            <Left>0.60764cm</Left>
+            <Top>4.95597cm</Top>
+            <Left>0.14454cm</Left>
             <Height>1.41727cm</Height>
-            <Width>18.05343cm</Width>
+            <Width>19.35754cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -543,7 +543,7 @@
                   <Width>3.58592cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>11.81206cm</Width>
+                  <Width>12.30382cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.60554cm</Width>
@@ -591,14 +591,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox108">
+                        <Textbox Name="Textbox14">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Last(Fields!AmountInWords.Value, "DataSet_Result")</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -607,7 +607,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox108</rd:DefaultName>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -906,14 +906,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox188">
+                        <Textbox Name="Textbox108">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Last(Fields!AmountInWords.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -922,10 +922,10 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox188</rd:DefaultName>
+                          <rd:DefaultName>Textbox108</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -995,7 +995,7 @@
             <Top>6.54963cm</Top>
             <Left>0.65755cm</Left>
             <Height>2.36637cm</Height>
-            <Width>18.00352cm</Width>
+            <Width>18.49528cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1023,9 +1023,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
             <Top>9.60855cm</Top>
-            <Left>4.20471cm</Left>
+            <Left>4.99846cm</Left>
             <Height>0.6cm</Height>
-            <Width>14.4176cm</Width>
+            <Width>14.50362cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1054,8 +1054,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox191</rd:DefaultName>
-            <Top>4.10981in</Top>
-            <Left>0.22673in</Left>
+            <Top>4.09592in</Top>
+            <Left>0.05691in</Left>
             <Height>0.31072in</Height>
             <Width>1.77344in</Width>
             <ZIndex>3</ZIndex>
@@ -1087,10 +1087,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox193</rd:DefaultName>
-            <Top>4.10981in</Top>
-            <Left>2.01406in</Left>
+            <Top>4.09592in</Top>
+            <Left>1.84423in</Left>
             <Height>0.31072in</Height>
-            <Width>1.77344in</Width>
+            <Width>2.03077in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -1120,10 +1120,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox195</rd:DefaultName>
-            <Top>4.10981in</Top>
-            <Left>3.7875in</Left>
+            <Top>4.09592in</Top>
+            <Left>3.88889in</Left>
             <Height>0.31072in</Height>
-            <Width>1.77344in</Width>
+            <Width>1.99566in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -1153,10 +1153,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox197</rd:DefaultName>
-            <Top>4.10981in</Top>
-            <Left>5.56094in</Left>
+            <Top>4.09592in</Top>
+            <Left>5.89844in</Left>
             <Height>0.31072in</Height>
-            <Width>1.77344in</Width>
+            <Width>1.77954in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -1184,8 +1184,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>11.22815cm</Top>
-            <Left>0.57589cm</Left>
+            <Top>11.18934cm</Top>
+            <Left>0.14454cm</Left>
             <Height>0.6cm</Height>
             <Width>4.50454cm</Width>
             <ZIndex>7</ZIndex>
@@ -2193,7 +2193,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Contact #:</Value>
+                                  <Value>Cust. No. : </Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2508,7 +2508,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.07678cm</Top>
-            <Left>9.70866cm</Left>
+            <Left>10.02616cm</Left>
             <Height>3.59294cm</Height>
             <Width>9.47592cm</Width>
             <ZIndex>10</ZIndex>
@@ -2853,7 +2853,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Vat No. :</Value>
+                                  <Value>Rep. No. :</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2961,7 +2961,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.06266cm</Top>
+            <Top>0.66591cm</Top>
             <Left>0.14454cm</Left>
             <Height>2.4cm</Height>
             <Width>9.271cm</Width>
@@ -3025,9 +3025,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox17</rd:DefaultName>
             <Top>4.19535cm</Top>
-            <Left>18.07805cm</Left>
+            <Left>18.39555cm</Left>
             <Height>0.6cm</Height>
-            <Width>1.07478cm</Width>
+            <Width>1.10653cm</Width>
             <ZIndex>13</ZIndex>
             <Visibility>
               <Hidden>=iif(Fields!Isb2B.Value = True, False, True)</Hidden>
@@ -3061,9 +3061,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
             <Top>4.20241cm</Top>
-            <Left>1.80493cm</Left>
+            <Left>1.83315cm</Left>
             <Height>0.6cm</Height>
-            <Width>16.20257cm</Width>
+            <Width>16.45657cm</Width>
             <ZIndex>14</ZIndex>
             <Visibility>
               <Hidden>=iif(Fields!Isb2B.Value = True, False, True)</Hidden>
@@ -3362,9 +3362,9 @@
               <Value>Screenshot20251010113651</Value>
               <Sizing>FitProportional</Sizing>
               <Top>0.4318cm</Top>
-              <Left>0.64426cm</Left>
-              <Height>3.92491cm</Height>
-              <Width>3.54477cm</Width>
+              <Left>1.34276cm</Left>
+              <Height>2.481cm</Height>
+              <Width>2.68399cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -3374,9 +3374,9 @@
             </Image>
             <Line Name="Line2">
               <Top>3.18487cm</Top>
-              <Left>4.45368cm</Left>
+              <Left>0.98425cm</Left>
               <Height>0cm</Height>
-              <Width>14.17694cm</Width>
+              <Width>17.57456cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -3402,36 +3402,6 @@
                 </RightBorder>
               </Style>
             </Line>
-            <Textbox Name="Textbox7">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>اجل &amp; Credit</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox7</rd:DefaultName>
-              <Top>5.32836cm</Top>
-              <Left>9.16141cm</Left>
-              <Height>0.6cm</Height>
-              <Width>2.0295cm</Width>
-              <ZIndex>7</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox96">
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -3453,6 +3423,38 @@
               <Left>13.47767cm</Left>
               <Height>4cm</Height>
               <Width>4cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox7">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!PaymentMethodEngAr.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>4.84637cm</Top>
+              <Left>7.08578cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.9995cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -3489,7 +3491,7 @@
               <Top>0.06703cm</Top>
               <Left>1.10287cm</Left>
               <Height>0cm</Height>
-              <Width>17.27955cm</Width>
+              <Width>17.51944cm</Width>
               <Style>
                 <Border>
                   <Color>DarkBlue</Color>
@@ -3644,10 +3646,10 @@ C.R.: 1011013536 - Membership: 104000011971</Value>
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0.5cm</RightMargin>
-        <TopMargin>1cm</TopMargin>
-        <BottomMargin>1cm</BottomMargin>
+        <LeftMargin>0.8cm</LeftMargin>
+        <RightMargin>0.4cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
@@ -4906,6 +4908,9 @@ yiqXufHMDW/Jipkd/11uWROwB8bKiXRcQbRS8zhUuDagothwEkaNQpsPLE91NKZOkVJIaUjPcJHpEFob
         </Field>
         <Field Name="TotalRawLineDiscAmountFormat">
           <DataField>TotalRawLineDiscAmountFormat</DataField>
+        </Field>
+        <Field Name="PaymentMethodEngAr">
+          <DataField>PaymentMethodEngAr</DataField>
         </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>

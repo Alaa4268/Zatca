@@ -88,5 +88,10 @@ tableextension 60103 "ZATCA Sales Credit Memo" extends "Sales Cr.Memo Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(60117; "Foreign Currency Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Currency;
+        }
     }
 }

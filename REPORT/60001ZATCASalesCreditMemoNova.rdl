@@ -4569,6 +4569,45 @@ End Function
         <Field Name="Isb2B">
           <DataField>Isb2B</DataField>
         </Field>
+        <Field Name="TotalAmountVAT">
+          <DataField>TotalAmountVAT</DataField>
+        </Field>
+        <Field Name="TotalAmountVATFormat">
+          <DataField>TotalAmountVATFormat</DataField>
+        </Field>
+        <Field Name="TotalInvDiscAmount">
+          <DataField>TotalInvDiscAmount</DataField>
+        </Field>
+        <Field Name="TotalInvDiscAmountFormat">
+          <DataField>TotalInvDiscAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalRawAmount">
+          <DataField>TotalRawAmount</DataField>
+        </Field>
+        <Field Name="TotalRawAmountFormat">
+          <DataField>TotalRawAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalAmountInclVAT">
+          <DataField>TotalAmountInclVAT</DataField>
+        </Field>
+        <Field Name="TotalAmountInclVATFormat">
+          <DataField>TotalAmountInclVATFormat</DataField>
+        </Field>
+        <Field Name="TotalRawLineDiscAmount">
+          <DataField>TotalRawLineDiscAmount</DataField>
+        </Field>
+        <Field Name="TotalRawLineDiscAmountFormat">
+          <DataField>TotalRawLineDiscAmountFormat</DataField>
+        </Field>
+        <Field Name="PaymentMethodEngAr">
+          <DataField>PaymentMethodEngAr</DataField>
+        </Field>
+        <Field Name="ForeignUnitPrice">
+          <DataField>ForeignUnitPrice</DataField>
+        </Field>
+        <Field Name="ConcatenatedCompanyInfoLine">
+          <DataField>ConcatenatedCompanyInfoLine</DataField>
+        </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>
         </Field>
@@ -4667,6 +4706,18 @@ End Function
         </Field>
         <Field Name="TransHeaderAmountFormat">
           <DataField>TransHeaderAmountFormat</DataField>
+        </Field>
+        <Field Name="RawLineAmount">
+          <DataField>RawLineAmount</DataField>
+        </Field>
+        <Field Name="RawLineAmountFormat">
+          <DataField>RawLineAmountFormat</DataField>
+        </Field>
+        <Field Name="RawUnitPrice">
+          <DataField>RawUnitPrice</DataField>
+        </Field>
+        <Field Name="RawUnitPriceFormat">
+          <DataField>RawUnitPriceFormat</DataField>
         </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>

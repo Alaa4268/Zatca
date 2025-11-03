@@ -501,6 +501,8 @@ report 60000 "ZATCA Sales - Invoice"
             column(TotalRawAmount; TotalRawAmount) { }
             column(TotalAmountInclVAT; TotalAmountInclVAT) { }
             column(TotalRawLineDiscAmount; TotalRawLineDiscAmount) { }
+            column(PaymentMethodEngAr;PaymentMethodEngAr){}
+
             dataitem(Line; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -1258,7 +1260,7 @@ report 60000 "ZATCA Sales - Invoice"
                 ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
 
 
-                // if Header."Payment Method Code"
+                PaymentMethodEngAr:= PaymentMethod.Code + ' & ' + PaymentMethod.Description;
             end;
 
             trigger OnPreDataItem()
