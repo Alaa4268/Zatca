@@ -4584,13 +4584,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.58592cm</Width>
+                  <Width>3.45892cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>12.30382cm</Width>
+                  <Width>12.99849cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.60554cm</Width>
+                  <Width>2.73421cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -4979,12 +4979,13 @@
                             <Border>
                               <Color>LightGrey</Color>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -5045,9 +5046,9 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>6.60224cm</Top>
-            <Left>0.53956cm</Left>
+            <Left>0.15355cm</Left>
             <Height>2.36637cm</Height>
-            <Width>18.49528cm</Width>
+            <Width>19.19162cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -6901,6 +6902,15 @@ yiqXufHMDW/Jipkd/11uWROwB8bKiXRcQbRS8zhUuDagothwEkaNQpsPLE91NKZOkVJIaUjPcJHpEFob
         </Field>
         <Field Name="RawUnitPriceFormat">
           <DataField>RawUnitPriceFormat</DataField>
+        </Field>
+        <Field Name="ForeignLineAmountExclVat">
+          <DataField>ForeignLineAmountExclVat</DataField>
+        </Field>
+        <Field Name="TotalAmountExclVat">
+          <DataField>TotalAmountExclVat</DataField>
+        </Field>
+        <Field Name="TotalAmountExclVatFormat">
+          <DataField>TotalAmountExclVatFormat</DataField>
         </Field>
         <Field Name="DocumentNo_ShipmentLine">
           <DataField>DocumentNo_ShipmentLine</DataField>

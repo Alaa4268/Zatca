@@ -501,7 +501,7 @@ report 60000 "ZATCA Sales - Invoice"
             column(TotalRawAmount; TotalRawAmount) { }
             column(TotalAmountInclVAT; TotalAmountInclVAT) { }
             column(TotalRawLineDiscAmount; TotalRawLineDiscAmount) { }
-            column(PaymentMethodEngAr;PaymentMethodEngAr){}
+            column(PaymentMethodEngAr; PaymentMethodEngAr) { }
 
             dataitem(Line; "Sales Invoice Line")
             {
@@ -640,7 +640,8 @@ report 60000 "ZATCA Sales - Invoice"
                 column(ForeignUnitPrice; ForeignUnitPrice)
                 {
                 }
-
+                column(ForeignLineAmountExclVat; ForeignLineAmountExclVat) { }
+                column(TotalAmountExclVat; TotalAmountExclVat) { }
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -709,6 +710,7 @@ report 60000 "ZATCA Sales - Invoice"
                     RoundingPrecision: Decimal;
                     RepCheck: Report Check;
                     CurrencyExchangeRate: Record "Currency Exchange Rate";
+                    ForeignAmount: Decimal;
                 begin
                     InitializeShipmentLine;
                     if Type = Type::"G/L Account" then
@@ -782,6 +784,8 @@ report 60000 "ZATCA Sales - Invoice"
                     if L_Currency.Get(Header."Foreign Currency Code") then
                         ForeignUnitPrice := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, Line."Unit Price", CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
 
+
+
                     FormatDocument.SetSalesInvoiceLine(Line, FormattedQuantity, FormattedUnitPrice, FormattedVATPct, FormattedLineAmount);
 
                     if Header."Prices Including VAT" then begin
@@ -791,8 +795,10 @@ report 60000 "ZATCA Sales - Invoice"
                         RawLineAmount := line."Line Amount" + Line."Line Discount Amount";
                         TotalRawLineDiscAmount += Line."Line Discount Amount";
                     end;
-
+                    
                     RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
+                    TotalAmountExclVat := RawUnitPrice * Line.Quantity;
+                    ForeignLineAmountExclVat := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, TotalAmountExclVat, CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
                     TotalRawAmount += RawLineAmount;
                 end;
 
@@ -1175,6 +1181,7 @@ report 60000 "ZATCA Sales - Invoice"
                 {
                 }
 
+
                 trigger OnPreDataItem()
                 begin
                     if Header."Prices Including VAT" then begin
@@ -1260,7 +1267,7 @@ report 60000 "ZATCA Sales - Invoice"
                 ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
 
 
-                PaymentMethodEngAr:= PaymentMethod.Code + ' & ' + PaymentMethod.Description;
+                PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
             end;
 
             trigger OnPreDataItem()
@@ -1822,7 +1829,10 @@ report 60000 "ZATCA Sales - Invoice"
         RawUnitPrice: Decimal;
         TotalRawAmount: Decimal;
         TotalRawLineDiscAmount: Decimal;
-        PaymentMethodEngAr:Text;
+        PaymentMethodEngAr: Text;
+        ForeignLineAmountExclVat: Text;
+        TotalAmountExclVat: Decimal;
+
 }
 
 

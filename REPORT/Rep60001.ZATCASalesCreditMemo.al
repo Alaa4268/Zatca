@@ -544,6 +544,8 @@ report 60001 "ZATCA Sales - Credit Memo"
                 }
                 column(RawLineAmount; RawLineAmount) { }
                 column(RawUnitPrice; RawUnitPrice) { }
+                column(ForeignLineAmountExclVat; ForeignLineAmountExclVat) { }
+                column(TotalAmountExclVat; TotalAmountExclVat) { }
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -683,9 +685,11 @@ report 60001 "ZATCA Sales - Credit Memo"
                         RawLineAmount := line."Line Amount" + Line."Line Discount Amount";
                         TotalRawLineDiscAmount += Line."Line Discount Amount";
                     end;
-                    
+
                     if Quantity <> 0 then
                         RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
+                    TotalAmountExclVat := RawUnitPrice * Line.Quantity;
+                    ForeignLineAmountExclVat := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, TotalAmountExclVat, CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;
                     TotalRawAmount += RawLineAmount;
                 end;
 
@@ -1420,5 +1424,7 @@ report 60001 "ZATCA Sales - Credit Memo"
         TotalRawAmount: Decimal;
         TotalRawLineDiscAmount: Decimal;
         PaymentMethodEngAr: Text;
+        ForeignLineAmountExclVat: Text;
+        TotalAmountExclVat: Decimal;
 }
 

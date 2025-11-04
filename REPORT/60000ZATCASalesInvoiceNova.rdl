@@ -4218,6 +4218,15 @@ End Function
         <Field Name="ForeignUnitPrice">
           <DataField>ForeignUnitPrice</DataField>
         </Field>
+        <Field Name="ForeignLineAmountExclVat">
+          <DataField>ForeignLineAmountExclVat</DataField>
+        </Field>
+        <Field Name="TotalAmountExclVat">
+          <DataField>TotalAmountExclVat</DataField>
+        </Field>
+        <Field Name="TotalAmountExclVatFormat">
+          <DataField>TotalAmountExclVatFormat</DataField>
+        </Field>
         <Field Name="RawLineAmount">
           <DataField>RawLineAmount</DataField>
         </Field>

@@ -606,6 +606,8 @@ codeunit 60103 "ZATCA Payload Mgt."
 
                     Price.Add(AdditonalDocReferenceValue);
 
+
+                    // Removed by customer's request, discount is not required in the XML
                     // Allowance Charge
                     // if SalesInvoiceLine."Line Discount Amount" > 0 then begin
                     //     AllowanceCharge := XmlElement.Create('AllowanceCharge', CacNamespaceUri);
@@ -899,29 +901,36 @@ codeunit 60103 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue := XmlElement.Create('PriceAmount', CbcNamespaceUri);
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                     AdditonalDocReferenceValue.Add(XmlAtt);
-                    AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - (SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price").Replace(',', '')));
+                         if SalesCrMemoHeader."Prices Including VAT" then
+                        AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")) / ((1 + (SalesCrMemoLine."VAT %" / 100)))).Replace(',', '')))
+                    else
+                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")).Replace(',', '')));
+
+                    // AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - (SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price").Replace(',', '')));
                     Price.Add(AdditonalDocReferenceValue);
+
+                    // Removed by customer's request, discount is not required in the XML
                     // Allowance Charge
-                    if SalesCrMemoLine."Line Discount Amount" > 0 then begin
-                        AllowanceCharge := XmlElement.Create('AllowanceCharge', CacNamespaceUri);
-                        AdditonalDocReferenceValue := XmlElement.Create('ChargeIndicator', CbcNamespaceUri);
-                        AdditonalDocReferenceValue.Add(XmlText.Create('true'));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('AllowanceChargeReason', CbcNamespaceUri);
-                        AdditonalDocReferenceValue.Add(XmlText.Create('discount'));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('Amount', CbcNamespaceUri);
-                        XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
-                        AdditonalDocReferenceValue.Add(XmlAtt);
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price").Replace(',', '')));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        AdditonalDocReferenceValue := XmlElement.Create('BaseAmount', CbcNamespaceUri);
-                        XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
-                        AdditonalDocReferenceValue.Add(XmlAtt);
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price").Replace(',', '')));
-                        AllowanceCharge.Add(AdditonalDocReferenceValue);
-                        Price.Add(AllowanceCharge);
-                    end;
+                    // if SalesCrMemoLine."Line Discount Amount" > 0 then begin
+                    //     AllowanceCharge := XmlElement.Create('AllowanceCharge', CacNamespaceUri);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('ChargeIndicator', CbcNamespaceUri);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create('true'));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('AllowanceChargeReason', CbcNamespaceUri);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create('discount'));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('Amount', CbcNamespaceUri);
+                    //     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
+                    //     AdditonalDocReferenceValue.Add(XmlAtt);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price").Replace(',', '')));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     AdditonalDocReferenceValue := XmlElement.Create('BaseAmount', CbcNamespaceUri);
+                    //     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
+                    //     AdditonalDocReferenceValue.Add(XmlAtt);
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price").Replace(',', '')));
+                    //     AllowanceCharge.Add(AdditonalDocReferenceValue);
+                    //     Price.Add(AllowanceCharge);
+                    // end;
                     InvoiceLine.Add(Price);
                     InvoiceElement.Add(InvoiceLine);
                 end;
