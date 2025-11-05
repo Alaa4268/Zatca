@@ -1024,10 +1024,10 @@
           </Border>
         </Style>
       </Body>
-      <Width>195.0852mm</Width>
+      <Width>195.2263mm</Width>
       <Page>
         <PageHeader>
-          <Height>12.98761cm</Height>
+          <Height>14.29994cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1049,8 +1049,8 @@
               </Paragraphs>
               <rd:DefaultName>Textbox123</rd:DefaultName>
               <Top>8.95397cm</Top>
-              <Left>0.1265cm</Left>
-              <Height>4.03364cm</Height>
+              <Left>0.14061cm</Left>
+              <Height>4.83797cm</Height>
               <Width>19.38202cm</Width>
               <Style>
                 <Border>
@@ -1296,7 +1296,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox31</rd:DefaultName>
               <Top>6.94774cm</Top>
-              <Left>16.68314cm</Left>
+              <Left>16.64843cm</Left>
               <Height>0.6cm</Height>
               <Width>2.76458cm</Width>
               <ZIndex>6</ZIndex>
@@ -1709,7 +1709,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox93</rd:DefaultName>
-              <Top>9.05981cm</Top>
+              <Top>9.34556cm</Top>
               <Left>7.09883cm</Left>
               <Height>0.6cm</Height>
               <Width>1.84939cm</Width>
@@ -1741,7 +1741,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox97</rd:DefaultName>
-              <Top>9.05981cm</Top>
+              <Top>9.34556cm</Top>
               <Left>0.1265cm</Left>
               <Height>0.6cm</Height>
               <Width>2.14378cm</Width>
@@ -1773,7 +1773,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
-              <Top>9.05981cm</Top>
+              <Top>9.34556cm</Top>
               <Left>2.34084cm</Left>
               <Height>0.6cm</Height>
               <Width>4.68744cm</Width>
@@ -1891,7 +1891,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>رقم البيان</Value>
+                      <Value>بوليصة الشحن</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1923,7 +1923,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>BAYAN No.</Value>
+                      <Value>MBL </Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                       </Style>
@@ -2189,7 +2189,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox93</rd:DefaultName>
-              <Top>9.69509cm</Top>
+              <Top>9.98084cm</Top>
               <Left>7.09883cm</Left>
               <Height>0.6cm</Height>
               <Width>1.84939cm</Width>
@@ -2221,7 +2221,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox97</rd:DefaultName>
-              <Top>9.69156cm</Top>
+              <Top>9.97731cm</Top>
               <Left>0.1265cm</Left>
               <Height>0.6cm</Height>
               <Width>2.14378cm</Width>
@@ -2253,7 +2253,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
-              <Top>9.69156cm</Top>
+              <Top>9.97731cm</Top>
               <Left>2.34084cm</Left>
               <Height>0.6cm</Height>
               <Width>4.68744cm</Width>
@@ -2285,7 +2285,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox93</rd:DefaultName>
-              <Top>10.33389cm</Top>
+              <Top>10.61964cm</Top>
               <Left>7.09883cm</Left>
               <Height>0.6cm</Height>
               <Width>1.84938cm</Width>
@@ -2317,7 +2317,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox97</rd:DefaultName>
-              <Top>10.33036cm</Top>
+              <Top>10.61611cm</Top>
               <Left>0.12649cm</Left>
               <Height>0.6cm</Height>
               <Width>2.14379cm</Width>
@@ -2349,7 +2349,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
-              <Top>10.33036cm</Top>
+              <Top>10.61611cm</Top>
               <Left>2.34084cm</Left>
               <Height>0.6cm</Height>
               <Width>4.68744cm</Width>
@@ -2381,7 +2381,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox93</rd:DefaultName>
-              <Top>10.9727cm</Top>
+              <Top>11.25845cm</Top>
               <Left>7.09883cm</Left>
               <Height>0.6cm</Height>
               <Width>1.86595cm</Width>
@@ -2413,7 +2413,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox97</rd:DefaultName>
-              <Top>10.96917cm</Top>
+              <Top>11.25492cm</Top>
               <Left>0.11553cm</Left>
               <Height>0.6cm</Height>
               <Width>2.15475cm</Width>
@@ -2445,7 +2445,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
-              <Top>10.95858cm</Top>
+              <Top>11.24433cm</Top>
               <Left>2.34084cm</Left>
               <Height>0.6cm</Height>
               <Width>4.68744cm</Width>
@@ -2477,7 +2477,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox93</rd:DefaultName>
-              <Top>11.59739cm</Top>
+              <Top>11.88314cm</Top>
               <Left>7.09883cm</Left>
               <Height>0.6cm</Height>
               <Width>1.8825cm</Width>
@@ -2509,7 +2509,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox97</rd:DefaultName>
-              <Top>11.59386cm</Top>
+              <Top>11.87961cm</Top>
               <Left>0.12786cm</Left>
               <Height>0.6cm</Height>
               <Width>2.14242cm</Width>
@@ -2541,7 +2541,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
-              <Top>11.59386cm</Top>
+              <Top>11.87961cm</Top>
               <Left>2.34084cm</Left>
               <Height>0.6cm</Height>
               <Width>4.68744cm</Width>
@@ -2618,8 +2618,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>12.22561cm</Top>
-              <Left>0.11553cm</Left>
+              <Top>13.08286cm</Top>
+              <Left>0.12964cm</Left>
               <Height>0.6cm</Height>
               <Width>2.15475cm</Width>
               <ZIndex>48</ZIndex>
@@ -2650,7 +2650,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
-              <Top>12.23267cm</Top>
+              <Top>13.08992cm</Top>
               <Left>17.59697cm</Left>
               <Height>0.6cm</Height>
               <Width>1.85075cm</Width>
@@ -2682,8 +2682,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>12.23267cm</Top>
-              <Left>2.27734cm</Left>
+              <Top>13.08992cm</Top>
+              <Left>2.29145cm</Left>
               <Height>0.6cm</Height>
               <Width>15.24907cm</Width>
               <ZIndex>50</ZIndex>
@@ -2708,7 +2708,9 @@
                       <Style />
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
@@ -2779,6 +2781,102 @@
               <Height>0.6cm</Height>
               <Width>4.72625cm</Width>
               <ZIndex>53</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox153">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>CR No.</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox97</rd:DefaultName>
+              <Top>12.26795cm</Top>
+              <Left>10.75299cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.26176cm</Width>
+              <ZIndex>54</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox154">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!ZatCrNo.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox102</rd:DefaultName>
+              <Top>12.26795cm</Top>
+              <Left>12.08885cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.17328cm</Width>
+              <ZIndex>55</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox155">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>السجل التجاري</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox93</rd:DefaultName>
+              <Top>12.26795cm</Top>
+              <Left>17.33621cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.14325cm</Width>
+              <ZIndex>56</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3229,7 +3327,7 @@
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
         <LeftMargin>0.7cm</LeftMargin>
-        <RightMargin>0.8cm</RightMargin>
+        <RightMargin>0.7cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
