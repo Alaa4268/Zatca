@@ -1213,10 +1213,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Invoice No. :</Value>
+                      <Value>Invoice No :</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1227,7 +1227,7 @@
               <Top>6.94937cm</Top>
               <Left>4.31943in</Left>
               <Height>0.6cm</Height>
-              <Width>3.17489cm</Width>
+              <Width>1.9558cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1252,14 +1252,16 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>DocumentNo</rd:DefaultName>
               <Top>6.94774cm</Top>
-              <Left>14.14843cm</Left>
+              <Left>12.96596cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.5cm</Width>
+              <Width>4.45463cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1282,8 +1284,8 @@
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
                         <TextDecoration>None</TextDecoration>
                         <Color>#000000</Color>
                       </Style>
@@ -1296,9 +1298,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox31</rd:DefaultName>
               <Top>6.94774cm</Top>
-              <Left>16.64843cm</Left>
+              <Left>17.45939cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.76458cm</Width>
+              <Width>1.95362cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1410,7 +1412,7 @@
                       <Value>Invoice Issue Date :</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontWeight>Normal</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1421,7 +1423,7 @@
               <Top>6.94937cm</Top>
               <Left>0.05536in</Left>
               <Height>0.6cm</Height>
-              <Width>3.16124cm</Width>
+              <Width>2.62855cm</Width>
               <ZIndex>10</ZIndex>
               <Style>
                 <Border>
@@ -1446,14 +1448,16 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>DocumentDate</rd:DefaultName>
               <Top>6.94937cm</Top>
-              <Left>3.31768cm</Left>
+              <Left>2.80444cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.5cm</Width>
+              <Width>3.57532cm</Width>
               <ZIndex>11</ZIndex>
               <Style>
                 <Border>
@@ -1477,7 +1481,6 @@
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
                         <TextDecoration>None</TextDecoration>
                         <Color>#000000</Color>
                       </Style>
@@ -1490,9 +1493,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox31</rd:DefaultName>
               <Top>6.94937cm</Top>
-              <Left>5.85239cm</Left>
+              <Left>6.41856cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.76458cm</Width>
+              <Width>2.19841cm</Width>
               <ZIndex>12</ZIndex>
               <Style>
                 <Border>
@@ -1512,7 +1515,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Cust. Name</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -1542,7 +1548,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!CustomerAddress1.Value, "DataSet_Result")</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1574,10 +1582,14 @@
                   <TextRuns>
                     <TextRun>
                       <Value>اسم العميل</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox120</rd:DefaultName>
@@ -2705,7 +2717,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value> : رقم العميل</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -2737,7 +2751,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Cust. No :</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -2767,7 +2783,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!SelltoCustomerNo.Value, "DataSet_Result")</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
