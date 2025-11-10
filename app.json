@@ -2,7 +2,7 @@
   "id": "1f3f8496-c272-444a-a638-2e35e7be516a",
   "name": "ZATCA-SHURAIM",
   "publisher": "CITS",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -16,8 +16,8 @@
   "application": "26.0.0.0",
   "idRanges": [
     {
-      "from": 50000,
-      "to": 99999
+      "from": 50200,
+      "to": 50300
     }
   ],
   "resourceExposurePolicy": {

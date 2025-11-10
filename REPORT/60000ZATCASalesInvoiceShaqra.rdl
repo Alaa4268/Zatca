@@ -1482,7 +1482,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CustomerAddress1.Value</Value>
+                                  <Value>=Fields!ExternalDocumentNo.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -2837,8 +2837,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.41981cm</Top>
-            <Left>0.14455cm</Left>
+            <Top>0.346cm</Top>
+            <Left>0.13982cm</Left>
             <Height>2.27454cm</Height>
             <Width>9.38772cm</Width>
             <ZIndex>11</ZIndex>
