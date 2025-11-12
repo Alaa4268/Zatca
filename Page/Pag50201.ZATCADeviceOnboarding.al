@@ -50,6 +50,7 @@ page 50201 "ZATCA Device Onboarding"
                     ApplicationArea = All;
                     ToolTip = 'Specifies if you were already onboarded then fill in below information in next section.';
                 }
+                field("Serial Code"; Rec."Serial Code") { ApplicationArea = All; }
             }
             group("Onborading Information")
             {
@@ -206,8 +207,10 @@ page 50201 "ZATCA Device Onboarding"
                 var
                     ZATCAAPIProcessing: Codeunit "ZATCA API Processing";
                 begin
-                    if Rec.CSID <> '' then ZATCAAPIProcessing.ZATCADeviceOnboardingProc(OldDeviceId)
-                    else if Confirm('You have already onboarded. Do you want to onboard again?')then ZATCAAPIProcessing.ZATCADeviceOnboardingProc(OldDeviceId)end;
+                    if Rec.CSID <> '' then
+                        ZATCAAPIProcessing.ZATCADeviceOnboardingProc(OldDeviceId)
+                    else if Confirm('You have already onboarded. Do you want to onboard again?') then ZATCAAPIProcessing.ZATCADeviceOnboardingProc(OldDeviceId)
+                end;
             }
         }
         area(Navigation)
@@ -224,7 +227,7 @@ page 50201 "ZATCA Device Onboarding"
                 var
                     JobQueueEntry: Record "Job Queue Entry";
                 begin
-                    if JobQueueEntry.Get(Rec."Job Queue Entry ID")then Page.Run(Page::"Job Queue Entry Card", JobQueueEntry);
+                    if JobQueueEntry.Get(Rec."Job Queue Entry ID") then Page.Run(Page::"Job Queue Entry Card", JobQueueEntry);
                 end;
             }
             action(ShowAPISettings)
@@ -236,9 +239,10 @@ page 50201 "ZATCA Device Onboarding"
 
                 trigger OnAction()
                 begin
-                    if ShowAPICallSetup then ShowAPICallSetup:=false
+                    if ShowAPICallSetup then
+                        ShowAPICallSetup := false
                     else
-                        ShowAPICallSetup:=true;
+                        ShowAPICallSetup := true;
                 end;
             }
             action(EditEndpoint)
@@ -251,8 +255,9 @@ page 50201 "ZATCA Device Onboarding"
 
                 trigger OnAction()
                 begin
-                    if EditEndpoints then EditEndpoints:=false
-                    else if Confirm('Do you want to edit API Settings? It cannot be changed back to previous settings.')then EditEndpoints:=true;
+                    if EditEndpoints then
+                        EditEndpoints := false
+                    else if Confirm('Do you want to edit API Settings? It cannot be changed back to previous settings.') then EditEndpoints := true;
                 end;
             }
             action("Invoices in Error")
@@ -268,7 +273,7 @@ page 50201 "ZATCA Device Onboarding"
                     SalesInvocieHeader: Record "Sales Invoice Header";
                 begin
                     SalesInvocieHeader.SetFilter(Status, '=%1', SalesInvocieHeader.Status::Error);
-                    if SalesInvocieHeader.FindSet()then Page.Run(Page::"Posted Sales Invoices", SalesInvocieHeader);
+                    if SalesInvocieHeader.FindSet() then Page.Run(Page::"Posted Sales Invoices", SalesInvocieHeader);
                 end;
             }
             action("Sales Cr Memo in Error")
@@ -284,7 +289,7 @@ page 50201 "ZATCA Device Onboarding"
                     SalesCrMemoHeader: Record "Sales Cr.Memo Header";
                 begin
                     SalesCrMemoHeader.SetFilter(Status, '=%1', SalesCrMemoHeader.Status::Error);
-                    if SalesCrMemoHeader.FindSet()then Page.Run(Page::"Posted Sales Credit Memos", SalesCrMemoHeader);
+                    if SalesCrMemoHeader.FindSet() then Page.Run(Page::"Posted Sales Credit Memos", SalesCrMemoHeader);
                 end;
             }
             action(APILog)
@@ -314,17 +319,23 @@ page 50201 "ZATCA Device Onboarding"
     trigger OnInit()
     begin
         if Rec.IsEmpty then Rec.Insert();
-        Rec."Xml File Path":='C:\\ZATCAConfiguration\\BF-ZATCA-INPUT-DATAFILE.xml';
+        Rec."Xml File Path" := 'C:\\ZATCAConfiguration\\BF-ZATCA-INPUT-DATAFILE.xml';
     end;
+
     trigger OnOpenPage()
     begin
-        OldDeviceId:=Rec."Device Id";
+        OldDeviceId := Rec."Device Id";
     end;
-    trigger OnQueryClosePage(CloseAction: Action): Boolean begin
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
         if Rec."Already Onboarded" then begin
-            Rec."Already Onboarded":=false;
+            Rec."Already Onboarded" := false;
             Rec.Modify();
-        end end;
-    var EditEndpoints, ShowAPICallSetup: Boolean;
-    OldDeviceId: Text;
+        end
+    end;
+
+    var
+        EditEndpoints, ShowAPICallSetup : Boolean;
+        OldDeviceId: Text;
 }

@@ -13,7 +13,7 @@ codeunit 50204 "ZATCA Payload Mgt."
         if ZATCADeviceOnboarding.CSID = '' then
             ZATCADeviceOnboarding."Serial Number" := 1
         else if ZATCADeviceOnboarding."Device Id" <> OldDeviceId then ZATCADeviceOnboarding."Serial Number" += 1;
-        CertificateJsonObject.Add('SerialNumber', '1-SHURAIM|2-BC|3-000000000' + Format(ZATCADeviceOnboarding."Serial Number"));
+        CertificateJsonObject.Add('SerialNumber', ZATCADeviceOnboarding."Serial Code" + Format(ZATCADeviceOnboarding."Serial Number"));
         CertificateJsonObject.Add('InvoiceType', '1100');
         CertificateJsonObject.Add('Location', CompanyInformation.City);
         CertificateJsonObject.Add('StreetName', CompanyInformation.Address);
@@ -901,7 +901,7 @@ codeunit 50204 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue := XmlElement.Create('PriceAmount', CbcNamespaceUri);
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                     AdditonalDocReferenceValue.Add(XmlAtt);
-                         if SalesCrMemoHeader."Prices Including VAT" then
+                    if SalesCrMemoHeader."Prices Including VAT" then
                         AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")) / ((1 + (SalesCrMemoLine."VAT %" / 100)))).Replace(',', '')))
                     else
                         AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")).Replace(',', '')));

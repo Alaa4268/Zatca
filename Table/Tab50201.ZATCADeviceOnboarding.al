@@ -144,6 +144,10 @@ table 50201 "ZATCA Device Onboarding"
             DataClassification = CustomerContent;
             InitValue = 'deviceOnboarding';
         }
+        field(50224; "Serial Code"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {
