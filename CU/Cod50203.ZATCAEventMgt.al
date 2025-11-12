@@ -108,7 +108,9 @@ codeunit 50203 "ZATCA Event Mgt"
         SalesHeader: Record "Sales Header";
     begin
         SalesHeader.Get(Rec."Document Type"::Invoice, Rec."Document No.");
-        SalesHeader.TestField("Shortcut Dimension 2 Code");
+        GenLedSetup.Get();
+        if GenLedSetup."Mandatory Sal. Inv. Dim." then
+            SalesHeader.TestField("Shortcut Dimension 2 Code");
     end;
 
 

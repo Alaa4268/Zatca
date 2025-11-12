@@ -13,5 +13,9 @@ tableextension 50201 "General Ledger Setup" extends "General Ledger Setup"
             DataClassification = ToBeClassified;
             TableRelation="Dimension Value".Code where("Dimension Code"=field("Brand Dimension Code"));
         }
+        field(50202; "Mandatory Sal. Inv. Dim."; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

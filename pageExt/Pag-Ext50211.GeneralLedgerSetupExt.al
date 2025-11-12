@@ -7,6 +7,7 @@ pageextension 50211 "General Ledger Setup Ext" extends "General Ledger Setup"
         {
             field("Brand Dimension Code"; Rec."Brand Dimension Code") { ApplicationArea = All; }
             field("Marada Dim. Value"; Rec."Marada Dim. Value") { ApplicationArea = All; }
+            field("Mandatory Sal. Inv. Dim."; Rec."Mandatory Sal. Inv. Dim.") { ApplicationArea = All; }
         }
     }
 }
