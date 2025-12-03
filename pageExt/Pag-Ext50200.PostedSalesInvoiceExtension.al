@@ -57,7 +57,7 @@ pageextension 50200 PostedSalesInvoiceExtension extends "Posted Sales Invoice"
                     CurrPage.SetSelectionFilter(SalesInvHeader);
                     SalesInvHeader.SetRecFilter();
                     ZatcaEventMgt.SetLayoutByDim(Rec."Shortcut Dimension 2 Code");
-                    Report.Run(60000, true, true, SalesInvHeader);
+                    Report.Run(50200, true, true, SalesInvHeader);
                 end;
             }
 

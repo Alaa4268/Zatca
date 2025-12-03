@@ -61,7 +61,7 @@ pageextension 50201 PostedSalesCrMemoExtension extends "Posted Sales Credit Memo
                     CurrPage.SetSelectionFilter(L_SalesCrMemoHeader);
                     L_SalesCrMemoHeader.SetRecFilter();
                     ZatcaEventMgt.SetLayoutByDim(Rec."Shortcut Dimension 2 Code");
-                    Report.Run(60001, true, true, L_SalesCrMemoHeader);
+                    Report.Run(50201, true, true, L_SalesCrMemoHeader);
                 end;
             }
 
