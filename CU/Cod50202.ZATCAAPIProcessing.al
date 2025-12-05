@@ -50,15 +50,17 @@ codeunit 50202 "ZATCA API Processing"
         Base64, Body, InvoiceId, PIH, Response, Url : Text;
         ErrorToShow: Text;
         InvoiceXml: XmlDocument;
+        NoResponse: Boolean;
     begin
         if not ZATCAActivationMgt.IsZATCAIntegrationModuleActive() then exit;
         ZATCADeviceOnboarding.Get();
         Url := ZATCADeviceOnboarding."Base URL" + ZATCADeviceOnboarding."Submit Document Endpoint";
+        NoResponse := false;
         if ZATCAPayloadMgt.SalesInvoiceInvoiceXML(SalesInvoiceHeader, InvoiceXml, InvoiceId, IsB2B) then begin
             Base64 := Base64Convert.ToBase64(Format(InvoiceXml), TextEncoding::UTF8);
             Body := ZATCAPayloadMgt.RequestPayload(Base64);
             SendHttpRequest(Url, Response, HttpRequestType::POST, Body);
-            if ResponseJson.ReadFrom(Response) then
+            if ResponseJson.ReadFrom(Response) then begin
                 if ResponseJson.Get('InvoiceReportingResponse', JToken) then begin
                     if Format(JToken) <> 'null' then InvoiceReportingResults := JToken.AsObject();
                     if InvoiceReportingResults.Get('IsSuccess', JToken) then InvoiceSigned := JToken.AsValue().AsBoolean();
@@ -162,7 +164,10 @@ codeunit 50202 "ZATCA API Processing"
                         end;
                     end;
                     if SalesInvoiceHeader.Modify() then;
-                end;
+                end else
+                    NoResponse := true;
+            end else
+                NoResponse := true;
         end
         else begin
             SalesInvoiceHeader."ZATCA Message" := CopyStr(GetLastErrorText(), 1, MaxStrLen(SalesInvoiceHeader."ZATCA Message"));
@@ -173,6 +178,10 @@ codeunit 50202 "ZATCA API Processing"
                 Message(GetLastErrorText());
             SalesInvoiceHeader.Modify();
         end;
+
+
+        if NoResponse then
+            Error('No response from Zatca server was received. Invoice cannot be received!');
     end;
 
     [TryFunction]
