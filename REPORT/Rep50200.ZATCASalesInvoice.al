@@ -642,6 +642,7 @@ report 50200 "ZATCA Sales - Invoice"
                 }
                 column(ForeignLineAmountExclVat; ForeignLineAmountExclVat) { }
                 column(TotalAmountExclVat; TotalAmountExclVat) { }
+                column(EncodedQrCode;EncodedQrCode){}
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -1208,7 +1209,8 @@ report 50200 "ZATCA Sales - Invoice"
                 end;
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
-                QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+
+                EncodedQrCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
 
                 if not IsReportInPreviewMode then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
@@ -1833,6 +1835,7 @@ report 50200 "ZATCA Sales - Invoice"
         PaymentMethodEngAr: Text;
         ForeignLineAmountExclVat: Text;
         TotalAmountExclVat: Decimal;
+        EncodedQrCode:Text;
 
 }
 

@@ -4400,6 +4400,9 @@ End Function
         <Field Name="TotalAmountExclVatFormat">
           <DataField>TotalAmountExclVatFormat</DataField>
         </Field>
+        <Field Name="EncodedQrCode">
+          <DataField>EncodedQrCode</DataField>
+        </Field>
         <Field Name="RawLineAmount">
           <DataField>RawLineAmount</DataField>
         </Field>

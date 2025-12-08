@@ -1017,7 +1017,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>35.8058mm</Height>
+        <Height>36.9602mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1050,7 +1050,7 @@
               <rd:DefaultName>Textbox123</rd:DefaultName>
               <Top>8.95397cm</Top>
               <Left>0.14061cm</Left>
-              <Height>4.83797cm</Height>
+              <Height>5.16958cm</Height>
               <Width>19.38202cm</Width>
               <Style>
                 <Border>
@@ -2589,7 +2589,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Fields!QRCode.Value</Value>
+                      <Value>=Fields!EncodedQrCode.Value</Value>
                       <Style>
                         <FontFamily>IDAutomation2D</FontFamily>
                         <FontSize>5pt</FontSize>
@@ -2601,7 +2601,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>2.70791cm</Top>
-              <Left>13.25943cm</Left>
+              <Left>13.56626cm</Left>
               <Height>4cm</Height>
               <Width>4cm</Width>
               <ZIndex>47</ZIndex>
@@ -4452,6 +4452,9 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         </Field>
         <Field Name="TotalAmountExclVatFormat">
           <DataField>TotalAmountExclVatFormat</DataField>
+        </Field>
+        <Field Name="EncodedQrCode">
+          <DataField>EncodedQrCode</DataField>
         </Field>
         <Field Name="RawLineAmount">
           <DataField>RawLineAmount</DataField>
