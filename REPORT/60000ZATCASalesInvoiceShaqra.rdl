@@ -2926,7 +2926,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConcatenatedCustomerInfoLine.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3028,7 +3028,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConcatenatedCustomerInfoLine.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -4377,8 +4377,8 @@ yiqXufHMDW/Jipkd/11uWROwB8bKiXRcQbRS8zhUuDagothwEkaNQpsPLE91NKZOkVJIaUjPcJHpEFob
         <Field Name="CompanyInfo">
           <DataField>CompanyInfo</DataField>
         </Field>
-        <Field Name="ConcatenatedCompanyInfoLine">
-          <DataField>ConcatenatedCompanyInfoLine</DataField>
+        <Field Name="ConcatenatedCustomerInfoLine">
+          <DataField>ConcatenatedCustomerInfoLine</DataField>
         </Field>
         <Field Name="DisplayAdditionalFeeNote">
           <DataField>DisplayAdditionalFeeNote</DataField>

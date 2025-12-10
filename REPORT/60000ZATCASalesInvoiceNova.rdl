@@ -2073,107 +2073,6 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox23">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Address : </Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox23</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox24">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!CustomerAddress2.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox24</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox26">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>: العنوان</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox26</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.62252cm</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Textbox34">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2389,13 +2288,12 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.3175cm</Top>
             <Left>9.88162cm</Left>
-            <Height>3.10554cm</Height>
+            <Height>2.48302cm</Height>
             <Width>9.16728cm</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
@@ -2745,7 +2643,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.93486cm</Top>
+            <Top>0.68086cm</Top>
             <Left>0.99547cm</Left>
             <Height>1.8cm</Height>
             <Width>8.59304cm</Width>
@@ -2835,7 +2733,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConcatenatedCustomerInfoLine.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2939,7 +2837,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConcatenatedCustomerInfoLine.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2987,7 +2885,7 @@
       <Width>194.8453mm</Width>
       <Page>
         <PageHeader>
-          <Height>6.82757cm</Height>
+          <Height>7.19446cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2996,7 +2894,7 @@
               <Value>=Fields!CompanyPicture.Value</Value>
               <MIMEType>image/png</MIMEType>
               <Sizing>Fit</Sizing>
-              <Top>0.03175cm</Top>
+              <Top>0.28575cm</Top>
               <Left>0.99547cm</Left>
               <Height>1.73521cm</Height>
               <Width>17.53807cm</Width>
@@ -3023,7 +2921,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>2.63737cm</Top>
+              <Top>3.08187cm</Top>
               <Left>13.76669cm</Left>
               <Height>4cm</Height>
               <Width>4cm</Width>
@@ -3061,7 +2959,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>3.25854cm</Top>
+              <Top>3.70304cm</Top>
               <Left>7.17137cm</Left>
               <Height>0.6cm</Height>
               <Width>5.9995cm</Width>
@@ -3096,7 +2994,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox30</rd:DefaultName>
-              <Top>2.65854cm</Top>
+              <Top>3.10304cm</Top>
               <Left>7.17137cm</Left>
               <Height>0.6cm</Height>
               <Width>5.9995cm</Width>
@@ -3112,7 +3010,7 @@
               </Style>
             </Textbox>
             <Line Name="Line1">
-              <Top>1.94335cm</Top>
+              <Top>2.45135cm</Top>
               <Left>0.67851cm</Left>
               <Height>0cm</Height>
               <Width>18.25752cm</Width>
@@ -3142,7 +3040,7 @@
               </Style>
             </Line>
             <Line Name="Line2">
-              <Top>2.07388cm</Top>
+              <Top>2.58188cm</Top>
               <Left>0.67851cm</Left>
               <Height>0cm</Height>
               <Width>18.25752cm</Width>
@@ -3186,7 +3084,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox9</rd:DefaultName>
-              <Top>4.03493cm</Top>
+              <Top>4.47943cm</Top>
               <Left>7.17137cm</Left>
               <Height>0.6cm</Height>
               <Width>3.40072cm</Width>
@@ -3218,7 +3116,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox10</rd:DefaultName>
-              <Top>4.03493cm</Top>
+              <Top>4.47943cm</Top>
               <Left>10.67087cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
@@ -3848,8 +3746,8 @@ End Function
         <Field Name="CompanyInfo">
           <DataField>CompanyInfo</DataField>
         </Field>
-        <Field Name="ConcatenatedCompanyInfoLine">
-          <DataField>ConcatenatedCompanyInfoLine</DataField>
+        <Field Name="ConcatenatedCustomerInfoLine">
+          <DataField>ConcatenatedCustomerInfoLine</DataField>
         </Field>
         <Field Name="DisplayAdditionalFeeNote">
           <DataField>DisplayAdditionalFeeNote</DataField>

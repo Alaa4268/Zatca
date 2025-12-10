@@ -138,7 +138,7 @@ report 50200 "ZATCA Sales - Invoice"
             column(CompanyInfo; CompanyInfo.Name)
             {
             }
-            column(ConcatenatedCompanyInfoLine; ConcatenatedCompanyInfoLine)
+            column(ConcatenatedCustomerInfoLine; ConcatenatedCustomerInfoLine)
             {
             }
             column(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
@@ -642,7 +642,7 @@ report 50200 "ZATCA Sales - Invoice"
                 }
                 column(ForeignLineAmountExclVat; ForeignLineAmountExclVat) { }
                 column(TotalAmountExclVat; TotalAmountExclVat) { }
-                column(EncodedQrCode;EncodedQrCode){}
+                column(EncodedQrCode; EncodedQrCode) { }
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = SORTING("Document No.", "Line No.", "Entry No.");
@@ -1267,7 +1267,7 @@ report 50200 "ZATCA Sales - Invoice"
                     "Order No." := "Prepayment Order No.";
 
                 // Filling company addresses and info in one line
-                ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
+                ConcatenatedCustomerInfoLine := Cust."ZATCA Building No." + ' ' + Cust.Address + ' ' + Cust."Address 2" + ' ' + Cust."Post Code" + ' ' + Cust.City + ' ' + Cust."Country/Region Code";
 
 
                 PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
@@ -1827,7 +1827,7 @@ report 50200 "ZATCA Sales - Invoice"
         Isb2B: Boolean;
         ZatcaEventMgmt: Codeunit "ZATCA Event Mgt";
         ForeignUnitPrice: Text;
-        ConcatenatedCompanyInfoLine: Text;
+        ConcatenatedCustomerInfoLine: Text;
         RawLineAmount: Decimal;
         RawUnitPrice: Decimal;
         TotalRawAmount: Decimal;
@@ -1835,7 +1835,7 @@ report 50200 "ZATCA Sales - Invoice"
         PaymentMethodEngAr: Text;
         ForeignLineAmountExclVat: Text;
         TotalAmountExclVat: Decimal;
-        EncodedQrCode:Text;
+        EncodedQrCode: Text;
 
 }
 

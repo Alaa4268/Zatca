@@ -4253,7 +4253,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!ConcatenatedCompanyInfoLine.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ConcatenatedCustomerInfoLine.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                       </Style>
@@ -5662,8 +5662,8 @@ C6EUKIHQpONJJkmSJEmSJPkN5P8D2LQ7qqQIKf8AAAAASUVORK5CYII=</ImageData>
         <Field Name="ForeignUnitPrice">
           <DataField>ForeignUnitPrice</DataField>
         </Field>
-        <Field Name="ConcatenatedCompanyInfoLine">
-          <DataField>ConcatenatedCompanyInfoLine</DataField>
+        <Field Name="ConcatenatedCustomerInfoLine">
+          <DataField>ConcatenatedCustomerInfoLine</DataField>
         </Field>
         <Field Name="EncodedQrCode">
           <DataField>EncodedQrCode</DataField>

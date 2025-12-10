@@ -437,7 +437,7 @@ report 50201 "ZATCA Sales - Credit Memo"
             column(TotalRawLineDiscAmount; TotalRawLineDiscAmount) { }
             column(PaymentMethodEngAr; PaymentMethodEngAr) { }
             column(ForeignUnitPrice; ForeignUnitPrice) { }
-            column(ConcatenatedCompanyInfoLine; ConcatenatedCompanyInfoLine) { }
+            column(ConcatenatedCustomerInfoLine; ConcatenatedCustomerInfoLine) { }
             column(EncodedQrCode; EncodedQrCode) { }
             dataitem(Line; "Sales Cr.Memo Line")
             {
@@ -1023,7 +1023,7 @@ report 50201 "ZATCA Sales - Credit Memo"
                 TotalPaymentDiscOnVAT := 0;
 
                 // Filling company addresses and info in one line
-                ConcatenatedCompanyInfoLine := CompanyInfo."ZATCA Building No." + ' ' + CompanyInfo.Address + ' ' + CompanyInfo."Address 2" + ' ' + CompanyInfo."Post Code" + ' ' + CompanyInfo.City + ' ' + CompanyCountryRegion.Name;
+                ConcatenatedCustomerInfoLine := Cust."ZATCA Building No." + ' ' + Cust.Address + ' ' + Cust."Address 2" + ' ' + Cust."Post Code" + ' ' + Cust.City + ' ' + Cust."Country/Region Code";
 
 
                 PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
@@ -1422,7 +1422,7 @@ report 50201 "ZATCA Sales - Credit Memo"
         ArTitle: Text;
         Isb2B: Boolean;
         ForeignUnitPrice: Text;
-        ConcatenatedCompanyInfoLine: Text;
+        ConcatenatedCustomerInfoLine: Text;
         RawLineAmount: Decimal;
         RawUnitPrice: Decimal;
         TotalRawAmount: Decimal;
