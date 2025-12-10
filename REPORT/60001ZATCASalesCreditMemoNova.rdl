@@ -2384,7 +2384,7 @@
             <Top>0.08534cm</Top>
             <Left>0.99547cm</Left>
             <Height>1.8cm</Height>
-            <Width>8.4928cm</Width>
+            <Width>8.49281cm</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=iif(Fields!Isb2B.Value = True, True, False)</Hidden>
@@ -2848,7 +2848,7 @@
             <Top>0.08534cm</Top>
             <Left>9.78138cm</Left>
             <Height>2.4cm</Height>
-            <Width>9.26752cm</Width>
+            <Width>9.26753cm</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=iif(Fields!Isb2B.Value = True, True, False)</Hidden>
@@ -4041,7 +4041,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Fields!QRCode.Value</Value>
+                      <Value>=Fields!EncodedQrCode.Value</Value>
                       <Style>
                         <FontFamily>IDAutomation2D</FontFamily>
                         <FontSize>5pt</FontSize>
@@ -5229,6 +5229,9 @@ End Function
         </Field>
         <Field Name="ConcatenatedCompanyInfoLine">
           <DataField>ConcatenatedCompanyInfoLine</DataField>
+        </Field>
+        <Field Name="EncodedQrCode">
+          <DataField>EncodedQrCode</DataField>
         </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>

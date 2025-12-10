@@ -3012,7 +3012,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Fields!QRCode.Value</Value>
+                      <Value>=Fields!EncodedQrCode.Value</Value>
                       <Style>
                         <FontFamily>IDAutomation2D</FontFamily>
                         <FontSize>5pt</FontSize>

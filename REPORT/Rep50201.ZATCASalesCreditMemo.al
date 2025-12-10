@@ -438,6 +438,7 @@ report 50201 "ZATCA Sales - Credit Memo"
             column(PaymentMethodEngAr; PaymentMethodEngAr) { }
             column(ForeignUnitPrice; ForeignUnitPrice) { }
             column(ConcatenatedCompanyInfoLine; ConcatenatedCompanyInfoLine) { }
+            column(EncodedQrCode; EncodedQrCode) { }
             dataitem(Line; "Sales Cr.Memo Line")
             {
                 DataItemLink = "Document No." = FIELD("No.");
@@ -617,7 +618,10 @@ report 50201 "ZATCA Sales - Credit Memo"
                     InitializeSalesShipmentLine;
                     ToRecordId := Header.RecordId;
                     // ?? why qrcode as a field is not accessible but it is in zatcasales invoice????
-                    Header.QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+                    // Header.QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+
+                    EncodedQrCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
+
                     // ZatcaEventMgt.SetQrCode(ToRecordId);
                     if Type = Type::"G/L Account" then
                         "No." := '';
@@ -1426,5 +1430,7 @@ report 50201 "ZATCA Sales - Credit Memo"
         PaymentMethodEngAr: Text;
         ForeignLineAmountExclVat: Text;
         TotalAmountExclVat: Decimal;
+        EncodedQrCode: Text;
+
 }
 

@@ -5270,7 +5270,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Fields!QRCode.Value</Value>
+                      <Value>=Fields!EncodedQrCode.Value</Value>
                       <Style>
                         <FontFamily>IDAutomation2D</FontFamily>
                         <FontSize>5pt</FontSize>
@@ -6747,6 +6747,9 @@ yiqXufHMDW/Jipkd/11uWROwB8bKiXRcQbRS8zhUuDagothwEkaNQpsPLE91NKZOkVJIaUjPcJHpEFob
         </Field>
         <Field Name="ConcatenatedCompanyInfoLine">
           <DataField>ConcatenatedCompanyInfoLine</DataField>
+        </Field>
+        <Field Name="EncodedQrCode">
+          <DataField>EncodedQrCode</DataField>
         </Field>
         <Field Name="LineNo_Line">
           <DataField>LineNo_Line</DataField>
