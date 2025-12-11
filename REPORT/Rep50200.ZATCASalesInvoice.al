@@ -1270,7 +1270,16 @@ report 50200 "ZATCA Sales - Invoice"
                 ConcatenatedCustomerInfoLine := Cust."ZATCA Building No." + ' ' + Cust.Address + ' ' + Cust."Address 2" + ' ' + Cust."Post Code" + ' ' + Cust.City + ' ' + Cust."Country/Region Code";
 
 
-                PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
+                // PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
+
+                if PaymentMethod.Code <> '' then begin
+
+                    if PaymentMethod.Description <> '' then
+                        PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description
+                    else
+                        PaymentMethodEngAr := PaymentMethod.Code;
+                end else
+                    PaymentMethodEngAr := '';
             end;
 
             trigger OnPreDataItem()

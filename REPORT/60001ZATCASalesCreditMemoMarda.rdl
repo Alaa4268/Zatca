@@ -3222,7 +3222,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>B/L-MAWB#</Value>
+                      <Value>HB/L</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                       </Style>
@@ -3235,7 +3235,7 @@
               <Top>10.04695cm</Top>
               <Left>10.45cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.13183cm</Width>
+              <Width>1.29885cm</Width>
               <ZIndex>21</ZIndex>
               <Style>
                 <Border>
@@ -3729,9 +3729,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox102</rd:DefaultName>
               <Top>10.04342cm</Top>
-              <Left>12.68414cm</Left>
+              <Left>11.85468cm</Left>
               <Height>0.56825cm</Height>
-              <Width>4.48636cm</Width>
+              <Width>5.31582cm</Width>
               <ZIndex>36</ZIndex>
               <Style>
                 <Border>
@@ -3821,6 +3821,7 @@
                       <Value>=First(Fields!ZatcaETD.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
+                        <Format>d</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>

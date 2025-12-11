@@ -1025,8 +1025,11 @@ report 50201 "ZATCA Sales - Credit Memo"
                 // Filling company addresses and info in one line
                 ConcatenatedCustomerInfoLine := Cust."ZATCA Building No." + ' ' + Cust.Address + ' ' + Cust."Address 2" + ' ' + Cust."Post Code" + ' ' + Cust.City + ' ' + Cust."Country/Region Code";
 
-
-                PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description;
+                if PaymentMethod.Code <> '' then
+                    if PaymentMethod.Description <> '' then
+                        PaymentMethodEngAr := PaymentMethod.Code + ' & ' + PaymentMethod.Description
+                    else
+                        PaymentMethodEngAr := PaymentMethod.Code;
             end;
 
             trigger OnPreDataItem()
