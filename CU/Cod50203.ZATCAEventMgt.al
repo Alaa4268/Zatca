@@ -130,12 +130,15 @@ codeunit 50203 "ZATCA Event Mgt"
         SalInv: Record "Sales Header";
         PostedSalInv: Record "Sales Invoice Header";
     begin
-        clear(SalInv);
-        SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        clear(PostedSalInv);
-        PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
-        if SalInv.FindFirst() or PostedSalInv.FindFirst() then
-            Error('This field cannot be changed because a transaction has been made for this Customer!');
+        SalesReceivablesSetup.Get();
+        if SalesReceivablesSetup."Validate Customer B2B/C" then begin
+            clear(SalInv);
+            SalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+            clear(PostedSalInv);
+            PostedSalInv.SetFilter("Sell-to Customer No.", '=%1', Rec."No.");
+            if SalInv.FindFirst() or PostedSalInv.FindFirst() then
+                Error('This field cannot be changed because a transaction has been made for this Customer!');
+        end;
     end;
 
     [EventSubscriber(ObjectType::Table, Database::Customer, OnBeforeValidateEvent, "Is B2C", false, false)]
@@ -231,5 +234,6 @@ codeunit 50203 "ZATCA Event Mgt"
     var
         ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
         GenLedSetup: Record "General Ledger Setup";
+        SalesReceivablesSetup: Record "Sales & Receivables Setup";
 
 }
