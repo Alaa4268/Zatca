@@ -59,14 +59,21 @@ codeunit 50204 "ZATCA Payload Mgt."
     var
         CustomerTypeLbl: label '%1 Customer should be either B2B or B2C', Comment = '%1:Customer No.';
     begin
-        Customer.TestField("VAT Registration No.");
-        Customer.TestField(City);
-        Customer.TestField(Name);
-        Customer.TestField("ZATCA Scheme Type");
-        Customer.TestField("ZATCA Scheme ID");
-        Customer.TestField("ZATCA Street Name");
-        Customer.TestField("ZATCA Building No.");
-        Customer.TestField("Country/Region Code");
+        if Customer."Is B2B" then begin
+            Customer.TestField("VAT Registration No.");
+            Customer.TestField(City);
+            Customer.TestField(Name);
+            Customer.TestField("ZATCA Scheme Type");
+            Customer.TestField("ZATCA Scheme ID");
+            Customer.TestField("ZATCA Street Name");
+            Customer.TestField("ZATCA Building No.");
+            Customer.TestField("Country/Region Code");
+        end else begin
+            Customer.TestField("ZATCA Scheme Type");
+            Customer.TestField("ZATCA Scheme ID");
+            Customer.TestField("Mobile Phone No.");
+            Customer.TestField(Address);
+        end;
         if (not Customer."Is B2B") and (not Customer."Is B2C") then Error(CustomerTypeLbl, Customer."No.");
     end;
 

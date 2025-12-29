@@ -2813,6 +2813,7 @@ codeunit 50200 "QR Code Generator1"
                     QRCode := SalesCrMemoHeader."QR Code";
                 end;
         end;
+        // QRCode := 'AS3Zhdi12YbYuSDbjNmG2KfYqNuM2Lkg2LTZgtix2KfYoSDZhNmE2YXbjNin2YcCDzMwMDA1MTUzMjgwMDAwMwMUMjAyNS0xMi0yOFQxMDowNTo1NloEAzE5NQUFMjUuNDMGLGhzUGpLbGFmai9RcVVQcUNCU0pXYzhFQ1ltajUzSVlJRWRwZVdYckZVbG89B2BNRVFDSUdONCsyMHorNUxYcWloWmtwMG9ZemIxblAySlZnYmVQODkxZThsVG5WT2NBaUFtTWo5aXNXTUlVWUY2NWR3SVptSnhYV3cvYWhBZEN2ZFVaLzRKbVllQkl3PT0IWDBWMBAGByqGSM49AgEGBSuBBAAKA0IABLiu2gCGu7jqz+OpAWPcMpaLXxwBV+9Ohdrd/sRIFGotQ0LVE5T5S4vgirCrJeA5tXNkkUWpoTO1jZipXbmyruMJRzBFAiEAuoob1cNae6zwK60iGrFO7DRZ1GdKwP/06OWy5fwOrTQCIDZunUC6CStBJ6UZ1KCJIBoKJxE6JfAI4WObHfW5LsTM';
         BarcodeString := QRCode;
         BarcodeFontProvider2D := BarcodeFontProvider2DEnum::IDAutomation2D;
         Exit(BarcodeFontProvider2D.EncodeFont(BarcodeString, BarcodeSymbology::"QR-Code"));
