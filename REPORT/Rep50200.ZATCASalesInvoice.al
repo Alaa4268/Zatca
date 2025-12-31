@@ -1365,7 +1365,6 @@ report 50200 "ZATCA Sales - Invoice"
             LayoutFile = 'REPORT\60000ZATCASalesInvoiceShaqra.rdl';
             CaptionML = ENU = 'ZATCA Sales Invoice - Shaqra', ENZ = 'فاتورة ضريبية';
         }
-
     }
 
     labels
