@@ -57,6 +57,7 @@ codeunit 50202 "ZATCA API Processing"
         Url := ZATCADeviceOnboarding."Base URL" + ZATCADeviceOnboarding."Submit Document Endpoint";
         NoResponse := false;
         if ZATCAPayloadMgt.SalesInvoiceInvoiceXML(SalesInvoiceHeader, InvoiceXml, InvoiceId, IsB2B) then begin
+            
             Base64 := Base64Convert.ToBase64(Format(InvoiceXml), TextEncoding::UTF8);
             Body := ZATCAPayloadMgt.RequestPayload(Base64);
             SendHttpRequest(Url, Response, HttpRequestType::POST, Body);

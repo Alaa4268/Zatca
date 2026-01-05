@@ -371,6 +371,11 @@ codeunit 50204 "ZATCA Payload Mgt."
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
         SalesInvHeader: Record "Sales Header";
         MonitorValue: Decimal;
+        FIleTest: OutStream;
+        TempBlob: Codeunit "Temp Blob";
+        OutStr: OutStream;
+        InStr: InStream;
+        FileName: Text;
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesInvoiceHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -651,6 +656,11 @@ codeunit 50204 "ZATCA Payload Mgt."
                 end;
             until SalesInvoiceLine.Next() = 0;
         XmlDoc.Add(InvoiceElement);
+        XmlDoc.WriteTo(FileName);
+        // FileName:=XmlDoc.;
+        // TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
+        // FileName := 'debug.xml';
+        // DownloadFromStream(InStr, 'Debug', '', '', FileName);
     end;
 
     [TryFunction]
@@ -668,6 +678,7 @@ codeunit 50204 "ZATCA Payload Mgt."
         AllowanceCharge, HeaderTaxTotal, InvoiceDocumentReference, InvoiceLine, Item, Price : xmlElement;
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
         TestDate: Text;
+
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesCrMemoHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -943,6 +954,7 @@ codeunit 50204 "ZATCA Payload Mgt."
                 end;
             until SalesCrMemoLine.Next() = 0;
         XmlDoc.Add(InvoiceElement);
+
     end;
 
     local procedure CreateLegalMonetoryTotal(TotalAmountExVAT: Decimal; TotalTaxAmount: Decimal; CurrencyCode: Text; AllowanceTotalAmount: Decimal): XmlElement
