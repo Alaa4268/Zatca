@@ -40,9 +40,30 @@ pageextension 50208 ZATCAPostedSalesInvoices extends "Posted Sales Invoices"
                 var
                     ZATCAAPIProcessing: Codeunit "ZATCA API Processing";
                 begin
-                    if(Rec.Status in[Rec.Status::Cleared, Rec.Status::Reported])then Message('This document has already been approved by ZATCA.')
+                    if (Rec.Status in [Rec.Status::Cleared, Rec.Status::Reported]) then
+                        Message('This document has already been approved by ZATCA.')
                     else
-                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)end;
+                        ZATCAAPIProcessing.SignAndSubmit(Rec, true)
+                end;
+            }
+
+            action(PrintZatcaReport)
+            {
+                Image=Report;
+                ApplicationArea = All;
+                // Promoted = true;
+                // PromotedCategory = Report;
+                Caption = 'Print Zatca Sales Invoice';
+                trigger OnAction()
+                var
+                    SalesInvHeader: Record "Sales Invoice Header";
+                begin
+                    SalesInvHeader := Rec;
+                    CurrPage.SetSelectionFilter(SalesInvHeader);
+                    SalesInvHeader.SetRecFilter();
+                    ZatcaEventMgt.SetLayoutByDim(Rec."Shortcut Dimension 2 Code");
+                    Report.Run(50200, true, true, SalesInvHeader);
+                end;
             }
         }
         addafter("&Invoice")
@@ -69,13 +90,21 @@ pageextension 50208 ZATCAPostedSalesInvoices extends "Posted Sales Invoices"
     var
         ZATCADeviceOnboarding: Record "ZATCA Device Onboarding";
     begin
-        if ZATCADeviceOnboarding.Get()then ShowAction:=ZATCADeviceOnboarding."On Posted Documents";
-        if ZATCAActivationMgt.IsZATCAIntegrationModuleActive()then case Rec.Status of Rec.Status::" ": StyleText:='None';
-            Rec.Status::Error: StyleText:='Unfavorable';
-            Rec.Status::Cleared, Rec.Status::Reported: StyleText:='Favorable';
+        if ZATCADeviceOnboarding.Get() then ShowAction := ZATCADeviceOnboarding."On Posted Documents";
+        if ZATCAActivationMgt.IsZATCAIntegrationModuleActive() then
+            case Rec.Status of
+                Rec.Status::" ":
+                    StyleText := 'None';
+                Rec.Status::Error:
+                    StyleText := 'Unfavorable';
+                Rec.Status::Cleared, Rec.Status::Reported:
+                    StyleText := 'Favorable';
             end;
     end;
-    var ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
-    ShowAction: Boolean;
-    StyleText: Text;
+
+    var
+        ZATCAActivationMgt: Codeunit "ZATCA Activation Mgt.";
+        ShowAction: Boolean;
+        StyleText: Text;
+        ZatcaEventMgt: Codeunit "ZATCA Event Mgt";
 }

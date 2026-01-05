@@ -656,7 +656,7 @@ codeunit 50204 "ZATCA Payload Mgt."
                 end;
             until SalesInvoiceLine.Next() = 0;
         XmlDoc.Add(InvoiceElement);
-        XmlDoc.WriteTo(FileName);
+        // XmlDoc.WriteTo(FileName);
         // FileName:=XmlDoc.;
         // TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
         // FileName := 'debug.xml';
