@@ -796,8 +796,8 @@ report 50200 "ZATCA Sales - Invoice"
                         RawLineAmount := line."Line Amount" + Line."Line Discount Amount";
                         TotalRawLineDiscAmount += Line."Line Discount Amount";
                     end;
-
-                    RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
+                    if Quantity <> 0 then
+                        RawUnitPrice := Round(RawLineAmount / Quantity, GLSetup."Amount Rounding Precision");
                     TotalAmountExclVat := RawUnitPrice * Line.Quantity;
                     if L_Currency.Code <> '' then
                         ForeignLineAmountExclVat := Format(Round(CurrencyExchangeRate.ExchangeAmtLCYToFCY(Header."Posting Date", L_Currency.Code, TotalAmountExclVat, CurrencyExchangeRate.ExchangeRate(Header."Posting Date", L_Currency.Code)), GLSetup."Amount Rounding Precision")) + ' ' + L_Currency.Code;

@@ -30,6 +30,31 @@
                       <CellContents>
                         <Rectangle Name="Rectangle1">
                           <ReportItems>
+                            <Rectangle Name="Rectangle3">
+                              <KeepTogether>true</KeepTogether>
+                              <Top>0cm</Top>
+                              <Left>0.0816cm</Left>
+                              <Height>1.90347cm</Height>
+                              <Width>19.36393cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Rectangle>
+                            <Rectangle Name="Rectangle2">
+                              <KeepTogether>true</KeepTogether>
+                              <Top>2.33358cm</Top>
+                              <Left>0.03842cm</Left>
+                              <Height>4.83271cm</Height>
+                              <Width>19.36393cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Rectangle>
                             <Tablix Name="Tablix1">
                               <TablixBody>
                                 <TablixColumns>
@@ -745,6 +770,7 @@
                               <Left>0.03842cm</Left>
                               <Height>2.00433cm</Height>
                               <Width>19.36394cm</Width>
+                              <ZIndex>2</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1004,7 +1030,7 @@
                               <Left>0.03842cm</Left>
                               <Height>1.18467cm</Height>
                               <Width>19.36393cm</Width>
-                              <ZIndex>1</ZIndex>
+                              <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -1052,7 +1078,7 @@
                               <Left>2.27869cm</Left>
                               <Height>0.6cm</Height>
                               <Width>15.24907cm</Width>
-                              <ZIndex>2</ZIndex>
+                              <ZIndex>4</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1085,7 +1111,7 @@
                               <Left>0.17018cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.06617cm</Width>
-                              <ZIndex>3</ZIndex>
+                              <ZIndex>5</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1118,7 +1144,7 @@
                               <Left>0.06699in</Left>
                               <Height>0.6cm</Height>
                               <Width>2.62855cm</Width>
-                              <ZIndex>4</ZIndex>
+                              <ZIndex>6</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1152,7 +1178,7 @@
                               <Left>2.83401cm</Left>
                               <Height>0.6cm</Height>
                               <Width>3.57532cm</Width>
-                              <ZIndex>5</ZIndex>
+                              <ZIndex>7</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1170,7 +1196,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!CustomerAddress1.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!CustomerAddress1.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                       </Style>
@@ -1186,7 +1212,7 @@
                               <Left>2.26096cm</Left>
                               <Height>1.16282cm</Height>
                               <Width>4.91008cm</Width>
-                              <ZIndex>6</ZIndex>
+                              <ZIndex>8</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1224,7 +1250,7 @@
                               <Left>6.44813cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.19841cm</Width>
-                              <ZIndex>7</ZIndex>
+                              <ZIndex>9</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1258,7 +1284,7 @@
                               <Left>7.20279cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.44167cm</Width>
-                              <ZIndex>8</ZIndex>
+                              <ZIndex>10</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1290,7 +1316,7 @@
                               <Left>0.0816cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.14242cm</Width>
-                              <ZIndex>9</ZIndex>
+                              <ZIndex>11</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1308,7 +1334,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!Commodity.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!Commodity.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1322,7 +1348,7 @@
                               <Left>2.29458cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68744cm</Width>
-                              <ZIndex>10</ZIndex>
+                              <ZIndex>12</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1354,7 +1380,7 @@
                               <Left>7.05257cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>11</ZIndex>
+                              <ZIndex>13</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1372,7 +1398,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZatcaShippper.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZatcaShippper.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1386,7 +1412,7 @@
                               <Left>2.29458cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68744cm</Width>
-                              <ZIndex>12</ZIndex>
+                              <ZIndex>14</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1418,7 +1444,7 @@
                               <Left>7.04028cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.86595cm</Width>
-                              <ZIndex>13</ZIndex>
+                              <ZIndex>15</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1450,7 +1476,7 @@
                               <Left>7.05257cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.84938cm</Width>
-                              <ZIndex>14</ZIndex>
+                              <ZIndex>16</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1482,7 +1508,7 @@
                               <Left>0.0633cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.14379cm</Width>
-                              <ZIndex>15</ZIndex>
+                              <ZIndex>17</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1514,7 +1540,7 @@
                               <Left>0.06331cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.14378cm</Width>
-                              <ZIndex>16</ZIndex>
+                              <ZIndex>18</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1546,7 +1572,7 @@
                               <Left>0.06331cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.14378cm</Width>
-                              <ZIndex>17</ZIndex>
+                              <ZIndex>19</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1564,7 +1590,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZatcaCNTE.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZatcaCNTE.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1578,7 +1604,7 @@
                               <Left>2.27765cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68744cm</Width>
-                              <ZIndex>18</ZIndex>
+                              <ZIndex>20</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1596,7 +1622,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!PortL.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!PortL.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1610,7 +1636,7 @@
                               <Left>2.27765cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68744cm</Width>
-                              <ZIndex>19</ZIndex>
+                              <ZIndex>21</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1642,7 +1668,7 @@
                               <Left>7.03564cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.84939cm</Width>
-                              <ZIndex>20</ZIndex>
+                              <ZIndex>22</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1674,7 +1700,7 @@
                               <Left>7.03564cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.84939cm</Width>
-                              <ZIndex>21</ZIndex>
+                              <ZIndex>23</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1692,7 +1718,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!PortD.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!PortD.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1706,7 +1732,7 @@
                               <Left>2.27765cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68744cm</Width>
-                              <ZIndex>22</ZIndex>
+                              <ZIndex>24</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1738,7 +1764,7 @@
                               <Left>0.0816cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.15475cm</Width>
-                              <ZIndex>23</ZIndex>
+                              <ZIndex>25</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1770,7 +1796,7 @@
                               <Left>10.69494cm</Left>
                               <Height>0.6cm</Height>
                               <Width>0.70789cm</Width>
-                              <ZIndex>24</ZIndex>
+                              <ZIndex>26</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1788,7 +1814,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!VATRegistrationNo.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!VATRegistrationNo.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1802,7 +1828,7 @@
                               <Left>11.50866cm</Left>
                               <Height>0.6cm</Height>
                               <Width>5.91382cm</Width>
-                              <ZIndex>25</ZIndex>
+                              <ZIndex>27</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1834,7 +1860,7 @@
                               <Left>17.49658cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>26</ZIndex>
+                              <ZIndex>28</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1866,7 +1892,7 @@
                               <Left>17.49657cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>27</ZIndex>
+                              <ZIndex>29</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1884,7 +1910,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!BLMAWB.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!BLMAWB.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1898,7 +1924,7 @@
                               <Left>11.89321cm</Left>
                               <Height>0.56825cm</Height>
                               <Width>5.52928cm</Width>
-                              <ZIndex>28</ZIndex>
+                              <ZIndex>30</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1930,7 +1956,7 @@
                               <Left>10.69493cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.11714cm</Width>
-                              <ZIndex>29</ZIndex>
+                              <ZIndex>31</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1962,7 +1988,7 @@
                               <Left>10.69494cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.94132cm</Width>
-                              <ZIndex>30</ZIndex>
+                              <ZIndex>32</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -1980,7 +2006,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZATBayanNo.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZATBayanNo.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1994,7 +2020,7 @@
                               <Left>12.7421cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.68039cm</Width>
-                              <ZIndex>31</ZIndex>
+                              <ZIndex>33</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2026,7 +2052,7 @@
                               <Left>17.49658cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>32</ZIndex>
+                              <ZIndex>34</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2058,7 +2084,7 @@
                               <Left>17.49658cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>33</ZIndex>
+                              <ZIndex>35</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2076,7 +2102,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZatcaConsignee.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZatcaConsignee.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -2090,7 +2116,7 @@
                               <Left>12.6786cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.74389cm</Width>
-                              <ZIndex>34</ZIndex>
+                              <ZIndex>36</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2122,7 +2148,7 @@
                               <Left>10.69494cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.87077cm</Width>
-                              <ZIndex>35</ZIndex>
+                              <ZIndex>37</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2154,7 +2180,7 @@
                               <Left>10.69494cm</Left>
                               <Height>0.6cm</Height>
                               <Width>0.84548cm</Width>
-                              <ZIndex>36</ZIndex>
+                              <ZIndex>38</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2172,7 +2198,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZatcaETD.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZatcaETD.Value</Value>
                                       <Style>
                                         <Format>d</Format>
                                       </Style>
@@ -2188,7 +2214,7 @@
                               <Left>11.60392cm</Left>
                               <Height>0.6cm</Height>
                               <Width>5.81856cm</Width>
-                              <ZIndex>37</ZIndex>
+                              <ZIndex>39</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2220,7 +2246,7 @@
                               <Left>17.49658cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8825cm</Width>
-                              <ZIndex>38</ZIndex>
+                              <ZIndex>40</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2252,7 +2278,7 @@
                               <Left>17.23582cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.14325cm</Width>
-                              <ZIndex>39</ZIndex>
+                              <ZIndex>41</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2270,7 +2296,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!ZatCrNo.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!ZatCrNo.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -2284,7 +2310,7 @@
                               <Left>11.98846cm</Left>
                               <Height>0.6cm</Height>
                               <Width>5.17328cm</Width>
-                              <ZIndex>40</ZIndex>
+                              <ZIndex>42</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2316,7 +2342,7 @@
                               <Left>10.6526cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.26176cm</Width>
-                              <ZIndex>41</ZIndex>
+                              <ZIndex>43</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2334,7 +2360,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!SelltoCustomerNo.Value, "DataSet_Result")</Value>
+                                      <Value>=Fields!SelltoCustomerNo.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                       </Style>
@@ -2350,7 +2376,7 @@
                               <Left>12.73149cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.72625cm</Width>
-                              <ZIndex>42</ZIndex>
+                              <ZIndex>44</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2382,7 +2408,7 @@
                               <Left>10.90269cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.8288cm</Width>
-                              <ZIndex>43</ZIndex>
+                              <ZIndex>45</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2415,7 +2441,7 @@
                               <Left>4.29239in</Left>
                               <Height>0.6cm</Height>
                               <Width>1.9558cm</Width>
-                              <ZIndex>44</ZIndex>
+                              <ZIndex>46</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2449,7 +2475,7 @@
                               <Left>12.8973cm</Left>
                               <Height>0.6cm</Height>
                               <Width>4.45463cm</Width>
-                              <ZIndex>45</ZIndex>
+                              <ZIndex>47</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2488,7 +2514,7 @@
                               <Left>17.39073cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.95362cm</Width>
-                              <ZIndex>46</ZIndex>
+                              <ZIndex>48</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2522,7 +2548,7 @@
                               <Left>17.49656cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.88251cm</Width>
-                              <ZIndex>47</ZIndex>
+                              <ZIndex>49</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2552,7 +2578,7 @@
                               <Left>0.07017cm</Left>
                               <Height>0.6cm</Height>
                               <Width>2.15475cm</Width>
-                              <ZIndex>48</ZIndex>
+                              <ZIndex>50</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2584,7 +2610,7 @@
                               <Left>17.56304cm</Left>
                               <Height>0.6cm</Height>
                               <Width>1.85075cm</Width>
-                              <ZIndex>49</ZIndex>
+                              <ZIndex>51</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -2595,32 +2621,6 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
-                            <Rectangle Name="Rectangle2">
-                              <KeepTogether>true</KeepTogether>
-                              <Top>2.33358cm</Top>
-                              <Left>0.03842cm</Left>
-                              <Height>4.83271cm</Height>
-                              <Width>19.36393cm</Width>
-                              <ZIndex>50</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>Solid</Style>
-                                </Border>
-                              </Style>
-                            </Rectangle>
-                            <Rectangle Name="Rectangle3">
-                              <KeepTogether>true</KeepTogether>
-                              <Top>0cm</Top>
-                              <Left>0.0816cm</Left>
-                              <Height>1.90347cm</Height>
-                              <Width>19.36393cm</Width>
-                              <ZIndex>51</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>Solid</Style>
-                                </Border>
-                              </Style>
-                            </Rectangle>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
