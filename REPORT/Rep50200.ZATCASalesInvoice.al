@@ -835,7 +835,7 @@ report 50200 "ZATCA Sales - Invoice"
                     end else begin
                         ArTitle := 'فاتورة ضريبية';
                         EngTitle := 'Taxable Invoice';
-                        Isb2B := true;
+                        // Isb2B := true;
                     end;
                 end;
             }
@@ -1203,10 +1203,17 @@ report 50200 "ZATCA Sales - Invoice"
                 CUQrCodeGeneratore: Codeunit "QR Code Generator1";
                 ToRecordId: RecordId;
             begin
+                TotalRawAmount := 0;
                 CustomerInfo.Get(Header."Bill-to Customer No.");
                 if CustomerInfo."Country/Region Code" <> '' then begin
                     CustomerCountryRegion.Get(CustomerInfo."Country/Region Code");
                 end;
+
+                if CustomerInfo."Is B2B" then
+                    Isb2B := true
+                else
+                    Isb2B := false;
+                    
                 CurrReport.Language := G_Language.GetLanguageIdOrDefault("Language Code");
                 ToRecordId := Header.RecordId;
 
