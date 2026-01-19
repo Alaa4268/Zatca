@@ -377,6 +377,7 @@ codeunit 50204 "ZATCA Payload Mgt."
         InStr: InStream;
         FileName: Text;
         LineAmountExclVat: Decimal;
+        LineAmountInclVat: Decimal;
     begin
         ValidateCompanyInformation();
         if Customer.Get(SalesInvoiceHeader."Sell-to Customer No.") then ValidateCustomerInfo();
@@ -394,7 +395,9 @@ codeunit 50204 "ZATCA Payload Mgt."
 
                     // Recalculate line amount and tax amount +
                     LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine);
-                    LineTaxAmount := Round(LineAmountExclVat * (SalesInvoiceLine."VAT %" / 100), 0.01);
+                    LineAmountInclVat := GetInvoiceLineAmountInclVat(SalesInvoiceLine);
+                    LineTaxAmount := LineAmountInclVat - LineAmountExclVat;
+                    // LineTaxAmount := Round(LineAmountExclVat * (SalesInvoiceLine."VAT %" / 100), 0.01);
                     // Recalculate line amount and tax amount -
 
                     // TaxAmount := SalesInvoiceLine.GetLineAmountInclVAT() - SalesInvoiceLine.GetLineAmountExclVAT();
@@ -574,6 +577,7 @@ codeunit 50204 "ZATCA Payload Mgt."
 
                     // Recalculate line amount and tax amount +
                     LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine);
+
                     LineTaxAmount := Round(LineAmountExclVat * (SalesInvoiceLine."VAT %" / 100), 0.01);
                     // Recalculate line amount and tax amount -
 
@@ -623,10 +627,11 @@ codeunit 50204 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue.Add(XmlAtt);
                     // Modify calculations to exclude vat from amount
 
-                    if SalesInvoiceHeader."Prices Including VAT" then
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round((SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100))), 0.01)).Replace(',', '')))
-                    else
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price"), 0.01)).Replace(',', '')));
+                    // if SalesInvoiceHeader."Prices Including VAT" then
+                    AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(LineAmountExclVat / SalesInvoiceLine.Quantity, 0.0001)).Replace(',', '')));
+                    // AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round((SalesInvoiceLine."Unit Price" - ((SalesInvoiceLine."Line Discount %" / 100) * SalesInvoiceLine."Unit Price")) / ((1 + (SalesInvoiceLine."VAT %" / 100))), 0.01)).Replace(',', ''))) 
+                    // else
+                    // AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(LineAmountExclVat/SalesInvoiceLine.Quantity,0.0001)).Replace(',', '')));
 
                     Price.Add(AdditonalDocReferenceValue);
 
@@ -676,10 +681,32 @@ codeunit 50204 "ZATCA Payload Mgt."
     end;
 
 
+    local procedure GetInvoiceLineAmountInclVat(var Rec: Record "Sales Invoice Line"): Decimal
+    var
+    begin
+        // exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
+        exit(Rec."Amount Including VAT");
+    end;
+
     local procedure GetInvoiceLineAmountExclVat(var Rec: Record "Sales Invoice Line"): Decimal
     var
     begin
-        exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
+        // exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
+        exit(Rec.Amount);
+    end;
+
+    local procedure GetCRMemoLineAmountInclVat(var Rec: Record "Sales Cr.Memo Line"): Decimal
+    var
+    begin
+        // exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
+        exit(Rec."Amount Including VAT");
+    end;
+
+    local procedure GetCRMemoLineAmountExclVat(var Rec: Record "Sales Cr.Memo Line"): Decimal
+    var
+    begin
+        // exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
+        exit(Rec.Amount);
     end;
 
     local procedure GetInvoiceCRMemoLineAmountExclVat(var Rec: Record "Sales Cr.Memo Line"): Decimal
@@ -704,6 +731,7 @@ codeunit 50204 "ZATCA Payload Mgt."
         PostalAddress, TaxCategory, TaxScheme, TaxTotal : xmlElement;
         TestDate: Text;
         LineAmountExclVat: Decimal;
+        LineAmountInclVat: Decimal;
         LineTaxAmount: Decimal;
     begin
         ValidateCompanyInformation();
@@ -719,7 +747,10 @@ codeunit 50204 "ZATCA Payload Mgt."
                     VATPercentage := SalesCrMemoLine."VAT %";
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetInvoiceCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    LineAmountInclVat := GetCRMemoLineAmountInclVat(SalesCrMemoLine);
+                    // LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
+                    // LineTaxAmount := LineAmountInclVat - LineAmountExclVat;
                     LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
                     // Recalculate line amount and tax amount -
 
@@ -729,7 +760,7 @@ codeunit 50204 "ZATCA Payload Mgt."
 
                     TotalTaxAmount += LineTaxAmount;
                     TotalAmountExVAT += LineAmountExclVat;
-                    
+
                     VATPostingSetup.SetRange("VAT Bus. Posting Group", SalesCrMemoLine."VAT Bus. Posting Group");
                     VATPostingSetup.SetRange("VAT Prod. Posting Group", SalesCrMemoLine."VAT Prod. Posting Group");
                     VATPostingSetup.SetRange("VAT %", SalesCrMemoLine."VAT %");
@@ -915,7 +946,8 @@ codeunit 50204 "ZATCA Payload Mgt."
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetInvoiceCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    // LineAmountInclVat := GetCRMemoLineAmountInclVat(SalesCrMemoLine);
                     LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
                     // Recalculate line amount and tax amount -
 
@@ -965,11 +997,13 @@ codeunit 50204 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue := XmlElement.Create('PriceAmount', CbcNamespaceUri);
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
                     AdditonalDocReferenceValue.Add(XmlAtt);
-                    if SalesCrMemoHeader."Prices Including VAT" then
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round((SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")) / ((1 + (SalesCrMemoLine."VAT %" / 100))), 0.01)).Replace(',', '')))
+                    // if SalesCrMemoHeader."Prices Including VAT" then
+                    AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(LineAmountExclVat / SalesCrMemoLine.Quantity, 0.0001)).Replace(',', '')));
+
+                    // AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round((SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")) / ((1 + (SalesCrMemoLine."VAT %" / 100))), 0.01)).Replace(',', '')));
                     // AdditonalDocReferenceValue.Add(XmlText.Create(Format((SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")) / ((1 + (SalesCrMemoLine."VAT %" / 100)))).Replace(',', '')))
-                    else
-                        AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price"), 0.01)).Replace(',', '')));
+                    // else
+                    //     AdditonalDocReferenceValue.Add(XmlText.Create(Format(Round(SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price"), 0.01)).Replace(',', '')));
                     // AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - ((SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price")).Replace(',', '')));
 
                     // AdditonalDocReferenceValue.Add(XmlText.Create(Format(SalesCrMemoLine."Unit Price" - (SalesCrMemoLine."Line Discount %" / 100) * SalesCrMemoLine."Unit Price").Replace(',', '')));
