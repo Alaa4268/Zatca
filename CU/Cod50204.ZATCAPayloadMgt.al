@@ -69,8 +69,8 @@ codeunit 50204 "ZATCA Payload Mgt."
             Customer.TestField("ZATCA Building No.");
             Customer.TestField("Country/Region Code");
         end else begin
-            Customer.TestField("ZATCA Scheme Type");
-            Customer.TestField("ZATCA Scheme ID");
+            // Customer.TestField("ZATCA Scheme Type");
+            // Customer.TestField("ZATCA Scheme ID");
             Customer.TestField("Mobile Phone No.");
             Customer.TestField(Address);
         end;
@@ -207,11 +207,11 @@ codeunit 50204 "ZATCA Payload Mgt."
         XmlAtt: XmlAttribute;
         AccountingParty, Country, Party, PartyIdentification, PostalAddress : xmlElement;
         AdditonalDocReferenceValue, PartyTaxScheme, TaxScheme : xmlElement;
+        NoSchemeType: Boolean;
     begin
         AccountingParty := XmlElement.Create('AccountingCustomerParty', CacNamespaceUri);
         Party := XmlElement.Create('Party', CacNamespaceUri);
-        PartyIdentification := XmlElement.Create('PartyIdentification', CacNamespaceUri);
-        AdditonalDocReferenceValue := XmlElement.Create('ID', CbcNamespaceUri);
+        NoSchemeType := false;
         case Customer."ZATCA Scheme Type" of
             Customer."ZATCA Scheme Type"::TIN:
                 XmlAtt := XmlAttribute.Create('schemeID', 'TIN');
@@ -236,12 +236,19 @@ codeunit 50204 "ZATCA Payload Mgt."
             Customer."ZATCA Scheme Type"::"700":
                 XmlAtt := XmlAttribute.Create('schemeID', '700');
             Customer."ZATCA Scheme Type"::" ":
-                Error('Sheme Type on customer cannot be blank');
+                if Customer."Is B2B" then
+                    Error('Sheme Type on customer cannot be blank')
+                else
+                    NoSchemeType := true;
         end;
-        AdditonalDocReferenceValue.Add(XmlAtt);
-        AdditonalDocReferenceValue.Add(XmlText.Create(Customer."ZATCA Scheme ID"));
-        PartyIdentification.Add(AdditonalDocReferenceValue);
-        Party.Add(PartyIdentification);
+        if not NoSchemeType then begin
+            PartyIdentification := XmlElement.Create('PartyIdentification', CacNamespaceUri);
+            AdditonalDocReferenceValue := XmlElement.Create('ID', CbcNamespaceUri);
+            AdditonalDocReferenceValue.Add(XmlAtt);
+            AdditonalDocReferenceValue.Add(XmlText.Create(Customer."ZATCA Scheme ID"));
+            PartyIdentification.Add(AdditonalDocReferenceValue);
+            Party.Add(PartyIdentification);
+        end;
         PostalAddress := XmlElement.Create('PostalAddress', CacNamespaceUri);
         AdditonalDocReferenceValue := XmlElement.Create('StreetName', CbcNamespaceUri);
         AdditonalDocReferenceValue.Add(XmlText.Create(Customer."ZATCA Street Name"));
@@ -394,7 +401,7 @@ codeunit 50204 "ZATCA Payload Mgt."
                     VATPercentage := SalesInvoiceLine."VAT %";
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine);
+                    LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine,SalesInvoiceHeader);
                     // LineTaxAmount := LineAmountInclVat - LineAmountExclVat;
                     LineTaxAmount := CalcLineTaxAmount(SalesInvoiceLine."VAT %", LineAmountExclVat);
                     LineAmountInclVat := GetInvoiceLineAmountInclVat(LineAmountExclVat, LineTaxAmount);
@@ -578,7 +585,7 @@ codeunit 50204 "ZATCA Payload Mgt."
                     AdditonalDocReferenceValue.Add(XmlAtt);
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine);
+                    LineAmountExclVat := GetInvoiceLineAmountExclVat(SalesInvoiceLine,SalesInvoiceHeader);
                     // LineTaxAmount := CalcTaxAmount(LineAmountExclVat,SalesInvoiceLine."VAT %");
                     LineTaxAmount := CalcLineTaxAmount(SalesInvoiceLine."VAT %", LineAmountExclVat);
                     LineAmountInclVat := GetInvoiceLineAmountInclVat(LineAmountExclVat, LineTaxAmount);
@@ -708,10 +715,13 @@ codeunit 50204 "ZATCA Payload Mgt."
         exit(LineAmountExclVat + TaxAmount);
     end;
 
-    local procedure GetInvoiceLineAmountExclVat(var Rec: Record "Sales Invoice Line"): Decimal
+    local procedure GetInvoiceLineAmountExclVat(var Rec: Record "Sales Invoice Line"; var SalesInvHeader: Record "Sales Invoice Header"): Decimal
     var
     begin
-        exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.0001) * Rec.Quantity, 0.01));
+        if SalesInvHeader."Prices Including VAT" then
+            exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.0001) * Rec.Quantity, 0.01))
+        else
+            exit(Round(Round(Rec."Unit Price", 0.0001) * Rec.Quantity, 0.01))
         // exit(Round(Rec."Amount Including VAT"/((Rec."VAT %" / 100) + 1),0.01));
     end;
 
@@ -722,10 +732,14 @@ codeunit 50204 "ZATCA Payload Mgt."
         exit(LineAmountExclVat + TaxAmount);
     end;
 
-    local procedure GetCRMemoLineAmountExclVat(var Rec: Record "Sales Cr.Memo Line"): Decimal
+    local procedure GetCRMemoLineAmountExclVat(var Rec: Record "Sales Cr.Memo Line"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header"): Decimal
     var
     begin
-        exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.0001) * Rec.Quantity, 0.01));
+        if SalesCrMemoHeader."Prices Including VAT" then
+            exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.0001) * Rec.Quantity, 0.01))
+        else
+            exit(Round(Round(Rec."Unit Price", 0.0001) * Rec.Quantity, 0.01))
+
         // exit(Round(Round(Rec."Unit Price" / ((Rec."VAT %" / 100) + 1), 0.01) * Rec.Quantity, 0.01));
         // exit(Rec.Amount);
     end;
@@ -768,9 +782,9 @@ codeunit 50204 "ZATCA Payload Mgt."
                     VATPercentage := SalesCrMemoLine."VAT %";
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine,SalesCrMemoHeader);
                     LineTaxAmount := CalcLineTaxAmount(SalesCrMemoLine."VAT %", LineAmountExclVat);
-                    LineAmountInclVat := GetCRMemoLineAmountInclVat(LineAmountExclVat,LineTaxAmount);
+                    LineAmountInclVat := GetCRMemoLineAmountInclVat(LineAmountExclVat, LineTaxAmount);
                     // LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
                     // LineTaxAmount := LineAmountInclVat - LineAmountExclVat;
                     // LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
@@ -968,9 +982,9 @@ codeunit 50204 "ZATCA Payload Mgt."
                     XmlAtt := XmlAttribute.Create('currencyID', CurrencyCode);
 
                     // Recalculate line amount and tax amount +
-                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine);
+                    LineAmountExclVat := GetCRMemoLineAmountExclVat(SalesCrMemoLine,SalesCrMemoHeader);
                     LineTaxAmount := CalcLineTaxAmount(SalesCrMemoLine."VAT %", LineAmountExclVat);
-                    LineAmountInclVat := GetCRMemoLineAmountInclVat(LineAmountExclVat,LineTaxAmount);
+                    LineAmountInclVat := GetCRMemoLineAmountInclVat(LineAmountExclVat, LineTaxAmount);
                     // LineTaxAmount := Round(LineAmountExclVat * (SalesCrMemoLine."VAT %" / 100), 0.01);
                     // Recalculate line amount and tax amount -
 
