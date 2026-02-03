@@ -2638,7 +2638,7 @@
                 <TablixMember>
                   <Group Name="Details1" />
                   <Visibility>
-                    <Hidden>=iif(Fields!ItemNo_Line.Value = "", True, False)</Hidden>
+                    <Hidden>=iif(Fields!LineNo_Line.Value = 0, True, False)</Hidden>
                   </Visibility>
                 </TablixMember>
               </TablixMembers>
@@ -4961,7 +4961,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.02877cm</Top>
             <Left>0.05684cm</Left>
-            <Height>2.99563cm</Height>
+            <Height>2.99562cm</Height>
             <Width>9.38772cm</Width>
             <ZIndex>15</ZIndex>
             <Visibility>

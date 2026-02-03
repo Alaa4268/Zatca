@@ -617,14 +617,15 @@ report 50201 "ZATCA Sales - Credit Memo"
                 begin
                     InitializeSalesShipmentLine;
                     ToRecordId := Header.RecordId;
+                    
                     // ?? why qrcode as a field is not accessible but it is in zatcasales invoice????
                     // Header.QRCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
 
                     EncodedQrCode := CUQrCodeGeneratore.GenerateQRCode(ToRecordId);
 
                     // ZatcaEventMgt.SetQrCode(ToRecordId);
-                    if Type = Type::"G/L Account" then
-                        "No." := '';
+                    // if Type = Type::"G/L Account" then
+                    //     "No." := '';
 
                     if "Line Discount %" = 0 then
                         LineDiscountPctText := ''

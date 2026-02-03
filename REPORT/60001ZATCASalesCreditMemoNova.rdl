@@ -2018,7 +2018,7 @@
                 <TablixMember>
                   <Group Name="Details2" />
                   <Visibility>
-                    <Hidden>=iif(Fields!ItemNo_Line.Value = "", True, False)</Hidden>
+                    <Hidden>=iif(Fields!LineNo_Line.Value = 0, True, False)</Hidden>
                   </Visibility>
                 </TablixMember>
               </TablixMembers>
