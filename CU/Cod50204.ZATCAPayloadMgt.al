@@ -72,7 +72,7 @@ codeunit 50204 "ZATCA Payload Mgt."
             // Customer.TestField("ZATCA Scheme Type");
             // Customer.TestField("ZATCA Scheme ID");
             Customer.TestField("Mobile Phone No.");
-            Customer.TestField(Address);
+            // Customer.TestField(Address);
         end;
         if (not Customer."Is B2B") and (not Customer."Is B2C") then Error(CustomerTypeLbl, Customer."No.");
     end;
