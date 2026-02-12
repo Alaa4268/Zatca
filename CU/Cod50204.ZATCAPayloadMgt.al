@@ -68,6 +68,7 @@ codeunit 50204 "ZATCA Payload Mgt."
             Customer.TestField("ZATCA Street Name");
             Customer.TestField("ZATCA Building No.");
             Customer.TestField("Country/Region Code");
+            Customer.TestField("Registration Number");
         end else begin
             // Customer.TestField("ZATCA Scheme Type");
             // Customer.TestField("ZATCA Scheme ID");
@@ -393,6 +394,7 @@ codeunit 50204 "ZATCA Payload Mgt."
         Clear(TaxableAmount);
         LineCount := 0;
         SalesInvoiceLine.SetRange("Document No.", SalesInvoiceHeader."No.");
+        // SalesInvoiceLine.SetFilter();
         if SalesInvoiceLine.FindSet() then
             repeat
                 if SalesInvoiceLine.Type <> SalesInvoiceLine.Type::" " then begin

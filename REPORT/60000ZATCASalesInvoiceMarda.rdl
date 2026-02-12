@@ -1165,6 +1165,7 @@
                                       <Value>=Fields!DocumentDate.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2367,6 +2368,7 @@
                                       <Value>=Fields!SelltoCustomerNo.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>

@@ -714,8 +714,8 @@ report 50200 "ZATCA Sales - Invoice"
                     ForeignAmount: Decimal;
                 begin
                     InitializeShipmentLine;
-                    if Type = Type::"G/L Account" then
-                        "No." := '';
+                    // if Type = Type::"G/L Account" then
+                    //     "No." := '';
                     OnBeforeLineOnAfterGetRecord(Header, Line);
 
                     if "Line Discount %" = 0 then
